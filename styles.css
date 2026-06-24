@@ -142,8 +142,8 @@ section{position:relative}
 .dish p{color:rgba(246,241,230,.62);font-size:.96rem;max-width:52ch}
 .menu__group--split{display:grid;grid-template-columns:1fr 1fr;gap:2rem 4rem}
 .menu__mini{list-style:none}
-.menu__mini li{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(246,241,230,.1);color:rgba(246,241,230,.85)}
-.menu__mini li b{color:var(--mustard);font-weight:600}
+.menu__mini li{display:flex;justify-content:space-between;gap:1rem;padding:.5rem 0;border-bottom:1px solid rgba(246,241,230,.1);color:rgba(246,241,230,.85);font-family:'Fraunces',Georgia,serif;font-weight:500;font-size:1.05rem}
+.menu__mini li b{color:var(--mustard);font-weight:500;font-family:'Fraunces',Georgia,serif}
 .menu__mini--cols{column-count:2;column-gap:3rem}
 .menu__mini--cols li{break-inside:avoid}
 .menu__note{text-align:center;color:rgba(246,241,230,.5);font-size:.86rem;margin-top:2.4rem;font-style:italic;max-width:var(--max);margin-inline:auto}
