@@ -197,9 +197,9 @@ section{position:relative}
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.is-in{opacity:1;transform:none}
 
-/* section headings wipe up from a mask — feels typeset, not faded */
-h2.reveal{opacity:1;transform:none;clip-path:inset(-12% -12% 100% -12%);transition:clip-path .9s var(--ease)}
-h2.reveal.is-in{clip-path:inset(-12% -12% -12% -12%)}
+/* section headings rise + fade (kept reliable; no layout-reserving clip) */
+h2.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+h2.reveal.is-in{opacity:1;transform:none}
 
 /* image tiles fade up; the photo settles from a slight zoom on reveal */
 .tile.reveal,.story__card.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
