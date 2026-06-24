@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#16335f" />
+  <title>Paperboys — Cork's Old-School Newsprint Brunch Joint</title>
+  <meta name="description" content="Paperboys is Cork city's old-school newsprint brunch joint on Tobin Street. Bold coffee, proper brunch, served daily 10am–4pm." />
+  <meta property="og:title" content="Paperboys — Brunch, Cork City" />
+  <meta property="og:description" content="Cork's old-school newsprint brunch joint. Tobin St, City Centre. Open daily 10–4." />
+  <meta property="og:type" content="restaurant" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=DM+Serif+Display:ital@0;1&family=Oswald:wght@400;500;600&family=Spectral:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- Edition banner -->
+  <div class="ribbon" id="ribbon">
+    <div class="ribbon__inner">
+      <span>Est. Cork City</span><span class="ribbon__dot">●</span>
+      <span>Vol. I — Brunch Daily 10–4</span><span class="ribbon__dot">●</span>
+      <span>Tobin Street Edition</span><span class="ribbon__dot">●</span>
+      <span>Hot Coffee, Cold Print</span><span class="ribbon__dot">●</span>
+      <span>Est. Cork City</span><span class="ribbon__dot">●</span>
+      <span>Vol. I — Brunch Daily 10–4</span><span class="ribbon__dot">●</span>
+      <span>Tobin Street Edition</span><span class="ribbon__dot">●</span>
+      <span>Hot Coffee, Cold Print</span><span class="ribbon__dot">●</span>
+    </div>
+  </div>
+
+  <!-- Nav -->
+  <header class="nav" id="nav">
+    <a href="#top" class="nav__brand">Paperboys</a>
+    <nav class="nav__links">
+      <a href="#story">The Story</a>
+      <a href="#menu">Menu</a>
+      <a href="#visit">Visit</a>
+    </nav>
+    <a class="nav__cta" href="#visit">Find Us</a>
+    <button class="nav__burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
+  </header>
+
+  <!-- Hero -->
+  <main id="top">
+    <section class="hero">
+      <div class="hero__disco" aria-hidden="true"><span></span></div>
+      <div class="hero__masthead reveal">
+        <div class="hero__byline">— No. 01 · The Cork Brunch Gazette · 10am–4pm Daily —</div>
+        <h1 class="hero__title">
+          <span class="word">Paper</span><span class="word">boys</span>
+        </h1>
+        <p class="hero__sub">Cork's old-school newsprint brunch joint. Bold coffee, proper plates, hot off the press on Tobin Street.</p>
+        <div class="hero__actions">
+          <a href="#menu" class="btn btn--solid">Read the Menu</a>
+          <a href="#visit" class="btn btn--ghost">Visit the Press</a>
+        </div>
+      </div>
+      <figure class="hero__mascot reveal" data-delay="200">
+        <img src="assets/mascot.svg" alt="The Paperboys mascot, a cheerful paperboy in a flat cap holding a rolled newspaper" />
+        <figcaption>“Extra! Extra!”</figcaption>
+      </figure>
+      <div class="hero__scroll" aria-hidden="true"><span></span>Scroll</div>
+    </section>
+
+    <!-- Marquee headlines -->
+    <section class="headlines" aria-hidden="true">
+      <div class="headlines__track">
+        <span>Fresh Sourdough</span><span class="star">✦</span>
+        <span>Proper Flat Whites</span><span class="star">✦</span>
+        <span>Brunch Done Right</span><span class="star">✦</span>
+        <span>Cork City Centre</span><span class="star">✦</span>
+        <span>Fresh Sourdough</span><span class="star">✦</span>
+        <span>Proper Flat Whites</span><span class="star">✦</span>
+        <span>Brunch Done Right</span><span class="star">✦</span>
+        <span>Cork City Centre</span><span class="star">✦</span>
+      </div>
+    </section>
+
+    <!-- Story -->
+    <section class="story" id="story">
+      <div class="story__col reveal">
+        <span class="kicker">The Front Page</span>
+        <h2>Brunch with ink under its nails.</h2>
+        <p class="lede">Tucked on Tobin Street in the heart of Cork City, Paperboys is a brunch room built like an old print shop — cream paper stock, bold blue headlines and a disco ball spinning over the lot.</p>
+        <p>We keep it classic: eggs the way they should be, coffee pulled properly, and a room that hums from open to close. No fuss, no airs — just the good stuff, served daily.</p>
+        <div class="story__stats">
+          <div><strong>10–4</strong><span>Open Daily</span></div>
+          <div><strong>100%</strong><span>Cork Made</span></div>
+          <div><strong>No.1</strong><span>Tobin St.</span></div>
+        </div>
+      </div>
+      <aside class="story__clip reveal" data-delay="150">
+        <div class="clip">
+          <div class="clip__head">DAILY · CORK</div>
+          <h3>“The brunch that reads the room.”</h3>
+          <p>Warm, earthy and unmistakably old-school — Paperboys turns a Tuesday into front-page news.</p>
+          <div class="clip__foot">★★★★★ &nbsp;— Regulars, everywhere</div>
+        </div>
+      </aside>
+    </section>
+
+    <!-- Menu -->
+    <section class="menu" id="menu">
+      <div class="menu__masthead reveal">
+        <span class="kicker">The Daily Special</span>
+        <h2>Off the Press</h2>
+        <p>A taste of the lineup. The full sheet changes with the seasons — always classic, never fussy.</p>
+      </div>
+      <div class="menu__grid">
+        <article class="card reveal">
+          <span class="card__price">€11</span>
+          <h3>The Headliner</h3>
+          <p>Sourdough toast, smashed avo, poached eggs, chilli & lemon.</p>
+        </article>
+        <article class="card reveal" data-delay="80">
+          <span class="card__price">€13</span>
+          <h3>Full Print Run</h3>
+          <p>The works — eggs, bacon, sausage, beans, grilled tomato & toast.</p>
+        </article>
+        <article class="card reveal" data-delay="160">
+          <span class="card__price">€10</span>
+          <h3>Sweet Edition</h3>
+          <p>Buttermilk pancakes, maple, seasonal fruit & a dusting of sugar.</p>
+        </article>
+        <article class="card reveal" data-delay="40">
+          <span class="card__price">€9</span>
+          <h3>Eggs Benedict</h3>
+          <p>Toasted muffin, ham, poached eggs & house hollandaise.</p>
+        </article>
+        <article class="card reveal" data-delay="120">
+          <span class="card__price">€3.50</span>
+          <h3>Flat White</h3>
+          <p>Properly pulled, locally roasted. The reason mornings exist.</p>
+        </article>
+        <article class="card reveal" data-delay="200">
+          <span class="card__price">€7</span>
+          <h3>The Newsstand</h3>
+          <p>Granola, yoghurt, compote & toasted seeds. Light reading.</p>
+        </article>
+      </div>
+      <p class="menu__note reveal">Prices &amp; dishes for illustration — pop in for the day's full edition.</p>
+    </section>
+
+    <!-- Visit -->
+    <section class="visit" id="visit">
+      <div class="visit__inner">
+        <div class="visit__info reveal">
+          <span class="kicker kicker--light">The Back Page</span>
+          <h2>Find the Press.</h2>
+          <address>
+            Paperboys<br />
+            Tobin Street, City Centre<br />
+            Cork, Ireland
+          </address>
+          <div class="hours">
+            <h3>Opening Hours</h3>
+            <ul id="hoursList">
+              <li data-day="0"><span>Sunday</span><span>10am – 4pm</span></li>
+              <li data-day="1"><span>Monday</span><span>10am – 4pm</span></li>
+              <li data-day="2"><span>Tuesday</span><span>10am – 4pm</span></li>
+              <li data-day="3"><span>Wednesday</span><span>10am – 4pm</span></li>
+              <li data-day="4"><span>Thursday</span><span>10am – 4pm</span></li>
+              <li data-day="5"><span>Friday</span><span>10am – 4pm</span></li>
+              <li data-day="6"><span>Saturday</span><span>10am – 4pm</span></li>
+            </ul>
+          </div>
+          <div class="visit__actions">
+            <a class="btn btn--solid" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get Directions</a>
+            <a class="btn btn--ghost btn--ghost-light" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">@paperboys_cork</a>
+          </div>
+        </div>
+        <div class="visit__map reveal" data-delay="150">
+          <iframe
+            title="Map to Paperboys, Tobin Street, Cork"
+            src="https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed"
+            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer__brand">Paperboys</div>
+    <p>Cork's old-school newsprint brunch joint · Tobin St, City Centre</p>
+    <div class="footer__links">
+      <a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Instagram</a>
+      <a href="#menu">Menu</a>
+      <a href="#visit">Visit</a>
+    </div>
+    <small>© <span id="year"></span> Paperboys Cork · Printed daily with love.</small>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
