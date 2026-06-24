@@ -80,24 +80,23 @@ section{position:relative}
 /* ===== Hero (scroll-zoom video) ===== */
 .hero__accent{font-style:italic;color:var(--terra)}
 .vhero{position:relative;height:340vh;z-index:2}
-.vhero__sticky{
-  position:sticky;top:0;height:100svh;overflow:hidden;
-  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(1rem,2.5vw,1.8rem);
-  padding:6rem clamp(1.1rem,4vw,2.6rem) 2.5rem;text-align:center;
-  background:
-    radial-gradient(60% 45% at 50% 12%,rgba(29,78,216,.10),transparent 70%),
-    radial-gradient(45% 40% at 12% 95%,rgba(216,98,61,.10),transparent 70%);
-}
-.vhero__copy{position:relative;z-index:3;will-change:transform,opacity}
-.vhero__mark{width:64px;height:64px;margin:0 auto .6rem;filter:drop-shadow(0 10px 16px rgba(16,37,74,.2))}
-.vhero__title{font-size:clamp(2.6rem,8vw,6rem);font-weight:500;letter-spacing:-.03em;line-height:1}
-.vhero__inset{
-  position:relative;z-index:2;overflow:hidden;
-  height:clamp(280px,56vh,620px);aspect-ratio:9/14;max-width:92vw;
-  box-shadow:0 40px 80px -30px rgba(16,37,74,.5);will-change:clip-path;
-}
+.vhero__sticky{position:sticky;top:0;height:100svh;overflow:hidden;background:var(--ink-2)}
+/* full-bleed video that scales + un-rounds on scroll */
+.vhero__inset{position:absolute;inset:0;z-index:1;overflow:hidden;will-change:clip-path}
+.vhero__inset::after{content:"";position:absolute;inset:0;z-index:2;pointer-events:none;
+  background:linear-gradient(to bottom,rgba(8,16,40,.55),rgba(8,16,40,.05) 32%,rgba(8,16,40,.05) 55%,rgba(8,16,40,.6))}
 .vhero__video{width:100%;height:100%;object-fit:cover;display:block;will-change:transform;transform-origin:center}
-.vhero__actions{position:relative;z-index:3;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;will-change:transform,opacity}
+/* headline overlaid on top */
+.vhero__copy{position:absolute;top:0;left:0;right:0;z-index:3;
+  padding:clamp(6rem,15vh,11rem) clamp(1.1rem,4vw,2.6rem) 0;text-align:center;color:var(--cream);
+  will-change:transform,opacity}
+.vhero__copy .eyebrow{color:#ffd9a8}
+.vhero__mark{width:62px;height:62px;margin:0 auto .7rem;filter:drop-shadow(0 8px 18px rgba(0,0,0,.45))}
+.vhero__title{font-size:clamp(2.8rem,8vw,6.5rem);font-weight:500;letter-spacing:-.03em;line-height:1;color:var(--cream);text-shadow:0 4px 30px rgba(0,0,0,.45)}
+.vhero__actions{position:absolute;bottom:clamp(2.5rem,8vh,5rem);left:0;right:0;z-index:3;
+  display:flex;gap:1rem;flex-wrap:wrap;justify-content:center;will-change:transform,opacity}
+.vhero__actions .btn--line{color:var(--cream);border-color:rgba(246,241,230,.6)}
+.vhero__actions .btn--line:hover{background:var(--cream);color:var(--ink);border-color:var(--cream)}
 
 .hero__ticker{position:relative;left:0;right:0;overflow:hidden;border-block:1px solid var(--line);background:rgba(251,248,241,.6);z-index:2}
 .ticker__track{display:flex;align-items:center;gap:1.4rem;width:max-content;white-space:nowrap;padding:.85rem 0;
