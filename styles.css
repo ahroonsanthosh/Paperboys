@@ -194,9 +194,39 @@ section{position:relative}
 .footer__nav a{opacity:.8;transition:opacity .25s,color .25s}.footer__nav a:hover{opacity:1;color:var(--mustard)}
 .footer__base{max-width:var(--max);margin:1.6rem auto 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:rgba(246,241,230,.5);font-size:.85rem}
 
-/* ===== Reveal ===== */
-.reveal{opacity:0;transform:translateY(28px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+/* ===== Reveal / micro-interactions ===== */
+/* default: a quiet rise + fade (shorter distance than before) */
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
 .reveal.is-in{opacity:1;transform:none}
+
+/* section headings wipe up from a mask — feels typeset, not faded */
+h2.reveal{opacity:1;transform:none;clip-path:inset(-12% -12% 100% -12%);transition:clip-path .9s var(--ease)}
+h2.reveal.is-in{clip-path:inset(-12% -12% -12% -12%)}
+
+/* image tiles clip open + the photo settles from a slight zoom */
+.tile.reveal,.story__card.reveal{opacity:1;transform:none;clip-path:inset(0 0 100% 0);transition:clip-path 1s var(--ease)}
+.tile.reveal.is-in,.story__card.reveal.is-in{clip-path:inset(0 0 0 0)}
+.tile img{transform:scale(1.12);transition:transform 1.3s var(--ease)}
+.tile.is-in img{transform:scale(1)}
+.tile:hover img{transform:scale(1.05)}
+
+/* menu rows: leader brightens, title warms, price eases in on hover */
+.dish__row h4{transition:color .3s var(--ease)}
+.dish:hover .dish__row h4{color:var(--mustard)}
+.dish:hover .dot{border-bottom-color:rgba(224,165,46,.6)}
+.dish__price{transition:transform .3s var(--ease)}
+.dish:hover .dish__price{transform:translateX(-2px)}
+
+/* hours: the row you point at steps forward quietly */
+.hours li{transition:padding-left .25s var(--ease),color .25s var(--ease)}
+.hours li:hover{padding-left:.45rem;color:var(--cream)}
+
+/* primary button: warm fill sweeps in from the left rather than a flat swap */
+.btn--primary{position:relative;overflow:hidden;isolation:isolate}
+.btn--primary::before{content:"";position:absolute;inset:0;z-index:-1;background:var(--terra);
+  transform:scaleX(0);transform-origin:left;transition:transform .4s var(--ease)}
+.btn--primary:hover{background:var(--ink)}
+.btn--primary:hover::before{transform:scaleX(1)}
 
 /* ===== Responsive ===== */
 @media(max-width:900px){
@@ -238,5 +268,6 @@ section{position:relative}
 /* Reduced motion */
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
-  .reveal{opacity:1;transform:none;transition:none}
+  .reveal,h2.reveal,.tile.reveal,.story__card.reveal{opacity:1;transform:none;clip-path:none!important;transition:none}
+  .tile img{transform:none}
 }
