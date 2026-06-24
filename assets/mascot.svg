@@ -24,7 +24,7 @@
     <circle class="eye" cx="150" cy="63" r="4"/>
     <!-- eyes -->
     <circle class="eye" cx="128" cy="150" r="6"/>
-    <path class="blink" d="M168 145c5-3 12-3 17 1"/>
+    <circle class="eye" cx="176" cy="148" r="6"/>
     <!-- open grin -->
     <path class="mouth" d="M118 176c8 26 56 26 64 0 2-6-4-9-9-7-15 6-31 6-46 0-5-2-11 1-9 7z"/>
     <path class="skin" d="M139 192c8 3 16 3 24 0-4 6-20 6-24 0z"/>
@@ -44,7 +44,7 @@
     <!-- cap button -->
     <circle class="eye" cx="272" cy="47" r="4"/>
     <!-- eyes -->
-    <path class="blink" d="M243 132c5-3 12-3 17 1"/>
+    <circle class="eye" cx="250" cy="136" r="6"/>
     <circle class="eye" cx="294" cy="137" r="6"/>
     <!-- open grin -->
     <path class="mouth" d="M238 164c9 28 60 28 68 0 2-6-4-10-10-7-16 6-33 6-49 0-6-3-11 1-9 7z"/>
