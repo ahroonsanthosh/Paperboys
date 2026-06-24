@@ -35,32 +35,34 @@
   </header>
 
   <main id="top">
-    <!-- Hero -->
-    <section class="hero">
-      <div class="hero__bg" aria-hidden="true"></div>
-      <div class="hero__content">
-        <p class="eyebrow reveal">Tobin Street · Cork City · Open daily 10–4</p>
-        <h1 class="hero__title">
-          <span class="reveal" data-delay="60">Brunch,</span>
-          <span class="reveal hero__accent" data-delay="160">done</span>
-          <span class="reveal" data-delay="260">properly.</span>
-        </h1>
-        <p class="hero__lede reveal" data-delay="360">A bright little brunch room in the heart of Cork — considered plates, coffee pulled with care, and two cheeky faces over the door.</p>
-        <div class="hero__actions reveal" data-delay="460">
+    <!-- Hero (scroll-zoom video) -->
+    <section class="vhero" id="vhero">
+      <div class="vhero__sticky">
+        <div class="vhero__copy" id="vheroCopy">
+          <img src="assets/mascot.svg" alt="" class="vhero__mark" />
+          <p class="eyebrow">Tobin Street · Cork City · Open daily 10–4</p>
+          <h1 class="vhero__title">Brunch, <span class="hero__accent">done</span> properly.</h1>
+        </div>
+
+        <div class="vhero__inset" id="vheroInset">
+          <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+            <source src="assets/hero.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="vhero__actions" id="vheroActions">
           <a href="#menu" class="btn btn--primary">See the menu</a>
           <a href="#visit" class="btn btn--line">Find us<span class="btn__arrow">→</span></a>
         </div>
       </div>
-      <figure class="hero__mascot reveal" data-delay="300">
-        <img src="assets/mascot.svg" alt="The Paperboys mascot — two cheerful faces in flat caps" />
-      </figure>
-      <div class="hero__ticker" aria-hidden="true">
-        <div class="ticker__track">
-          <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
-          <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
-        </div>
-      </div>
     </section>
+
+    <div class="hero__ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
+        <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
+      </div>
+    </div>
 
     <!-- Story -->
     <section class="story" id="story">
