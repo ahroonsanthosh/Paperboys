@@ -6,16 +6,51 @@
   <meta name="theme-color" content="#0e1f3d" />
   <title>Paperboys — Brunch · Cork City</title>
   <meta name="description" content="Paperboys is a brunch room in the heart of Cork City. Considered plates, properly pulled coffee, served daily 10–4 on Tobin Street." />
+  <link rel="canonical" href="https://ahroonsanthosh.github.io/Paperboys/" />
   <meta property="og:title" content="Paperboys — Brunch, Cork City" />
   <meta property="og:description" content="A brunch room on Tobin Street, Cork. Open daily 10–4." />
   <meta property="og:type" content="restaurant" />
+  <meta property="og:url" content="https://ahroonsanthosh.github.io/Paperboys/" />
+  <meta property="og:image" content="https://ahroonsanthosh.github.io/Paperboys/assets/pbb4.webp" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Paperboys — Brunch, Cork City" />
+  <meta name="twitter:description" content="A brunch room on Tobin Street, Cork. Open daily 10–4." />
+  <meta name="twitter:image" content="https://ahroonsanthosh.github.io/Paperboys/assets/pbb4.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/mascot.svg" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Restaurant",
+    "name": "Paperboys",
+    "description": "An old-school brunch room in the heart of Cork City.",
+    "servesCuisine": "Brunch",
+    "priceRange": "€€",
+    "image": "https://ahroonsanthosh.github.io/Paperboys/assets/pbb4.webp",
+    "url": "https://ahroonsanthosh.github.io/Paperboys/",
+    "telephone": "",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Tobin Street",
+      "addressLocality": "Cork",
+      "addressRegion": "Munster",
+      "addressCountry": "IE"
+    },
+    "sameAs": ["https://www.instagram.com/paperboys_cork"],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"],
+      "opens": "10:00",
+      "closes": "16:00"
+    }]
+  }
+  </script>
 </head>
 <body>
+  <a href="#story" class="skip-link">Skip to content</a>
   <div class="grain" aria-hidden="true"></div>
 
   <!-- Nav -->
@@ -45,7 +80,8 @@
         </div>
 
         <div class="vhero__inset" id="vheroInset">
-          <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="auto" poster="assets/hero-poster.jpg">
+          <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-label="Brunch being served at Paperboys">
+            <source src="assets/hero.webm" type="video/webm" />
             <source src="assets/hero.mp4" type="video/mp4" />
           </video>
         </div>
@@ -242,6 +278,13 @@
       <small>Brunch daily, 10–4</small>
     </div>
   </footer>
+
+  <!-- mobile-only quick actions -->
+  <nav class="mobilebar" aria-label="Quick actions">
+    <a href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Directions</a>
+    <a href="#menu">Menu</a>
+    <a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener" class="mobilebar--accent">Follow</a>
+  </nav>
 
   <script src="script.js"></script>
 </body>

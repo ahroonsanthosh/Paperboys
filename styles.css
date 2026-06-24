@@ -33,12 +33,18 @@ section{position:relative}
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
 }
 
+/* accessibility: skip link + visible focus */
+.skip-link{position:fixed;top:-60px;left:1rem;z-index:100;background:var(--ink);color:var(--cream);
+  padding:.7rem 1.1rem;border-radius:8px;font-weight:600;transition:top .2s var(--ease)}
+.skip-link:focus{top:1rem}
+:focus-visible{outline:3px solid var(--terra);outline-offset:3px;border-radius:4px}
+
 /* eyebrow */
 .eyebrow{
   font-family:'Manrope',sans-serif;text-transform:uppercase;letter-spacing:.22em;
-  font-size:.74rem;font-weight:600;color:var(--terra);margin-bottom:1.1rem;
+  font-size:.74rem;font-weight:700;color:#b8492a;margin-bottom:1.1rem;
 }
-.eyebrow--light{color:var(--mustard)}
+.eyebrow--light{color:#c98a18}
 
 /* buttons */
 .btn{
@@ -191,6 +197,26 @@ section{position:relative}
 .footer__nav{display:flex;gap:1.6rem;flex-wrap:wrap;font-weight:500;font-size:.95rem}
 .footer__nav a{opacity:.8;transition:opacity .25s,color .25s}.footer__nav a:hover{opacity:1;color:var(--mustard)}
 .footer__base{max-width:var(--max);margin:1.6rem auto 0;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;color:rgba(246,241,230,.5);font-size:.85rem}
+
+/* ===== Mobile-only quick-action bar ===== */
+.mobilebar{display:none}
+@media(max-width:700px){
+  .mobilebar{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:1px;
+    position:fixed;left:0;right:0;bottom:0;z-index:60;
+    background:var(--line);border-top:1px solid var(--line);
+    box-shadow:0 -8px 24px rgba(16,37,74,.12);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  .mobilebar a{
+    background:rgba(246,241,230,.96);backdrop-filter:blur(8px);
+    text-align:center;padding:.95rem .5rem;font-weight:600;font-size:.9rem;color:var(--ink);
+  }
+  .mobilebar a:active{background:var(--cream-2)}
+  .mobilebar--accent{background:var(--ink)!important;color:var(--cream)!important}
+  .footer{padding-bottom:5.5rem}
+  .nav__cta{display:none}
+}
 
 /* ===== Reveal / micro-interactions ===== */
 /* default: a quiet rise + fade (shorter distance than before) */
