@@ -22,8 +22,8 @@ export default defineConfig({
   name: 'paperboys',
   title: 'Paperboys Studio',
 
-  projectId: 'kbi1x7f8',
-  dataset: 'production',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'kbi1x7f8',
+  dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [
     structureTool({

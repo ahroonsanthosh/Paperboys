@@ -12,15 +12,16 @@ import {readFileSync} from 'fs'
 import {homedir} from 'os'
 import {join} from 'path'
 
-const PROJECT_ID = 'kbi1x7f8'
+const FALLBACK_PROJECT_ID = 'kbi1x7f8'
 
 function readProjectId() {
+  if (process.env.SANITY_STUDIO_PROJECT_ID) return process.env.SANITY_STUDIO_PROJECT_ID
   try {
     const env = readFileSync('.env', 'utf8')
     const match = env.match(/SANITY_STUDIO_PROJECT_ID\s*=\s*(\S+)/)
     if (match) return match[1]
   } catch {}
-  return PROJECT_ID
+  return FALLBACK_PROJECT_ID
 }
 
 function readSanityToken() {

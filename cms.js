@@ -1,6 +1,8 @@
 (function () {
+  // ── CLIENT CONFIG — change these two values for each new client ────────────
   var PROJECT_ID = 'kbi1x7f8';
-  var DATASET = 'production';
+  var DATASET    = 'production';
+  // ──────────────────────────────────────────────────────────────────────────
   var API_VERSION = '2024-01-01';
 
   // Exit silently if project ID hasn't been set yet
