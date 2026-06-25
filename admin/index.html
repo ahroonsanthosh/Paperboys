@@ -142,6 +142,10 @@
   <h1>Paperboys Content Editor</h1>
   <p>Enter your password to manage site content</p>
   <input type="password" id="pwdInput" placeholder="Password" autocomplete="current-password" />
+  <div id="tokenSection" style="display:none; width:100%; max-width:320px;">
+    <p style="font-size:0.8rem;color:#888;margin-bottom:0.4rem;">First-time setup: paste the GitHub token (won't be asked again)</p>
+    <input type="password" id="tokenInput" placeholder="github_pat_…" autocomplete="off" style="font-size:0.8rem;" />
+  </div>
   <button onclick="doLogin()">Sign in</button>
   <p id="loginError"></p>
 </div>
@@ -269,16 +273,21 @@
 
 <script>
 // ── Config ─────────────────────────────────────────────────────────────────
-var REPO  = 'ahroonsanthosh/Paperboys';
-var FILE  = 'content.json';
-var TOKEN = 'GITHUB_TOKEN_PLACEHOLDER';
+var REPO = 'ahroonsanthosh/Paperboys';
+var FILE = 'content.json';
+
+function getToken() { return localStorage.getItem('pb_gh_token') || ''; }
 
 // Default password hash (SHA-256 of "paperboys2024")
-// Stored in localStorage after first change so client can update it.
 var DEFAULT_HASH = 'a349cbd924cc903029202298c0c18829c5c8552ae54077ea6cb9f9346eea122c';
 
 function getPwdHash() {
   return localStorage.getItem('pb_pwd_hash') || DEFAULT_HASH;
+}
+
+// Show token field only when no token is saved yet
+if (!getToken()) {
+  document.getElementById('tokenSection').style.display = 'block';
 }
 
 // ── Auth ────────────────────────────────────────────────────────────────────
@@ -288,15 +297,26 @@ async function sha256(str) {
 }
 
 async function doLogin() {
-  var val = document.getElementById('pwdInput').value;
-  var h   = await sha256(val);
-  if (h === getPwdHash()) {
-    sessionStorage.setItem('pb_auth', '1');
-    showEditor();
-  } else {
+  var pwd = document.getElementById('pwdInput').value;
+  var h   = await sha256(pwd);
+  if (h !== getPwdHash()) {
     document.getElementById('loginError').textContent = 'Incorrect password.';
+    return;
   }
+  // Save token if provided (first-time setup)
+  var tokenEl = document.getElementById('tokenInput');
+  if (tokenEl && tokenEl.value.trim()) {
+    localStorage.setItem('pb_gh_token', tokenEl.value.trim());
+  }
+  if (!getToken()) {
+    document.getElementById('loginError').textContent = 'Please paste the GitHub token (first-time setup).';
+    document.getElementById('tokenSection').style.display = 'block';
+    return;
+  }
+  sessionStorage.setItem('pb_auth', '1');
+  showEditor();
 }
+
 document.getElementById('pwdInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
 
 function signOut() {
@@ -568,7 +588,7 @@ async function saveAll() {
   try {
     // Get current file SHA
     var headRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
-      headers: {'Authorization': 'Bearer ' + TOKEN, 'Accept': 'application/vnd.github+json'}
+      headers: {'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json'}
     });
     var headData = await headRes.json();
     var sha = headData.sha;
@@ -577,7 +597,7 @@ async function saveAll() {
     var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
       method: 'PUT',
       headers: {
-        'Authorization': 'Bearer ' + TOKEN,
+        'Authorization': 'Bearer ' + getToken(),
         'Accept': 'application/vnd.github+json',
         'Content-Type': 'application/json'
       },
