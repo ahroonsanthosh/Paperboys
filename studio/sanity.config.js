@@ -36,6 +36,8 @@ export default defineConfig({
             S.divider(),
             S.documentTypeListItem('menuDish').title('Menu Dishes'),
             S.documentTypeListItem('galleryPhoto').title('Gallery Photos'),
+            S.documentTypeListItem('testimonial').title('Testimonials'),
+            S.documentTypeListItem('faqItem').title('FAQ'),
           ]),
     }),
     visionTool(),

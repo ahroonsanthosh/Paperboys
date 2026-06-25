@@ -1,8 +1,7 @@
 (function () {
-  // ── CLIENT CONFIG — change these two values for each new client ────────────
-  var PROJECT_ID = 'kbi1x7f8';
-  var DATASET    = 'production';
-  // ──────────────────────────────────────────────────────────────────────────
+  // Read project config from <meta> tags in index.html — change those tags for each new client
+  var PROJECT_ID = (document.querySelector('meta[name="sanity-project-id"]') || {}).content || 'kbi1x7f8';
+  var DATASET    = (document.querySelector('meta[name="sanity-dataset"]') || {}).content || 'production';
   var API_VERSION = '2024-01-01';
 
   // Exit silently if project ID hasn't been set yet

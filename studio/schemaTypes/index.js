@@ -4,6 +4,8 @@ import {storySection} from './storySection.js'
 import {menuSettings} from './menuSettings.js'
 import {menuDish} from './menuDish.js'
 import {galleryPhoto} from './galleryPhoto.js'
+import {testimonial} from './testimonial.js'
+import {faqItem} from './faqItem.js'
 
 export const schemaTypes = [
   siteSettings,
@@ -12,4 +14,6 @@ export const schemaTypes = [
   menuSettings,
   menuDish,
   galleryPhoto,
+  testimonial,
+  faqItem,
 ]
