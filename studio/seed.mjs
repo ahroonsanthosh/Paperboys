@@ -29,7 +29,9 @@ function readSanityToken() {
   const candidates = [
     join(homedir(), '.config', 'sanity', 'auth.json'),
     join(homedir(), '.sanity', 'auth.json'),
+    join(homedir(), 'AppData', 'Roaming', 'Sanity', 'auth.json'),
     join(homedir(), 'AppData', 'Roaming', 'sanity', 'auth.json'),
+    join(homedir(), 'AppData', 'Local', 'Sanity', 'auth.json'),
   ]
   for (const p of candidates) {
     try {
