@@ -28,6 +28,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Inject admin token
+        env:
+          ADMIN_GH_TOKEN: ${{ secrets.ADMIN_GH_TOKEN }}
+        run: sed -i "s|__ADMIN_GH_TOKEN__|${ADMIN_GH_TOKEN}|g" admin/index.html
+
       - name: Upload site
         uses: actions/upload-pages-artifact@v3
         with:
