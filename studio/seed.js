@@ -10,23 +10,18 @@
 import {createClient} from '@sanity/client'
 import {readFileSync} from 'fs'
 
-// Read project ID from the .env file written by `sanity init --env`
+const PROJECT_ID = 'kbi1x7f8'
+
 function readProjectId() {
   try {
     const env = readFileSync('.env', 'utf8')
     const match = env.match(/SANITY_STUDIO_PROJECT_ID\s*=\s*(\S+)/)
     if (match) return match[1]
   } catch {}
-  return null
+  return PROJECT_ID
 }
 
 const projectId = readProjectId()
-if (!projectId) {
-  console.error(
-    'No project ID found. Run `npx sanity init --env` first, then re-run this script.',
-  )
-  process.exit(1)
-}
 
 const client = createClient({
   projectId,

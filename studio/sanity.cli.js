@@ -1,8 +1,6 @@
-import {defineCliConfig} from 'sanity/cli'
-
-export default defineCliConfig({
+export default {
   api: {
     projectId: 'kbi1x7f8',
     dataset: 'production',
   },
-})
+}
