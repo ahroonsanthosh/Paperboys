@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - main
-      - claude/quirky-clarke-43sow0
   workflow_dispatch:
 
 permissions:

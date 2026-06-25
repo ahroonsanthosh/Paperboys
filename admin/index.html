@@ -587,7 +587,7 @@ async function saveAll() {
 
   try {
     // Get current file SHA
-    var headRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
+    var headRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main', {
       headers: {'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json'}
     });
     var headData = await headRes.json();
@@ -604,7 +604,8 @@ async function saveAll() {
       body: JSON.stringify({
         message: 'Update content via admin panel',
         content: encoded,
-        sha: sha
+        sha: sha,
+        branch: 'main'
       })
     });
 
