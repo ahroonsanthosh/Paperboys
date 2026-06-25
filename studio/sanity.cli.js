@@ -3,4 +3,5 @@ module.exports = {
     projectId: 'kbi1x7f8',
     dataset: 'production',
   },
+  studioHost: 'paperboys',
 }
