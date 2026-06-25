@@ -3,11 +3,12 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes/index.js'
 
-const SINGLETONS = new Set(['siteSettings', 'homepage', 'openingHours', 'storySection', 'menuSettings'])
+const SINGLETONS = new Set(['siteSettings', 'homepage', 'aboutSection', 'openingHours', 'storySection', 'menuSettings'])
 
 const SINGLETON_TITLES = {
   siteSettings:  'Site Settings',
   homepage:      'Homepage',
+  aboutSection:  'About Section',
   openingHours:  'Opening Hours',
   storySection:  'Story & Ticker',
   menuSettings:  'Menu Settings (sides, drinks, allergens)',
