@@ -1,50 +1,159 @@
-# Paperboys — CMS Editing Guide
+# Paperboys — CMS Guide
 
-Your studio URL is: `https://<your-studio-name>.sanity.studio`
+## Studio URL
+**https://paperboys.sanity.studio**
 
-Log in with the email address you used when setting up the project.
-
----
-
-## What you can edit
-
-### Site Settings
-Business name, address, Instagram handle and link, Google Maps embed URL, directions URL, and the small eyebrow text in the hero ("Tobin Street · Cork City · Open daily 10–4").
-
-### Opening Hours
-Seven day entries. Flip the **Closed today** toggle to mark a day off — the website will show "Closed" automatically.
-
-### Story & Ticker
-The heading and two paragraphs in the "Who we are" section, the storefront photo, the quote below it, and the scrolling ticker words at the top of the page.
-
-### Menu Settings (sides, drinks, allergens)
-The menu intro line, the full allergen key, and the Sides & Add-ons and Drinks lists. To add or remove an item, use the + / trash icons beside each row.
-
-### Menu Dishes
-Each dish is a separate document. You can change the name, price, allergen numbers, description, and category (Breakfast or Sandwiches). Drag to reorder within a category using the **Sort Order** field (lower numbers appear first).
-
-### Gallery Photos
-Five (or more) photos in the room & plates section. Upload a new image, update the caption and alt text. Sort Order controls the grid position.
+Log in with the Sanity account used to create the project (ahroonsanthosh8@gmail.com).
 
 ---
 
-## How publishing works
+## Client Editing Guide
 
-Click **Publish** on any document to make it live. Changes appear on the website within a few seconds — there is no deploy step needed.
+### What you can edit (no code required)
 
-Click **Discard changes** to undo unpublished edits.
+#### Site Settings
+Business name, street address, locality, Instagram handle and link, Google Maps embed URL,
+directions URL, and the eyebrow text in the hero section.
+
+#### Opening Hours
+Seven day entries (Monday–Sunday). Each row has an **Opens**, **Closes**, and **Closed today** toggle.
+Flip the toggle to mark a day as closed — the website shows "Closed" automatically.
+
+#### Story & Ticker
+The heading and two body paragraphs in the "Who we are" section, the storefront photo,
+the pull-quote below it, and the scrolling ticker words at the top of the page.
+
+#### Menu Settings
+The menu intro line, the full allergen key, the **Sides & Add-ons** list, and the **Drinks** list.
+Use the **+** button to add items and the trash icon to remove them.
+
+#### Menu Dishes
+Each dish is a separate document in the left sidebar under **Menu Dishes**.
+You can change name, price, allergen codes, description, and category (Breakfast or Sandwiches).
+**Sort Order** controls display order within each category (lower = first).
+
+#### Gallery Photos
+Five photos in the room & plates section. Click a photo document, upload a new image,
+update caption and alt text. **Sort Order** controls grid position.
+
+### How publishing works
+Click **Publish** on any document. Changes appear on the live website within seconds — no deploy needed.
+Click **Discard changes** to undo unpublished edits without affecting the live site.
+
+### Image uploads
+Click any image field → **Upload** → choose a file from your computer.
+Supported formats: JPG, PNG, WebP. Recommended width: 1200px or wider.
 
 ---
 
-## How to add this CMS to a new client site (agency reuse)
+## Technical Reference
 
-1. Clone the Paperboys repo:  `git clone https://github.com/ahroonsanthosh/Paperboys.git new-client`
-2. `cd new-client/studio && npm install`
-3. `npx sanity login` (if not already logged in)
-4. `npx sanity init --env` → choose **Create new project**, name it after the client
-5. Replace `REPLACE_WITH_PROJECT_ID` in `cms.js`, `studio/sanity.config.js`, and `studio/sanity.cli.js` with the new project ID
-6. Update `studio/sanity.config.js` → change `title: 'Paperboys Studio'` to the client name
-7. `bash studio/setup-cors-and-deploy.sh https://client-domain.com`
-8. `node studio/seed.js` (seeds placeholder content — editor replaces with real content)
+### Environment Variables
 
-Total time: under 10 minutes for a returning user.
+**Studio** (`studio/.env` — copy from `studio/.env.example`):
+```
+SANITY_STUDIO_PROJECT_ID=kbi1x7f8
+SANITY_STUDIO_DATASET=production
+SANITY_STUDIO_HOST=paperboys
+```
+
+**Frontend** (`cms.js` lines 2–3):
+```js
+var PROJECT_ID = 'kbi1x7f8';
+var DATASET    = 'production';
+```
+
+### GROQ Query (cms.js)
+All content is fetched in a single query:
+```groq
+{
+  "settings": *[_type == "siteSettings"][0],
+  "hours":    *[_type == "openingHours"][0],
+  "story":    *[_type == "storySection"][0],
+  "menu":     *[_type == "menuSettings"][0],
+  "dishes":   *[_type == "menuDish"] | order(category asc, sortOrder asc),
+  "gallery":  *[_type == "galleryPhoto"] | order(sortOrder asc)
+}
+```
+
+### Schema types
+| Type | Kind | Purpose |
+|---|---|---|
+| `siteSettings` | Singleton | Business name, address, social links |
+| `openingHours` | Singleton | Mon–Sun hours with closed toggle |
+| `storySection` | Singleton | About text, storefront image, ticker words |
+| `menuSettings` | Singleton | Intro text, allergen key, sides, drinks |
+| `menuDish` | Collection | Individual menu dishes with category + price |
+| `galleryPhoto` | Collection | Gallery images with caption + alt text |
+
+### Deployment
+- **Studio**: `cd studio && npx sanity@latest deploy`
+- **Website**: push to `main` branch → GitHub Pages auto-deploys
+
+### CORS
+The Sanity CDN read API (`*.apicdn.sanity.io`) is public — no CORS configuration needed for the frontend.
+
+---
+
+## Reusing This Template for a New Client
+
+**Time required: under 15 minutes**
+
+### Step 1 — Clone the repo
+```bash
+git clone https://github.com/ahroonsanthosh/Paperboys.git new-client-name
+cd new-client-name
+```
+
+### Step 2 — Create a new Sanity project
+```bash
+cd studio
+npm install
+npx sanity login
+npx sanity projects create --name "New Client Name"
+# Note the project ID printed (e.g. abc123xyz)
+```
+
+### Step 3 — Configure the new project ID
+Edit two places:
+
+**`cms.js`** (line 3):
+```js
+var PROJECT_ID = 'abc123xyz';  // ← new project ID
+```
+
+**`studio/.env`** (create from `.env.example`):
+```
+SANITY_STUDIO_PROJECT_ID=abc123xyz
+SANITY_STUDIO_DATASET=production
+SANITY_STUDIO_HOST=new-client-hostname
+```
+
+### Step 4 — Update studio title
+In `studio/sanity.config.js` change:
+```js
+title: 'Paperboys Studio'  →  title: 'New Client Studio'
+```
+
+### Step 5 — Seed initial content
+```bash
+# In studio/ directory
+SANITY_TOKEN=<editor-token-from-manage> node seed.mjs
+```
+Or paste the browser console seed script at the new studio URL (see session notes).
+
+### Step 6 — Deploy studio
+```bash
+npx sanity@latest deploy
+# When prompted for hostname: enter new-client-hostname
+```
+
+### Step 7 — Push website to GitHub
+Update `index.html` with the client's actual content (name, address, etc. — the CMS will
+override these at runtime, but they serve as static fallback).
+
+```bash
+git add -A && git commit -m "init: new client" && git push origin main
+```
+
+That's it. The new client can now edit all content at `new-client-hostname.sanity.studio`.
