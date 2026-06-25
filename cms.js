@@ -56,7 +56,7 @@
   ].join('');
 
   var API_URL =
-    'https://' + PROJECT_ID + '.apicdn.sanity.io/v' + API_VERSION +
+    'https://' + PROJECT_ID + '.api.sanity.io/v' + API_VERSION +
     '/data/query/' + DATASET + '?query=' + encodeURIComponent(QUERY);
 
   fetch(API_URL)
