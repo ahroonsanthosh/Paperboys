@@ -9,6 +9,8 @@
 
 import {createClient} from '@sanity/client'
 import {readFileSync} from 'fs'
+import {homedir} from 'os'
+import {join} from 'path'
 
 const PROJECT_ID = 'kbi1x7f8'
 
@@ -21,15 +23,37 @@ function readProjectId() {
   return PROJECT_ID
 }
 
+function readSanityToken() {
+  if (process.env.SANITY_TOKEN) return process.env.SANITY_TOKEN
+  // Try locations where `sanity login` stores credentials
+  const candidates = [
+    join(homedir(), '.config', 'sanity', 'auth.json'),
+    join(homedir(), '.sanity', 'auth.json'),
+    join(homedir(), 'AppData', 'Roaming', 'sanity', 'auth.json'),
+  ]
+  for (const p of candidates) {
+    try {
+      const data = JSON.parse(readFileSync(p, 'utf8'))
+      if (data.token) return data.token
+    } catch {}
+  }
+  return null
+}
+
 const projectId = readProjectId()
+const token = readSanityToken()
+
+if (!token) {
+  console.error('No Sanity auth token found. Run `npx sanity login` first, then re-run this script.')
+  process.exit(1)
+}
 
 const client = createClient({
   projectId,
   dataset: 'production',
   apiVersion: '2024-01-01',
   useCdn: false,
-  // Uses the token from `sanity login` stored in ~/.sanity/auth.json
-  token: process.env.SANITY_TOKEN,
+  token,
 })
 
 // ---------------------------------------------------------------------------
