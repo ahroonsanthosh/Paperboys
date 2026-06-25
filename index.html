@@ -57,7 +57,7 @@
   <header class="nav" id="nav">
     <a href="#top" class="nav__brand">
       <img src="assets/mascot.svg" alt="" class="nav__logo" />
-      <span>Paperboys</span>
+      <span class="cms-brand-name">Paperboys</span>
     </a>
     <nav class="nav__links">
       <a href="#story">Story</a>
@@ -75,7 +75,7 @@
       <div class="vhero__sticky">
         <div class="vhero__copy" id="vheroCopy">
           <img src="assets/mascot.svg" alt="" class="vhero__mark" />
-          <p class="eyebrow">Tobin Street · Cork City · Open daily 10–4</p>
+          <p class="eyebrow" id="heroEyebrow">Tobin Street · Cork City · Open daily 10–4</p>
           <h1 class="vhero__title">Brunch, <span class="hero__accent">done</span> properly.</h1>
         </div>
 
@@ -94,7 +94,7 @@
     </section>
 
     <div class="hero__ticker" aria-hidden="true">
-      <div class="ticker__track">
+      <div class="ticker__track" id="tickerTrack">
         <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
         <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
       </div>
@@ -104,9 +104,9 @@
     <section class="story" id="story">
       <div class="story__text">
         <p class="eyebrow reveal">Who we are</p>
-        <h2 class="reveal" data-delay="80">A neighbourhood brunch room with a bit of mischief.</h2>
-        <p class="reveal" data-delay="160">Tucked onto Tobin Street, Paperboys is small, warm and unmistakably Cork. We keep the menu tight and the coffee serious — the kind of room you slip into on a slow morning and lose an hour in.</p>
-        <p class="reveal" data-delay="220">No fuss, no pretence. Just good plates, good people, and our two paperboys keeping an eye on the place.</p>
+        <h2 class="reveal" data-delay="80" id="storyHeading">A neighbourhood brunch room with a bit of mischief.</h2>
+        <p class="reveal" data-delay="160" id="storyPara1">Tucked onto Tobin Street, Paperboys is small, warm and unmistakably Cork. We keep the menu tight and the coffee serious — the kind of room you slip into on a slow morning and lose an hour in.</p>
+        <p class="reveal" data-delay="220" id="storyPara2">No fuss, no pretence. Just good plates, good people, and our two paperboys keeping an eye on the place.</p>
         <div class="story__meta reveal" data-delay="280">
           <div><span class="num" data-count="10">10–4</span><small>Open every day</small></div>
           <div><span class="num">Cork</span><small>City centre</small></div>
@@ -115,8 +115,8 @@
       </div>
       <div class="story__visual">
         <figure class="story__card reveal" data-delay="160">
-          <img src="assets/storefront.webp" alt="The Paperboys storefront on Tobin Street — the two-face mascot sign above the timber doors" loading="lazy" />
-          <figcaption class="story__quote">“Two faces over the door, and the best reason to leave the house before noon.”</figcaption>
+          <img id=”storefrontImg” src=”assets/storefront.webp” alt=”The Paperboys storefront on Tobin Street — the two-face mascot sign above the timber doors” loading=”lazy” />
+          <figcaption class=”story__quote” id=”storefrontQuote”>”Two faces over the door, and the best reason to leave the house before noon.”</figcaption>
         </figure>
       </div>
     </section>
@@ -126,12 +126,12 @@
       <div class="menu__head">
         <p class="eyebrow eyebrow--light reveal">Bites · Brunch &amp; Sambos · Est. 2023</p>
         <h2 class="reveal" data-delay="80">The menu</h2>
-        <p class="menu__intro reveal" data-delay="140">Served all day. Allergen numbers in brackets — full key at the foot of the list.</p>
+        <p class="menu__intro reveal" data-delay="140" id="menuIntro">Served all day. Allergen numbers in brackets — full key at the foot of the list.</p>
       </div>
 
       <div class="menu__group reveal">
         <h3 class="menu__cat">Breakfast</h3>
-        <div class="menu__list">
+        <div class="menu__list" id="breakfastList">
           <article class="dish">
             <div class="dish__row"><h4>Halloumi Florentine <em>(1,3,7)</em></h4><span class="dot"></span><span class="dish__price">€14.50</span></div>
             <p>Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon.</p>
@@ -153,7 +153,7 @@
 
       <div class="menu__group reveal">
         <h3 class="menu__cat">Sandwiches</h3>
-        <div class="menu__list">
+        <div class="menu__list" id="sandwichesList">
           <article class="dish">
             <div class="dish__row"><h4>The Ham 'n 2 Cheeses <em>(1,7,10)</em></h4><span class="dot"></span><span class="dish__price">€12</span></div>
             <p>Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar &amp; emmentaler. Add fries.</p>
@@ -176,7 +176,7 @@
       <div class="menu__group menu__group--split">
         <div class="reveal">
           <h3 class="menu__cat">Sides &amp; Add-ons</h3>
-          <ul class="menu__mini">
+          <ul class="menu__mini" id="sidesList">
             <li><span>Avo</span><b>€4.50</b></li>
             <li><span>Bacon</span><b>€4.50</b></li>
             <li><span>Black Pudding</span><b>€4.50</b></li>
@@ -187,7 +187,7 @@
         </div>
         <div class="reveal" data-delay="100">
           <h3 class="menu__cat">Drinks</h3>
-          <ul class="menu__mini menu__mini--cols">
+          <ul class="menu__mini menu__mini--cols" id="drinksList">
             <li><span>Espresso / Doppio</span><b>€3</b></li>
             <li><span>Americano</span><b>€3.30</b></li>
             <li><span>Flat White</span><b>€3.50</b></li>
@@ -211,7 +211,7 @@
           </ul>
         </div>
       </div>
-      <p class="menu__note reveal">Allergens — 1 Gluten · 2 Crustaceans · 3 Eggs · 4 Fish · 5 Peanuts · 6 Soy · 7 Milk · 8 Nuts · 9 Celery · 10 Mustard · 11 Sesame · 12 Sulphites · 13 Lupin · 14 Molluscs.</p>
+      <p class="menu__note reveal" id="allergenNote">Allergens — 1 Gluten · 2 Crustaceans · 3 Eggs · 4 Fish · 5 Peanuts · 6 Soy · 7 Milk · 8 Nuts · 9 Celery · 10 Mustard · 11 Sesame · 12 Sulphites · 13 Lupin · 14 Molluscs.</p>
     </section>
 
     <!-- Gallery -->
@@ -220,7 +220,7 @@
         <p class="eyebrow reveal">The room &amp; the plates</p>
         <h2 class="reveal" data-delay="80">Warm light, good company.</h2>
       </div>
-      <div class="gallery__grid">
+      <div class="gallery__grid" id="galleryGrid">
         <figure class="tile tile--a reveal"><img src="assets/pbb5.webp" alt="Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber" loading="lazy" /><figcaption>The counter</figcaption></figure>
         <figure class="tile tile--b reveal" data-delay="80"><img src="assets/pbb4.webp" alt="Two brunch plates — buttermilk fried chicken with French toast, and grilled halloumi with flatbread" loading="lazy" /><figcaption>On the plate</figcaption></figure>
         <figure class="tile tile--c reveal" data-delay="160"><img src="assets/pbb2.webp" alt="A flat white with latte art" loading="lazy" /><figcaption>Coffee, all day</figcaption></figure>
@@ -234,7 +234,7 @@
       <div class="visit__info">
         <p class="eyebrow eyebrow--light reveal">Come say hello</p>
         <h2 class="reveal" data-delay="80">Find the room.</h2>
-        <address class="reveal" data-delay="140">
+        <address class="reveal" data-delay="140" id="visitAddress">
           Paperboys<br />Tobin Street, City Centre<br />Cork, Ireland
         </address>
         <div class="hours reveal" data-delay="200">
@@ -250,12 +250,12 @@
           </ul>
         </div>
         <div class="visit__actions reveal" data-delay="240">
-          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get directions</a>
-          <a class="btn btn--line btn--line-light" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">@paperboys_cork</a>
+          <a class="btn btn--primary cms-directions-link" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn--line btn--line-light cms-instagram-link" id="visitInstagramBtn" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">@paperboys_cork</a>
         </div>
       </div>
       <div class="visit__map reveal" data-delay="160">
-        <iframe title="Map to Paperboys, Tobin Street, Cork"
+        <iframe id="mapIframe" title="Map to Paperboys, Tobin Street, Cork"
           src="https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed"
           loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
@@ -266,26 +266,27 @@
     <div class="footer__top">
       <div class="footer__brand">
         <img src="assets/mascot.svg" alt="" />
-        <span>Paperboys</span>
+        <span class="cms-brand-name">Paperboys</span>
       </div>
       <nav class="footer__nav">
         <a href="#story">Story</a><a href="#menu">Menu</a><a href="#gallery">The Room</a><a href="#visit">Visit</a>
-        <a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Instagram</a>
+        <a class="cms-instagram-link" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
     <div class="footer__base">
-      <small>© <span id="year"></span> Paperboys · Tobin Street, Cork City</small>
+      <small id="footerCopyright">© <span id="year"></span> Paperboys · Tobin Street, Cork City</small>
       <small>Brunch daily, 10–4</small>
     </div>
   </footer>
 
   <!-- mobile-only quick actions -->
   <nav class="mobilebar" aria-label="Quick actions">
-    <a href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Directions</a>
+    <a class="cms-directions-link" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Directions</a>
     <a href="#menu">Menu</a>
-    <a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener" class="mobilebar--accent">Follow</a>
+    <a class="cms-instagram-link mobilebar--accent" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Follow</a>
   </nav>
 
+  <script src="cms.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
