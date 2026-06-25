@@ -22,7 +22,7 @@ export default defineConfig({
   name: 'paperboys',
   title: 'Paperboys Studio',
 
-  projectId: 'REPLACE_WITH_PROJECT_ID',
+  projectId: 'kbi1x7f8',
   dataset: 'production',
 
   plugins: [

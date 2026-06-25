@@ -1,5 +1,5 @@
 (function () {
-  var PROJECT_ID = 'REPLACE_WITH_PROJECT_ID';
+  var PROJECT_ID = 'kbi1x7f8';
   var DATASET = 'production';
   var API_VERSION = '2024-01-01';
 
