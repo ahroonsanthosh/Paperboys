@@ -3,21 +3,56 @@
     "businessName": "Paperboys",
     "streetAddress": "Tobin Street, City Centre",
     "locality": "Cork, Ireland",
+    "heroEyebrow": "Tobin Street · Cork City · Open daily 10–4",
     "instagramHandle": "@paperboys_cork",
     "instagramUrl": "https://www.instagram.com/paperboys_cork",
-    "googleMapsUrl": "https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed",
     "directionsUrl": "https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork",
-    "heroEyebrow": "Tobin Street · Cork City · Open daily 10–4"
+    "googleMapsUrl": "https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed"
   },
   "hours": {
     "days": [
-      {"dayName": "Monday",    "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Tuesday",   "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Wednesday", "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Thursday",  "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Friday",    "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Saturday",  "opens": "10:00", "closes": "16:00", "closed": false},
-      {"dayName": "Sunday",    "opens": "10:00", "closes": "16:00", "closed": false}
+      {
+        "dayName": "Monday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Tuesday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Wednesday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Thursday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Friday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Saturday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      },
+      {
+        "dayName": "Sunday",
+        "opens": "10:00",
+        "closes": "16:00",
+        "closed": false
+      }
     ]
   },
   "story": {
@@ -25,57 +60,229 @@
     "paragraph1": "Tucked onto Tobin Street, Paperboys is small, warm and unmistakably Cork. We keep the menu tight and the coffee serious — the kind of room you slip into on a slow morning and lose an hour in.",
     "paragraph2": "No fuss, no pretence. Just good plates, good people, and our two paperboys keeping an eye on the place.",
     "storefrontQuote": "\"Two faces over the door, and the best reason to leave the house before noon.\"",
-    "tickerWords": ["Sourdough", "Flat Whites", "Brunch Daily", "Cork City"]
+    "tickerWords": [
+      "Sourdough",
+      "Flat Whites",
+      "Brunch Daily",
+      "Cork City"
+    ]
   },
   "menu": {
     "introText": "Served all day. Allergen numbers in brackets — full key at the foot of the list.",
     "allergenKey": "Allergens — 1 Gluten · 2 Crustaceans · 3 Eggs · 4 Fish · 5 Peanuts · 6 Soy · 7 Milk · 8 Nuts · 9 Celery · 10 Mustard · 11 Sesame · 12 Sulphites · 13 Lupin · 14 Molluscs.",
     "sides": [
-      {"name": "Avo",                  "price": 4.50},
-      {"name": "Bacon",                "price": 4.50},
-      {"name": "Black Pudding",        "price": 4.50},
-      {"name": "Halloumi",             "price": 4.50},
-      {"name": "Fries",                "price": 4.50},
-      {"name": "Sourdough or Brioche", "price": 2.50}
+      {
+        "name": "Avo",
+        "price": 4.5
+      },
+      {
+        "name": "Bacon",
+        "price": 4.5
+      },
+      {
+        "name": "Black Pudding",
+        "price": 4.5
+      },
+      {
+        "name": "Halloumi",
+        "price": 4.5
+      },
+      {
+        "name": "Fries",
+        "price": 4.5
+      },
+      {
+        "name": "Sourdough or Brioche",
+        "price": 2.5
+      }
     ],
     "drinks": [
-      {"name": "Espresso / Doppio",  "price": 3.00},
-      {"name": "Americano",          "price": 3.30},
-      {"name": "Flat White",         "price": 3.50},
-      {"name": "Cappuccino",         "price": 3.50},
-      {"name": "Latte",              "price": 3.50},
-      {"name": "Dirty Chai",         "price": 4.00},
-      {"name": "Mocha",              "price": 3.60},
-      {"name": "Masala Chai",        "price": 3.70},
-      {"name": "Hot Choc",           "price": 3.50},
-      {"name": "Tea",                "price": 2.00},
-      {"name": "OJ",                 "price": 2.50},
-      {"name": "Rose Lemonade",      "price": 4.50},
-      {"name": "Mimosa",             "price": 9.00},
-      {"name": "Hugo Spritz",        "price": 11.00},
-      {"name": "Aperol Spritz",      "price": 11.00},
-      {"name": "Beamish",            "price": 5.20},
-      {"name": "Heineken",           "price": 6.20},
-      {"name": "Orchard Thieves",    "price": 6.20},
-      {"name": "Cab Sav (G)",        "price": 8.00},
-      {"name": "Sav Blanc (G)",      "price": 8.00}
+      {
+        "name": "Espresso / Doppio",
+        "price": 3
+      },
+      {
+        "name": "Americano",
+        "price": 3.3
+      },
+      {
+        "name": "Flat White",
+        "price": 3.5
+      },
+      {
+        "name": "Cappuccino",
+        "price": 3.5
+      },
+      {
+        "name": "Latte",
+        "price": 3.5
+      },
+      {
+        "name": "Dirty Chai",
+        "price": 4
+      },
+      {
+        "name": "Mocha",
+        "price": 3.6
+      },
+      {
+        "name": "Masala Chai",
+        "price": 3.7
+      },
+      {
+        "name": "Hot Choc",
+        "price": 3.5
+      },
+      {
+        "name": "Tea",
+        "price": 2
+      },
+      {
+        "name": "OJ",
+        "price": 2.5
+      },
+      {
+        "name": "Rose Lemonade",
+        "price": 4.5
+      },
+      {
+        "name": "Mimosa",
+        "price": 9
+      },
+      {
+        "name": "Hugo Spritz",
+        "price": 11
+      },
+      {
+        "name": "Aperol Spritz",
+        "price": 11
+      },
+      {
+        "name": "Beamish",
+        "price": 5.2
+      },
+      {
+        "name": "Heineken",
+        "price": 6.2
+      },
+      {
+        "name": "Orchard Thieves",
+        "price": 6.2
+      },
+      {
+        "name": "Cab Sav (G)",
+        "price": 8
+      },
+      {
+        "name": "Sav Blanc (G)",
+        "price": 8
+      }
     ]
   },
   "dishes": [
-    {"id": "halloumi-florentine",  "category": "breakfast",   "sortOrder": 1, "name": "Halloumi Florentine",       "allergens": "1,3,7",      "price": 14.50, "description": "Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon."},
-    {"id": "revised-morning-issue","category": "breakfast",   "sortOrder": 2, "name": "The Revised Morning Issue", "allergens": "1,3,7",      "price": 14.50, "description": "Signature hash browns, black pudding hash, hollandaise, poached eggs. Add crispy bacon / avo."},
-    {"id": "benny-boru",           "category": "breakfast",   "sortOrder": 3, "name": "Benny Boru",                "allergens": "1,3,7,10",   "price": 15.00, "description": "Brioche, honey-glazed ham, hollandaise, poached eggs. Add crispy bacon / black pudding."},
-    {"id": "avo-smash",            "category": "breakfast",   "sortOrder": 4, "name": "Avo… Smash!",               "allergens": "1,3,7,8",    "price": 14.50, "description": "Sourdough or brioche, smashed avo, crispy chilli & peanut ryu, poached eggs. Add halloumi / crispy bacon."},
-    {"id": "ham-2-cheeses",        "category": "sandwiches",  "sortOrder": 1, "name": "The Ham 'n 2 Cheeses",     "allergens": "1,7,10",     "price": 12.00, "description": "Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar & emmentaler. Add fries."},
-    {"id": "muthah-cluckah",       "category": "sandwiches",  "sortOrder": 2, "name": "The Muthah Cluckah",       "allergens": "1,3,6,7,10", "price": 13.50, "description": "Crispy battered buttermilk & hot-sauce marinated chicken, pickles, lettuce, hot ranch sauce. Add fries / crispy bacon."},
-    {"id": "banh-mi",              "category": "sandwiches",  "sortOrder": 3, "name": "The Banh Mi",               "allergens": "1,3,4,10",   "price": 12.50, "description": "Vietnamese pork belly, pickled daikon & carrot, chilli, coriander, vietnamayo, baguette. Veg sub: crispy garlic chilli tofu."},
-    {"id": "melt",                 "category": "sandwiches",  "sortOrder": 4, "name": "The Melt",                  "allergens": "1,7,10",     "price": 12.00, "description": "Roast peppers, mushroom, caramelised onion, 2-cheese sauce, smoked cheddar, emmentaler. Add fries."}
+    {
+      "name": "Halloumi Florentine",
+      "price": 88,
+      "id": "halloumi-florentine",
+      "category": "breakfast",
+      "allergens": "1,3,7",
+      "description": "Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon.",
+      "sortOrder": 1
+    },
+    {
+      "name": "The Revised Morning Issue",
+      "price": 14.5,
+      "id": "revised-morning-issue",
+      "category": "breakfast",
+      "allergens": "1,3,7",
+      "description": "Signature hash browns, black pudding hash, hollandaise, poached eggs. Add crispy bacon / avo.",
+      "sortOrder": 2
+    },
+    {
+      "name": "Benny Boru",
+      "price": 15,
+      "id": "benny-boru",
+      "category": "breakfast",
+      "allergens": "1,3,7,10",
+      "description": "Brioche, honey-glazed ham, hollandaise, poached eggs. Add crispy bacon / black pudding.",
+      "sortOrder": 3
+    },
+    {
+      "name": "Avo… Smash!",
+      "price": 14.5,
+      "id": "avo-smash",
+      "category": "breakfast",
+      "allergens": "1,3,7,8",
+      "description": "Sourdough or brioche, smashed avo, crispy chilli & peanut ryu, poached eggs. Add halloumi / crispy bacon.",
+      "sortOrder": 4
+    },
+    {
+      "name": "The Ham 'n 2 Cheeses",
+      "price": 12,
+      "id": "ham-2-cheeses",
+      "category": "sandwiches",
+      "allergens": "1,7,10",
+      "description": "Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar & emmentaler. Add fries.",
+      "sortOrder": 1
+    },
+    {
+      "name": "The Muthah Cluckah",
+      "price": 13.5,
+      "id": "muthah-cluckah",
+      "category": "sandwiches",
+      "allergens": "1,3,6,7,10",
+      "description": "Crispy battered buttermilk & hot-sauce marinated chicken, pickles, lettuce, hot ranch sauce. Add fries / crispy bacon.",
+      "sortOrder": 2
+    },
+    {
+      "name": "The Banh Mi",
+      "price": 12.5,
+      "id": "banh-mi",
+      "category": "sandwiches",
+      "allergens": "1,3,4,10",
+      "description": "Vietnamese pork belly, pickled daikon & carrot, chilli, coriander, vietnamayo, baguette. Veg sub: crispy garlic chilli tofu.",
+      "sortOrder": 3
+    },
+    {
+      "name": "The Melt",
+      "price": 12,
+      "id": "melt",
+      "category": "sandwiches",
+      "allergens": "1,7,10",
+      "description": "Roast peppers, mushroom, caramelised onion, 2-cheese sauce, smoked cheddar, emmentaler. Add fries.",
+      "sortOrder": 4
+    }
   ],
   "gallery": [
-    {"sortOrder": 1, "src": "assets/pbb5.webp", "caption": "The counter",    "alt": "Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber"},
-    {"sortOrder": 2, "src": "assets/pbb4.webp", "caption": "On the plate",   "alt": "Two brunch plates — buttermilk fried chicken with French toast, and grilled halloumi with flatbread"},
-    {"sortOrder": 3, "src": "assets/pbb2.webp", "caption": "Coffee, all day","alt": "A flat white with latte art"},
-    {"sortOrder": 4, "src": "assets/pbb3.webp", "caption": "Egg tostadas",   "alt": "Egg tostadas topped with micro-herbs and salsa"},
-    {"sortOrder": 5, "src": "assets/pbb1.webp", "caption": "Prawn baguette", "alt": "Prawn baguette with seasoned fries"}
+    {
+      "sortOrder": 1,
+      "src": "assets/pbb5.webp",
+      "caption": "The counter",
+      "alt": "Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber"
+    },
+    {
+      "sortOrder": 2,
+      "src": "assets/pbb4.webp",
+      "caption": "On the plate",
+      "alt": "Two brunch plates — buttermilk fried chicken with French toast, and grilled halloumi with flatbread"
+    },
+    {
+      "sortOrder": 3,
+      "src": "assets/pbb2.webp",
+      "caption": "Coffee, all day",
+      "alt": "A flat white with latte art"
+    },
+    {
+      "sortOrder": 4,
+      "src": "assets/pbb3.webp",
+      "caption": "Egg tostadas",
+      "alt": "Egg tostadas topped with micro-herbs and salsa"
+    },
+    {
+      "sortOrder": 5,
+      "src": "assets/pbb1.webp",
+      "caption": "Prawn baguette",
+      "alt": "Prawn baguette with seasoned fries"
+    }
   ]
 }
