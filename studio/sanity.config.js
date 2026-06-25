@@ -3,10 +3,11 @@ import {structureTool} from 'sanity/structure'
 import {visionTool} from '@sanity/vision'
 import {schemaTypes} from './schemaTypes/index.js'
 
-const SINGLETONS = new Set(['siteSettings', 'openingHours', 'storySection', 'menuSettings'])
+const SINGLETONS = new Set(['siteSettings', 'homepage', 'openingHours', 'storySection', 'menuSettings'])
 
 const SINGLETON_TITLES = {
   siteSettings:  'Site Settings',
+  homepage:      'Homepage',
   openingHours:  'Opening Hours',
   storySection:  'Story & Ticker',
   menuSettings:  'Menu Settings (sides, drinks, allergens)',
@@ -34,6 +35,7 @@ export default defineConfig({
             S.divider(),
             ...[...SINGLETONS].map((t) => singletonListItem(S, t)),
             S.divider(),
+            S.documentTypeListItem('menuCategory').title('Menu Categories'),
             S.documentTypeListItem('menuDish').title('Menu Dishes'),
             S.documentTypeListItem('galleryPhoto').title('Gallery Photos'),
             S.documentTypeListItem('testimonial').title('Testimonials'),
