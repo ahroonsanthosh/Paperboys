@@ -110,10 +110,12 @@
     vheroEl.appendChild(light);
     vheroEl.addEventListener('mousemove', function (e) {
       var r = vheroEl.getBoundingClientRect();
+      light.style.animation = 'none';
       light.style.left = (e.clientX - r.left) + 'px';
       light.style.top  = (e.clientY - r.top)  + 'px';
     });
     vheroEl.addEventListener('mouseleave', function () {
+      light.style.animation = '';
       light.style.left = '50%';
       light.style.top  = '50%';
     });
@@ -171,31 +173,36 @@
   }
 
   // ===== Hours list stagger =====
-  function initHoursStagger() {
+  function staggerHoursItems() {
     var hoursList = document.getElementById('hoursList');
     if (!hoursList) return;
-    hoursList.querySelectorAll('li').forEach(function (li, i) {
-      li.style.setProperty('--i', i);
+    var items = hoursList.querySelectorAll('li');
+    if (!items.length) return;
+    items.forEach(function (li, i) {
+      setTimeout(function () { li.classList.add('is-in'); }, i * 80 + 100);
     });
-    var hoursSection = document.querySelector('.hours');
-    if (!hoursSection) return;
-    if ('IntersectionObserver' in window) {
-      var hoursIO = new IntersectionObserver(function (entries) {
-        if (entries[0].isIntersecting) {
-          hoursSection.classList.add('is-in');
-          hoursIO.disconnect();
-        }
-      }, { threshold: 0.15 });
-      hoursIO.observe(hoursSection);
-    } else {
-      hoursSection.classList.add('is-in');
-    }
   }
-  // Run now and also after CMS populates the list
-  initHoursStagger();
+  // Observe the hours section; once visible, stagger in the items
+  var hoursSection = document.querySelector('.hours');
+  if (hoursSection && 'IntersectionObserver' in window) {
+    var hoursIO = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        staggerHoursItems();
+        hoursIO.disconnect();
+      }
+    }, { threshold: 0.15 });
+    hoursIO.observe(hoursSection);
+  }
+  // Also fire after CMS populates the list (CMS fetch may complete after IO fires)
   var hoursListEl = document.getElementById('hoursList');
   if (hoursListEl && window.MutationObserver) {
-    var hoursObs = new MutationObserver(function () { initHoursStagger(); hoursObs.disconnect(); });
+    var hoursObs = new MutationObserver(function () {
+      hoursObs.disconnect();
+      // If section already visible, stagger now; otherwise IO handles it
+      if (hoursSection && hoursSection.getBoundingClientRect().top < window.innerHeight * 0.92) {
+        staggerHoursItems();
+      }
+    });
     hoursObs.observe(hoursListEl, { childList: true });
   }
 
