@@ -82,18 +82,22 @@
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
 
-  // ===== Newsletter form =====
-  var nlForm = document.getElementById('newsletterForm');
-  if (nlForm) {
-    nlForm.addEventListener('submit', function (e) {
+  // ===== Contact form =====
+  var contactForm = document.getElementById('contactForm');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault();
-      var email  = this.querySelector('input[type=email]').value;
-      var mailto = (this.dataset.mailto || 'mailto:hello@paperboys.ie?subject=Newsletter+signup');
-      window.open(mailto + '&body=Please+add+me+to+the+mailing+list%3A+' + encodeURIComponent(email));
-      var btn = this.querySelector('button[type=submit]');
+      var name    = (this.querySelector('#cName')    || {}).value || '';
+      var email   = (this.querySelector('#cEmail')   || {}).value || '';
+      var type    = (this.querySelector('#cType')    || {}).value || '';
+      var message = (this.querySelector('#cMessage') || {}).value || '';
+      var base    = this.dataset.mailto || 'mailto:hello@paperboys.ie';
+      var subject = encodeURIComponent((type || 'Enquiry') + ' — Paperboys');
+      var body    = encodeURIComponent('Name: ' + name + '\nEmail: ' + email + '\nType: ' + type + '\n\nMessage:\n' + message);
+      window.open(base + '?subject=' + subject + '&body=' + body);
+      var btn  = this.querySelector('button[type=submit]');
       var orig = btn.textContent;
-      btn.textContent = 'Done ✓';
-      this.querySelector('input').value = '';
+      btn.textContent = 'Sent ✓';
       setTimeout(function () { btn.textContent = orig; }, 3000);
     });
   }

@@ -83,7 +83,7 @@
         <div class="vhero__copy" id="vheroCopy">
           <img src="assets/mascot.svg" alt="" class="vhero__mark" />
           <p class="eyebrow" id="heroEyebrow">Tobin Street · Cork City · Open daily 10–4</p>
-          <h1 class="vhero__title">Brunch, <span class="hero__accent">done</span> properly.</h1>
+          <h1 class="vhero__title"><span id="heroTitle">Good food.</span><br /><span class="hero__accent" id="heroTitleAccent">Better times.</span></h1>
         </div>
 
         <div class="vhero__inset" id="vheroInset">
@@ -125,8 +125,8 @@
         <p class="evhero__sub reveal" data-delay="160" id="evheroSub">Brunch clubs, supper nights, DJ Sundays, pop-up collabs — Paperboys is more than a café. It's a place things happen.</p>
 
         <div class="evhero__actions reveal" data-delay="220">
-          <a href="mailto:hello@paperboys.ie" class="btn btn--cream" id="evheroCta1">Get in touch</a>
-          <a href="#hire" class="btn btn--ghost" id="evheroCta2">Host your event<span class="btn__arrow">→</span></a>
+          <a href="#contact" class="btn btn--cream" id="evheroCta1">Get in touch</a>
+          <a href="#contact" class="btn btn--ghost" id="evheroCta2">Host your event<span class="btn__arrow">→</span></a>
         </div>
 
       </div>
@@ -256,8 +256,7 @@
           <p class="eyebrow eyebrow--light" id="hireEyebrow">Private Hire</p>
           <h3 id="hireHeading">Got something to celebrate?</h3>
           <p id="hirePara">Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. Full buyout, bespoke menus, up to 40 guests. We sort the food, the coffee and the atmosphere — you bring the people.</p>
-          <p class="hire__details" id="hireDetails">Up to 40 guests · Full buyout · Bespoke menus · Morning, afternoon or evening</p>
-          <a href="mailto:hello@paperboys.ie" class="btn btn--primary hire__btn" id="hireCtaLink">Get in touch</a>
+          <a href="#contact" class="btn btn--primary hire__btn" id="hireCtaLink">Get in touch</a>
         </div>
       </div>
     </section>
@@ -281,18 +280,6 @@
           <span class="gallery__social-handle" id="gallerySocialHandle">@paperboys_cork</span>
           <span class="gallery__social-arrow">→</span>
         </a>
-      </div>
-    </section>
-
-    <!-- Newsletter -->
-    <section class="newsletter" id="newsletter">
-      <div class="newsletter__inner">
-        <h2 class="reveal"><span id="newsletterLine1">Get in first.</span><br /><em id="newsletterLine2">Stay in the loop.</em></h2>
-        <p class="reveal" data-delay="100" id="newsletterSub">Events, Sunday Sessions, pop-ups — in your inbox before it hits the gram.</p>
-        <form class="newsletter__form reveal" data-delay="180" id="newsletterForm">
-          <input type="email" placeholder="your@email.com" required autocomplete="email" />
-          <button type="submit" class="btn btn--ink" id="newsletterCta">Join the list</button>
-        </form>
       </div>
     </section>
 
@@ -328,6 +315,44 @@
       </div>
     </section>
   </main>
+
+  <!-- Contact -->
+  <section class="contact" id="contact">
+    <div class="contact__inner">
+      <div class="contact__copy">
+        <p class="eyebrow eyebrow--light reveal" id="contactEyebrow">Get in touch</p>
+        <h2 class="reveal" data-delay="80"><span id="contactHeading">Let's make</span><br /><em id="contactHeadingAccent">something happen.</em></h2>
+        <p class="reveal" data-delay="140" id="contactSub">Private hire, events, pop-ups or just a question — drop us a line and we'll get back to you.</p>
+      </div>
+      <form class="contact__form reveal" data-delay="100" id="contactForm">
+        <div class="contact__row">
+          <div class="contact__field">
+            <label for="cName">Name</label>
+            <input type="text" id="cName" name="name" required placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="contact__field">
+            <label for="cEmail">Email</label>
+            <input type="email" id="cEmail" name="email" required placeholder="your@email.com" autocomplete="email" />
+          </div>
+        </div>
+        <div class="contact__field">
+          <label for="cType">What's this about?</label>
+          <select id="cType" name="type">
+            <option value="">Select an option</option>
+            <option value="Private Hire">Private Hire</option>
+            <option value="Events Collab">Events Collab</option>
+            <option value="Press &amp; Media">Press &amp; Media</option>
+            <option value="General Enquiry">General Enquiry</option>
+          </select>
+        </div>
+        <div class="contact__field">
+          <label for="cMessage">Message</label>
+          <textarea id="cMessage" name="message" rows="4" placeholder="Tell us what you've got in mind…"></textarea>
+        </div>
+        <button type="submit" class="btn btn--cream contact__submit" id="contactSubmit">Send it →</button>
+      </form>
+    </div>
+  </section>
 
   <footer class="footer">
     <div class="footer__top">

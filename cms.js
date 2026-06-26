@@ -25,13 +25,15 @@
       var eventsHero     = d.eventsHero     || {};
       var hire           = d.hire           || {};
       var gallerySection = d.gallerySection || {};
-      var newsletter     = d.newsletter     || {};
+      var contact        = d.contact        || {};
 
       // ── Site Settings ──────────────────────────────────────────────────────
       document.querySelectorAll('.cms-brand-name').forEach(function (el) {
         if (settings.businessName) el.textContent = settings.businessName;
       });
-      set('heroEyebrow', settings.heroEyebrow);
+      set('heroEyebrow',       settings.heroEyebrow);
+      set('heroTitle',         settings.heroTitle);
+      set('heroTitleAccent',   settings.heroTitleAccent);
 
       var addr = document.getElementById('visitAddress');
       if (addr && settings.businessName) {
@@ -146,7 +148,6 @@
       set('hireEyebrow', hire.eyebrow);
       set('hireHeading', hire.heading);
       set('hirePara',    hire.paragraph);
-      set('hireDetails', hire.details);
       var hireCta = document.getElementById('hireCtaLink');
       if (hireCta) {
         if (hire.ctaLabel) hireCta.textContent = hire.ctaLabel;
@@ -162,14 +163,15 @@
         gallerySocialHandle.textContent = settings.instagramHandle;
       }
 
-      // ── Newsletter ─────────────────────────────────────────────────────────
-      set('newsletterLine1', newsletter.line1);
-      set('newsletterLine2', newsletter.line2);
-      set('newsletterSub',   newsletter.subtext);
-      var nlCta = document.getElementById('newsletterCta');
-      if (nlCta && newsletter.ctaLabel) nlCta.textContent = newsletter.ctaLabel;
-      var nlForm = document.getElementById('newsletterForm');
-      if (nlForm && newsletter.ctaMailto) nlForm.dataset.mailto = newsletter.ctaMailto;
+      // ── Contact ────────────────────────────────────────────────────────────
+      set('contactEyebrow',       contact.eyebrow);
+      set('contactHeading',       contact.heading);
+      set('contactHeadingAccent', contact.headingAccent);
+      set('contactSub',           contact.subtext);
+      var ctSubmit = document.getElementById('contactSubmit');
+      if (ctSubmit && contact.ctaLabel) ctSubmit.textContent = contact.ctaLabel;
+      var ctForm = document.getElementById('contactForm');
+      if (ctForm && contact.mailto) ctForm.dataset.mailto = contact.mailto;
 
       // ── Gallery ────────────────────────────────────────────────────────────
       var grid = document.getElementById('galleryGrid');

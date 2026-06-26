@@ -256,8 +256,8 @@
       <a href="#" onclick="showPanel('hire', this); return false;">Private Hire</a>
       <div class="sidebar-label">Gallery</div>
       <a href="#" onclick="showPanel('gallery', this); return false;">Gallery</a>
-      <div class="sidebar-label">Newsletter</div>
-      <a href="#" onclick="showPanel('newsletter', this); return false;">Newsletter</a>
+      <div class="sidebar-label">Contact</div>
+      <a href="#" onclick="showPanel('contact', this); return false;">Contact Form</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
     </nav>
@@ -273,6 +273,10 @@
           <div class="field"><label>Locality</label><input type="text" id="s-locality" /></div>
         </div>
         <div class="field"><label>Hero Eyebrow Text</label><input type="text" id="s-heroEyebrow" /></div>
+        <div class="field-row">
+          <div class="field"><label>Hero Title Line 1</label><input type="text" id="s-heroTitle" /></div>
+          <div class="field"><label>Hero Title Accent (italic gradient)</label><input type="text" id="s-heroTitleAccent" /></div>
+        </div>
         <div class="field-row">
           <div class="field"><label>Instagram Handle</label><input type="text" id="s-instagramHandle" /></div>
           <div class="field"><label>Instagram URL</label><input type="text" id="s-instagramUrl" /></div>
@@ -364,7 +368,6 @@
         <div class="field"><label>Eyebrow Label</label><input type="text" id="hire-eyebrow" /></div>
         <div class="field"><label>Heading</label><input type="text" id="hire-heading" /></div>
         <div class="field"><label>Paragraph</label><textarea id="hire-para"></textarea></div>
-        <div class="field"><label>Details Line (shown below paragraph)</label><input type="text" id="hire-details" /></div>
         <div class="field-row">
           <div class="field"><label>CTA Label</label><input type="text" id="hire-ctaLabel" /></div>
           <div class="field"><label>CTA Link (href)</label><input type="text" id="hire-ctaHref" /></div>
@@ -385,17 +388,18 @@
         </label>
       </div>
 
-      <!-- Newsletter -->
-      <div class="panel" id="panel-newsletter">
-        <div class="panel-title">Newsletter Section</div>
+      <!-- Contact -->
+      <div class="panel" id="panel-contact">
+        <div class="panel-title">Contact Form</div>
+        <div class="field"><label>Eyebrow</label><input type="text" id="ct-eyebrow" /></div>
         <div class="field-row">
-          <div class="field"><label>Heading Line 1</label><input type="text" id="nl-line1" /></div>
-          <div class="field"><label>Heading Line 2 (italic)</label><input type="text" id="nl-line2" /></div>
+          <div class="field"><label>Heading Line 1</label><input type="text" id="ct-heading" /></div>
+          <div class="field"><label>Heading Accent (italic)</label><input type="text" id="ct-headingAccent" /></div>
         </div>
-        <div class="field"><label>Subtext</label><textarea id="nl-subtext"></textarea></div>
+        <div class="field"><label>Subtext</label><textarea id="ct-subtext"></textarea></div>
         <div class="field-row">
-          <div class="field"><label>Button Label</label><input type="text" id="nl-ctaLabel" /></div>
-          <div class="field"><label>Mailto Link</label><input type="text" id="nl-ctaMailto" /></div>
+          <div class="field"><label>Button Label</label><input type="text" id="ct-ctaLabel" /></div>
+          <div class="field"><label>Mailto Address</label><input type="text" id="ct-mailto" /></div>
         </div>
       </div>
 
@@ -503,7 +507,9 @@ function populateForms() {
   val('s-businessName',    s.businessName);
   val('s-streetAddress',   s.streetAddress);
   val('s-locality',        s.locality);
-  val('s-heroEyebrow',     s.heroEyebrow);
+  val('s-heroEyebrow',      s.heroEyebrow);
+  val('s-heroTitle',        s.heroTitle);
+  val('s-heroTitleAccent',  s.heroTitleAccent);
   val('s-instagramHandle', s.instagramHandle);
   val('s-instagramUrl',    s.instagramUrl);
   val('s-directionsUrl',   s.directionsUrl);
@@ -542,7 +548,6 @@ function populateForms() {
   val('hire-eyebrow',  hr.eyebrow);
   val('hire-heading',  hr.heading);
   val('hire-para',     hr.paragraph);
-  val('hire-details',  hr.details);
   val('hire-ctaLabel', hr.ctaLabel);
   val('hire-ctaHref',  hr.ctaHref);
 
@@ -551,12 +556,13 @@ function populateForms() {
   val('gs-heading',    gs.heading);
   val('gs-socialText', gs.socialText);
 
-  var nl = content.newsletter || {};
-  val('nl-line1',      nl.line1);
-  val('nl-line2',      nl.line2);
-  val('nl-subtext',    nl.subtext);
-  val('nl-ctaLabel',   nl.ctaLabel);
-  val('nl-ctaMailto',  nl.ctaMailto);
+  var ct = content.contact || {};
+  val('ct-eyebrow',       ct.eyebrow);
+  val('ct-heading',       ct.heading);
+  val('ct-headingAccent', ct.headingAccent);
+  val('ct-subtext',       ct.subtext);
+  val('ct-ctaLabel',      ct.ctaLabel);
+  val('ct-mailto',        ct.mailto);
 
   renderGallery(content.gallery || []);
 }
@@ -724,6 +730,8 @@ function readForms() {
       streetAddress:   g('s-streetAddress'),
       locality:        g('s-locality'),
       heroEyebrow:     g('s-heroEyebrow'),
+      heroTitle:       g('s-heroTitle'),
+      heroTitleAccent: g('s-heroTitleAccent'),
       instagramHandle: g('s-instagramHandle'),
       instagramUrl:    g('s-instagramUrl'),
       directionsUrl:   g('s-directionsUrl'),
@@ -758,7 +766,6 @@ function readForms() {
       eyebrow:   g('hire-eyebrow'),
       heading:   g('hire-heading'),
       paragraph: g('hire-para'),
-      details:   g('hire-details'),
       ctaLabel:  g('hire-ctaLabel'),
       ctaHref:   g('hire-ctaHref')
     },
@@ -767,12 +774,13 @@ function readForms() {
       heading:    g('gs-heading'),
       socialText: g('gs-socialText')
     },
-    newsletter: {
-      line1:      g('nl-line1'),
-      line2:      g('nl-line2'),
-      subtext:    g('nl-subtext'),
-      ctaLabel:   g('nl-ctaLabel'),
-      ctaMailto:  g('nl-ctaMailto')
+    contact: {
+      eyebrow:       g('ct-eyebrow'),
+      heading:       g('ct-heading'),
+      headingAccent: g('ct-headingAccent'),
+      subtext:       g('ct-subtext'),
+      ctaLabel:      g('ct-ctaLabel'),
+      mailto:        g('ct-mailto')
     },
     gallery: (function() {
       var cards = document.getElementById('galleryCards');

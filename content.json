@@ -4,6 +4,8 @@
     "streetAddress": "Tobin Street, City Centre",
     "locality": "Cork, Ireland",
     "heroEyebrow": "Tobin Street · Cork City · Open daily 10–4",
+    "heroTitle": "Good food.",
+    "heroTitleAccent": "Better times.",
     "instagramHandle": "@paperboys_cork",
     "instagramUrl": "https://www.instagram.com/paperboys_cork",
     "directionsUrl": "https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork",
@@ -303,20 +305,20 @@
     "eyebrow": "Private Hire",
     "heading": "Got something to celebrate?",
     "paragraph": "Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. Full buyout, bespoke menus, up to 40 guests. We sort the food, the coffee and the atmosphere — you bring the people.",
-    "details": "Up to 40 guests · Full buyout · Bespoke menus · Morning, afternoon or evening",
     "ctaLabel": "Get in touch",
-    "ctaHref": "mailto:hello@paperboys.ie"
+    "ctaHref": "#contact"
   },
   "gallerySection": {
     "eyebrow": "Tobin Street · Daily",
     "heading": "The scene.",
     "socialText": "Follow the chaos"
   },
-  "newsletter": {
-    "line1": "Get in first.",
-    "line2": "Stay in the loop.",
-    "subtext": "Events, Sunday Sessions, pop-ups — in your inbox before it hits the gram.",
-    "ctaLabel": "Join the list",
-    "ctaMailto": "mailto:hello@paperboys.ie?subject=Newsletter+signup"
+  "contact": {
+    "eyebrow": "Get in touch",
+    "heading": "Let's make",
+    "headingAccent": "something happen.",
+    "subtext": "Private hire, events, pop-ups or just a question — drop us a line and we'll get back to you.",
+    "ctaLabel": "Send it →",
+    "mailto": "mailto:hello@paperboys.ie"
   }
 }
