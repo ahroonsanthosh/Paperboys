@@ -121,6 +121,15 @@
     .tag-input-row input { flex: 1; padding: 0.5rem 0.75rem; border: 1.5px solid #ddd; border-radius: 6px; font-size: 0.875rem; }
     .tag-input-row button { padding: 0.5rem 1rem; background: #0e1f3d; color: #fff; border: none; border-radius: 6px; cursor: pointer; }
 
+    /* ── Toast notification ── */
+    #toast {
+      position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(120%);
+      background: #0e1f3d; color: #fff; padding: 0.75rem 1.25rem;
+      border-radius: 8px; font-size: 0.85rem; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
+      transition: transform 0.3s ease; z-index: 9999; white-space: nowrap; pointer-events: none;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+
     /* ── Change password ── */
     .pwd-section { margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #e5e5e5; }
     .pwd-section h3 { font-size: 1rem; font-weight: 700; margin-bottom: 1rem; }
@@ -198,6 +207,8 @@
   </style>
 </head>
 <body>
+
+<div id="toast"></div>
 
 <!-- ── Login Screen ── -->
 <div id="loginScreen">
@@ -688,6 +699,7 @@ async function saveAll() {
         content = newContent;
         setStatus('Saved ✓');
         setTimeout(function(){ setStatus(''); }, 3000);
+        showToast('⏳ Changes saved — may take 10–30 seconds to appear on the site');
         break;
       }
 
@@ -703,6 +715,13 @@ async function saveAll() {
   }
 
   btn.disabled = false;
+}
+
+function showToast(msg, duration) {
+  var el = document.getElementById('toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(function() { el.classList.remove('show'); }, duration || 5000);
 }
 
 function setStatus(msg, isError) {
