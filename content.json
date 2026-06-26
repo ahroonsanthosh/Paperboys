@@ -218,7 +218,7 @@
     },
     {
       "name": "The Ham 'n 2 Cheeses",
-      "price": 13,
+      "price": 12,
       "id": "ham-2-cheeses",
       "category": "sandwiches",
       "allergens": "1,7,10",
