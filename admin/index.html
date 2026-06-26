@@ -711,7 +711,8 @@ async function saveAll() {
       break;
     }
   } catch(e) {
-    setStatus('Network error — check connection', true);
+    console.error('saveAll:', e);
+    setStatus('Error: ' + (e && e.message ? e.message : String(e)), true);
   }
 
   btn.disabled = false;
