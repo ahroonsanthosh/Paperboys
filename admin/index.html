@@ -764,11 +764,12 @@ function makeGalleryCard(src, caption, alt) {
 
 async function replaceImage(file, card) {
   var statusEl = card.querySelector('.upload-status');
+  // Show local preview immediately — the GitHub Pages URL won't exist until after deploy
+  card.querySelector('img').src = URL.createObjectURL(file);
   statusEl.textContent = 'Uploading…';
   try {
     var newSrc = await uploadImageToRepo(file);
     card.dataset.src = newSrc;
-    card.querySelector('img').src = '../' + newSrc;
     statusEl.textContent = 'Done ✓';
     setTimeout(function() { statusEl.textContent = ''; }, 3000);
   } catch(e) {
@@ -818,7 +819,6 @@ function handleNewImages(files) {
   var el = document.getElementById('galleryCards');
   Array.from(files).forEach(function(file) {
     var card = makeGalleryCard('', '', '');
-    card.querySelector('img').src = URL.createObjectURL(file);
     el.appendChild(card);
     replaceImage(file, card);
   });
