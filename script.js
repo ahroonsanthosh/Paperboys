@@ -38,6 +38,12 @@
   var onScroll = function () {
     if (!nav) return;
     nav.classList.toggle('is-stuck', window.scrollY > 12);
+    // slide nav up as banner scrolls away
+    if (announce && !announce.classList.contains('is-hidden')) {
+      var bannerH = announce.offsetHeight;
+      var offset = Math.max(0, bannerH - window.scrollY);
+      nav.style.top = offset + 'px';
+    }
   };
   window.addEventListener('scroll', onScroll, { passive: true });
   onScroll();
