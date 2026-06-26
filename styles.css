@@ -499,8 +499,10 @@ section{position:relative}
 .reveal.is-in{opacity:1;transform:none}
 h2.reveal,h3.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
-.tile.reveal,.story__card.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
-.tile.reveal.is-in,.story__card.reveal.is-in{opacity:1;transform:none}
+.story__card.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.story__card.reveal.is-in{opacity:1;transform:none}
+.tile.reveal{opacity:0;clip-path:inset(0 0 100% 0);transition:opacity .6s var(--ease),clip-path .75s var(--ease)}
+.tile.reveal.is-in{opacity:1;clip-path:inset(0 0 0% 0)}
 .tile img{transform:scale(1.08);transition:transform 1.3s var(--ease)}
 .tile.is-in img{transform:scale(1)}
 .tile:hover img{transform:scale(1.05)}
@@ -515,6 +517,85 @@ h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 /* hours hover */
 .hours li{transition:padding-left .25s var(--ease),color .25s var(--ease)}
 .hours li:hover{padding-left:.45rem;color:var(--cream)}
+
+/* ===== Section animations ===== */
+
+/* vhero — cursor light orb */
+.vhero__light{
+  position:absolute;width:480px;height:480px;border-radius:50%;
+  background:radial-gradient(circle,rgba(216,98,61,.22) 0%,transparent 70%);
+  transform:translate(-50%,-50%);pointer-events:none;
+  transition:left .6s ease,top .6s ease;z-index:2;
+  left:50%;top:50%;
+}
+@media(prefers-reduced-motion:no-preference){
+  .vhero__light{transition:left .55s ease,top .55s ease}
+}
+
+/* ticker — fade edges */
+.ticker{-webkit-mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0%,#000 8%,#000 92%,transparent 100%)}
+.ticker:hover .ticker__track{animation-play-state:paused}
+
+/* evhero — floating particles */
+.evhero__dot{
+  position:absolute;border-radius:50%;
+  width:calc(var(--sz,4)*1px);height:calc(var(--sz,4)*1px);
+  background:rgba(216,98,61,.55);pointer-events:none;
+  animation:floatDot var(--dur,8s) var(--del,0s) ease-in-out infinite alternate;
+  left:var(--lx,50%);top:var(--ty,50%);
+}
+@keyframes floatDot{
+  0%{transform:translate(0,0) scale(1);opacity:.7}
+  50%{transform:translate(var(--dx,20px),var(--dy,-30px)) scale(1.4);opacity:.3}
+  100%{transform:translate(calc(var(--dx,20px)*-.7),var(--dy,-30px)) scale(.8);opacity:.6}
+}
+
+/* story — terra underline draw-in */
+.story h2{position:relative;display:inline-block}
+.story h2::after{
+  content:'';position:absolute;left:0;bottom:-.2em;
+  height:3px;width:0;background:var(--terra);border-radius:2px;
+  transition:width .8s var(--ease) .3s;
+}
+.story h2.is-in::after{width:48px}
+
+/* story stats stagger */
+.stat-reveal{opacity:0;transform:translateY(14px);transition:opacity .6s var(--ease),transform .6s var(--ease)}
+.stat-reveal.is-in{opacity:1;transform:none}
+
+/* menu — dish slide-in stagger */
+@keyframes dishSlide{from{opacity:0;transform:translateX(-12px)}to{opacity:1;transform:none}}
+.menu__group.is-in .dish{animation:dishSlide .55s var(--ease) both}
+.menu__group.is-in .dish:nth-child(2){animation-delay:.08s}
+.menu__group.is-in .dish:nth-child(3){animation-delay:.16s}
+.menu__group.is-in .dish:nth-child(4){animation-delay:.24s}
+.menu__group.is-in .dish:nth-child(5){animation-delay:.32s}
+.menu__group.is-in .dish:nth-child(6){animation-delay:.40s}
+.menu__group.is-in .dish:nth-child(7){animation-delay:.48s}
+.menu__group.is-in .dish:nth-child(8){animation-delay:.56s}
+
+/* hire — Ken Burns on photo */
+@keyframes kenBurns{from{transform:scale(1) translate(0,0)}to{transform:scale(1.07) translate(-1.5%,-1%)}}
+.hire__photo img{animation:kenBurns 22s ease-in-out infinite alternate}
+
+/* contact — input glow + CTA pulse */
+.contact__field:focus-within input,
+.contact__field:focus-within select,
+.contact__field:focus-within textarea{
+  box-shadow:0 0 0 3px rgba(216,98,61,.35);border-color:var(--terra);outline:none
+}
+@keyframes ctaPulse{
+  0%,100%{box-shadow:0 0 0 0 rgba(216,98,61,.45)}
+  50%{box-shadow:0 0 0 8px rgba(216,98,61,0)}
+}
+.contact__submit:hover{animation:ctaPulse 1.4s ease infinite}
+
+/* visit hours — stagger reveal */
+.hours.is-in li{
+  opacity:1;transform:none;
+  transition:opacity .5s var(--ease) calc(var(--i,0)*.07s + .1s),transform .5s var(--ease) calc(var(--i,0)*.07s + .1s)
+}
+#hoursList li{opacity:0;transform:translateY(10px)}
 
 /* ===== Responsive ===== */
 @media(max-width:900px){
@@ -559,7 +640,11 @@ h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
   .reveal,h2.reveal,h3.reveal,.tile.reveal,.story__card.reveal{opacity:1;transform:none;transition:none}
+  .tile.reveal{clip-path:none}
   .tile img{transform:none}
-  .evhero__glow{animation:none}
-  .evhero__pill::before{animation:none}
+  .evhero__glow,.evhero__pill::before,.evhero__dot{animation:none!important}
+  .story h2::after{transition:none;width:48px}
+  .stat-reveal{opacity:1;transform:none;transition:none}
+  .hire__photo img{animation:none}
+  #hoursList li{opacity:1;transform:none}
 }
