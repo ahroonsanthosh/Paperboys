@@ -56,10 +56,17 @@
       if (hours.days && hours.days.length) {
         var list = document.getElementById('hoursList');
         if (list) {
+          var dayIdx = {monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,sunday:0};
+          var todayNum = new Date().getDay();
           list.innerHTML = hours.days.map(function (d) {
+            var idx = dayIdx[(d.dayName || '').toLowerCase()];
+            var cls = [];
+            if (d.closed) cls.push('closed');
+            if (idx === todayNum) cls.push('is-today');
+            var attrs = (idx !== undefined ? ' data-day="' + idx + '"' : '') +
+                        (cls.length ? ' class="' + cls.join(' ') + '"' : '');
             var t = d.closed ? 'Closed' : esc(d.opens) + ' – ' + esc(d.closes);
-            return '<li' + (d.closed ? ' class="closed"' : '') + '>' +
-              '<span>' + esc(d.dayName) + '</span><span>' + t + '</span></li>';
+            return '<li' + attrs + '><span>' + esc(d.dayName) + '</span><span>' + t + '</span></li>';
           }).join('');
         }
       }
