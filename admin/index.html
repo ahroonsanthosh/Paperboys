@@ -126,7 +126,8 @@
       position: fixed; bottom: 1.5rem; left: 50%; transform: translateX(-50%) translateY(120%);
       background: #0e1f3d; color: #fff; padding: 0.75rem 1.25rem;
       border-radius: 8px; font-size: 0.85rem; box-shadow: 0 4px 16px rgba(0,0,0,0.25);
-      transition: transform 0.3s ease; z-index: 9999; white-space: nowrap; pointer-events: none;
+      transition: transform 0.3s ease; z-index: 9999;
+      max-width: calc(100vw - 3rem); text-align: center; pointer-events: none;
     }
     #toast.show { transform: translateX(-50%) translateY(0); }
 
@@ -146,7 +147,7 @@
     /* ── Gallery ── */
     .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
     .gallery-card { background: #fff; border: 1.5px solid #e5e5e5; border-radius: 8px; overflow: hidden; }
-    .gallery-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+    .gallery-card img { width: 100%; height: 140px; object-fit: cover; display: block; background: #eee; }
     .gallery-card-body { padding: 0.75rem; }
     .gallery-card-body input { width: 100%; padding: 0.4rem 0.6rem; border: 1.5px solid #ddd; border-radius: 5px; font-size: 0.8rem; margin-bottom: 0.4rem; font-family: inherit; }
     .gallery-card-body input:focus { outline: none; border-color: #0e1f3d; }
@@ -157,11 +158,11 @@
     }
     .upload-label:hover { background: #1a3560; }
     .upload-label input[type=file] { display: none; }
-    .upload-status { font-size: 0.72rem; color: #888; }
+    .upload-status { font-size: 0.72rem; color: #888; max-width: 80px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .gallery-add-zone {
       border: 2px dashed #bbb; border-radius: 8px; padding: 2rem;
       text-align: center; cursor: pointer; color: #888; font-size: 0.875rem;
-      transition: border-color 0.15s, color 0.15s;
+      transition: border-color 0.15s, color 0.15s; display: block;
     }
     .gallery-add-zone:hover, .gallery-add-zone.drag-over { border-color: #0e1f3d; color: #0e1f3d; }
     .gallery-add-zone input[type=file] { display: none; }
@@ -183,9 +184,9 @@
       .sidebar {
         width: 100%; height: auto; position: static;
         border-right: none; border-bottom: 1px solid #e5e5e5;
-        padding: 0; overflow: hidden; max-height: 0; transition: max-height 0.25s ease;
+        padding: 0; overflow: hidden; max-height: 0; transition: max-height 0.3s ease;
       }
-      .sidebar.open { max-height: 600px; }
+      .sidebar.open { max-height: 800px; overflow-y: auto; }
       .sidebar-label { padding: 0.75rem 1.25rem 0.2rem; }
       .sidebar a { padding: 0.7rem 1.25rem; }
 
@@ -203,6 +204,13 @@
       .topbar-right { gap: 0.5rem; }
       #saveBtn { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
       .signout { font-size: 0.75rem; }
+
+      /* Gallery: single column on phones */
+      .gallery-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 420px) {
+      .gallery-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -234,19 +242,19 @@
   <div class="layout">
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-label">Site</div>
-      <a href="#" onclick="showPanel('settings'); return false;">Site Info</a>
-      <a href="#" onclick="showPanel('hours'); return false;">Opening Hours</a>
-      <a href="#" onclick="showPanel('story'); return false;">Story & Ticker</a>
+      <a href="#" onclick="showPanel('settings', this); return false;">Site Info</a>
+      <a href="#" onclick="showPanel('hours', this); return false;">Opening Hours</a>
+      <a href="#" onclick="showPanel('story', this); return false;">Story &amp; Ticker</a>
       <div class="sidebar-label">Menu</div>
-      <a href="#" onclick="showPanel('menuIntro'); return false;">Menu Intro</a>
-      <a href="#" onclick="showPanel('breakfast'); return false;">Breakfast</a>
-      <a href="#" onclick="showPanel('sandwiches'); return false;">Sandwiches</a>
-      <a href="#" onclick="showPanel('sides'); return false;">Sides</a>
-      <a href="#" onclick="showPanel('drinks'); return false;">Drinks</a>
+      <a href="#" onclick="showPanel('menuIntro', this); return false;">Menu Intro</a>
+      <a href="#" onclick="showPanel('breakfast', this); return false;">Breakfast</a>
+      <a href="#" onclick="showPanel('sandwiches', this); return false;">Sandwiches</a>
+      <a href="#" onclick="showPanel('sides', this); return false;">Sides</a>
+      <a href="#" onclick="showPanel('drinks', this); return false;">Drinks</a>
       <div class="sidebar-label">Gallery</div>
-      <a href="#" onclick="showPanel('gallery'); return false;">Gallery Images</a>
+      <a href="#" onclick="showPanel('gallery', this); return false;">Gallery Images</a>
       <div class="sidebar-label">Other</div>
-      <a href="#" onclick="showPanel('password'); return false;">Change Password</a>
+      <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
     </nav>
 
     <div class="content">
@@ -276,7 +284,7 @@
 
       <!-- Story -->
       <div class="panel" id="panel-story">
-        <div class="panel-title">Story & Ticker</div>
+        <div class="panel-title">Story &amp; Ticker</div>
         <div class="field"><label>Heading</label><input type="text" id="story-heading" /></div>
         <div class="field"><label>Paragraph 1</label><textarea id="story-para1"></textarea></div>
         <div class="field"><label>Paragraph 2</label><textarea id="story-para2"></textarea></div>
@@ -314,7 +322,7 @@
 
       <!-- Sides -->
       <div class="panel" id="panel-sides">
-        <div class="panel-title">Sides & Add-ons</div>
+        <div class="panel-title">Sides &amp; Add-ons</div>
         <div class="item-list" id="sidesItems"></div>
         <button class="add-btn" onclick="addSimpleItem('sides')">+ Add side</button>
       </div>
@@ -356,48 +364,64 @@
 
 <script>
 // ── Config ─────────────────────────────────────────────────────────────────
-var REPO = 'ahroonsanthosh/Paperboys';
-var FILE = 'content.json';
+var REPO  = 'ahroonsanthosh/Paperboys';
+var FILE  = 'content.json';
 var TOKEN = '__ADMIN_GH_TOKEN__';
 
 function getToken() { return TOKEN; }
 
-// Default password hash (SHA-256 of "paperboys2024")
 var DEFAULT_HASH = 'a349cbd924cc903029202298c0c18829c5c8552ae54077ea6cb9f9346eea122c';
-
-function getPwdHash() {
-  return localStorage.getItem('pb_pwd_hash') || DEFAULT_HASH;
-}
+function getPwdHash() { return localStorage.getItem('pb_pwd_hash') || DEFAULT_HASH; }
 
 // ── Auth ────────────────────────────────────────────────────────────────────
 async function sha256(str) {
   var buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(function(b){return b.toString(16).padStart(2,'0');}).join('');
+  return Array.from(new Uint8Array(buf)).map(function(b){ return b.toString(16).padStart(2,'0'); }).join('');
 }
 
 async function doLogin() {
-  var pwd = document.getElementById('pwdInput').value;
-  var h   = await sha256(pwd);
+  var inp = document.getElementById('pwdInput');
+  var h   = await sha256(inp.value);
   if (h !== getPwdHash()) {
     document.getElementById('loginError').textContent = 'Incorrect password.';
     return;
   }
+  inp.value = '';
   sessionStorage.setItem('pb_auth', '1');
   showEditor();
 }
 
-document.getElementById('pwdInput').addEventListener('keydown', function(e){ if(e.key==='Enter') doLogin(); });
+document.getElementById('pwdInput').addEventListener('keydown', function(e){ if (e.key === 'Enter') doLogin(); });
 
 function signOut() {
+  if (unsaved && !confirm('You have unsaved changes. Leave anyway?')) return;
   sessionStorage.removeItem('pb_auth');
   location.reload();
 }
 
+// ── Unsaved-changes guard ───────────────────────────────────────────────────
+var unsaved = false;
+
+window.addEventListener('beforeunload', function(e) {
+  if (unsaved && sessionStorage.getItem('pb_auth') === '1') {
+    e.preventDefault();
+    e.returnValue = '';
+  }
+});
+
+function markClean() { unsaved = false; }
+function markDirty() { unsaved = true; }
+
+// Track user edits (programmatic value-sets don't fire these events)
+document.addEventListener('input',  markDirty);
+document.addEventListener('change', markDirty);
+
 // ── State ───────────────────────────────────────────────────────────────────
-var content = {};
+var content        = {};
+var pendingUploads = 0;
 
 function showEditor() {
-  document.getElementById('loginScreen').style.display = 'none';
+  document.getElementById('loginScreen').style.display  = 'none';
   document.getElementById('editorScreen').style.display = 'block';
   setupGalleryDropZone();
   loadContent();
@@ -408,26 +432,27 @@ if (sessionStorage.getItem('pb_auth') === '1') showEditor();
 // ── Load content ────────────────────────────────────────────────────────────
 function loadContent() {
   fetch('../content.json?v=' + Date.now())
-    .then(function(r){ return r.json(); })
+    .then(function(r) { return r.json(); })
     .then(function(data) {
       content = data;
       populateForms();
+      markClean();
     })
-    .catch(function(){ setStatus('Could not load content.json', true); });
+    .catch(function() { setStatus('Could not load content.json', true); });
 }
 
 function populateForms() {
   var s = content.settings || {};
-  val('s-businessName',  s.businessName);
-  val('s-streetAddress', s.streetAddress);
-  val('s-locality',      s.locality);
-  val('s-heroEyebrow',   s.heroEyebrow);
+  val('s-businessName',    s.businessName);
+  val('s-streetAddress',   s.streetAddress);
+  val('s-locality',        s.locality);
+  val('s-heroEyebrow',     s.heroEyebrow);
   val('s-instagramHandle', s.instagramHandle);
   val('s-instagramUrl',    s.instagramUrl);
   val('s-directionsUrl',   s.directionsUrl);
   val('s-googleMapsUrl',   s.googleMapsUrl);
 
-  buildHoursRows(content.hours && content.hours.days || []);
+  buildHoursRows((content.hours && content.hours.days) || []);
 
   var st = content.story || {};
   val('story-heading', st.heading);
@@ -441,8 +466,8 @@ function populateForms() {
   val('menu-allergen', m.allergenKey);
 
   var dishes = content.dishes || [];
-  renderDishes('breakfastItems',  dishes.filter(function(d){ return d.category === 'breakfast'; }));
-  renderDishes('sandwichItems',   dishes.filter(function(d){ return d.category === 'sandwiches'; }));
+  renderDishes('breakfastItems', dishes.filter(function(d) { return d.category === 'breakfast'; }));
+  renderDishes('sandwichItems',  dishes.filter(function(d) { return d.category === 'sandwiches'; }));
   renderSimpleList('sidesItems',  m.sides  || []);
   renderSimpleList('drinksItems', m.drinks || []);
 
@@ -459,10 +484,10 @@ function buildHoursRows(days) {
   var el = document.getElementById('hoursRows');
   el.innerHTML = days.map(function(d, i) {
     return '<div class="hours-row">' +
-      '<span>' + d.dayName + '</span>' +
-      '<input type="time" id="h-opens-' + i + '" value="' + (d.opens||'') + '" ' + (d.closed?'disabled':'') + ' />' +
-      '<input type="time" id="h-closes-' + i + '" value="' + (d.closes||'') + '" ' + (d.closed?'disabled':'') + ' />' +
-      '<div class="toggle-wrap"><input type="checkbox" id="h-closed-' + i + '" ' + (d.closed?'checked':'') +
+      '<span>' + escHtml(d.dayName) + '</span>' +
+      '<input type="time" id="h-opens-' + i + '" value="' + escAttr(d.opens || '') + '"' + (d.closed ? ' disabled' : '') + ' />' +
+      '<input type="time" id="h-closes-' + i + '" value="' + escAttr(d.closes || '') + '"' + (d.closed ? ' disabled' : '') + ' />' +
+      '<div class="toggle-wrap"><input type="checkbox" id="h-closed-' + i + '"' + (d.closed ? ' checked' : '') +
         ' onchange="toggleDay(' + i + ')" /><label for="h-closed-' + i + '">Closed</label></div>' +
       '</div>';
   }).join('');
@@ -481,7 +506,7 @@ function renderTicker(words) {
   var el = document.getElementById('tickerTags');
   el.innerHTML = tickerWords.map(function(w, i) {
     return '<span class="tag">' + escHtml(w) +
-      '<button onclick="removeTicker(' + i + ')" title="Remove">×</button></span>';
+      '<button onclick="removeTicker(' + i + ')" title="Remove">\xd7</button></span>';
   }).join('');
 }
 function addTicker() {
@@ -498,115 +523,109 @@ function removeTicker(i) {
 }
 
 // ── Dishes ───────────────────────────────────────────────────────────────────
+// Cards use data-field attrs so readCards() works correctly even after removals
 function renderDishes(containerId, dishes) {
   var el = document.getElementById(containerId);
-  el.innerHTML = dishes.map(function(d, i) {
-    var uid = containerId + '-' + i;
-    return '<div class="item-card" id="card-' + uid + '">' +
+  el.innerHTML = dishes.map(function(d) {
+    return '<div class="item-card">' +
       '<div class="item-card-header"><strong>' + escHtml(d.name) + '</strong>' +
-      '<button class="remove-btn" onclick="removeCard(\'' + uid + '\')">Remove</button></div>' +
-      '<div class="field-row"><div class="field"><label>Name</label>' +
-        '<input type="text" id="' + uid + '-name" value="' + escAttr(d.name) + '" /></div>' +
-      '<div class="field"><label>Price (€)</label>' +
-        '<input type="number" step="0.01" id="' + uid + '-price" value="' + (d.price||'') + '" /></div></div>' +
-      '<div class="field-row"><div class="field"><label>Allergens</label>' +
-        '<input type="text" id="' + uid + '-allergens" value="' + escAttr(d.allergens||'') + '" placeholder="e.g. 1,3,7" /></div>' +
-      '<div class="field" style="display:none"><input type="hidden" id="' + uid + '-id" value="' + escAttr(d.id||'') + '" />' +
-        '<input type="hidden" id="' + uid + '-category" value="' + escAttr(d.category||'') + '" /></div></div>' +
-      '<div class="field"><label>Description</label>' +
-        '<textarea id="' + uid + '-desc">' + escHtml(d.description||'') + '</textarea></div>' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Name</label><input type="text" data-field="name" value="' + escAttr(d.name) + '" /></div>' +
+        '<div class="field"><label>Price (€)</label><input type="number" step="0.01" data-field="price" value="' + (d.price || '') + '" /></div>' +
+      '</div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Allergens</label><input type="text" data-field="allergens" value="' + escAttr(d.allergens || '') + '" placeholder="e.g. 1,3,7" /></div>' +
+        '<div class="field" style="display:none">' +
+          '<input type="hidden" data-field="id"       value="' + escAttr(d.id       || '') + '" />' +
+          '<input type="hidden" data-field="category" value="' + escAttr(d.category || '') + '" />' +
+        '</div>' +
+      '</div>' +
+      '<div class="field"><label>Description</label><textarea data-field="desc">' + escHtml(d.description || '') + '</textarea></div>' +
       '</div>';
   }).join('');
 }
 
 function addDish(category) {
   var containerId = category === 'breakfast' ? 'breakfastItems' : 'sandwichItems';
-  var el = document.getElementById(containerId);
-  var i = el.children.length;
-  var uid = containerId + '-' + i;
+  var el  = document.getElementById(containerId);
   var card = document.createElement('div');
   card.className = 'item-card';
-  card.id = 'card-' + uid;
   card.innerHTML =
     '<div class="item-card-header"><strong>New dish</strong>' +
-    '<button class="remove-btn" onclick="removeCard(\'' + uid + '\')">Remove</button></div>' +
-    '<div class="field-row"><div class="field"><label>Name</label>' +
-      '<input type="text" id="' + uid + '-name" placeholder="Dish name" /></div>' +
-    '<div class="field"><label>Price (€)</label>' +
-      '<input type="number" step="0.01" id="' + uid + '-price" placeholder="0.00" /></div></div>' +
-    '<div class="field-row"><div class="field"><label>Allergens</label>' +
-      '<input type="text" id="' + uid + '-allergens" placeholder="e.g. 1,3,7" /></div>' +
-    '<div class="field" style="display:none"><input type="hidden" id="' + uid + '-id" value="new-' + Date.now() + '" />' +
-      '<input type="hidden" id="' + uid + '-category" value="' + category + '" /></div></div>' +
-    '<div class="field"><label>Description</label><textarea id="' + uid + '-desc"></textarea></div>';
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Name</label><input type="text" data-field="name" placeholder="Dish name" /></div>' +
+      '<div class="field"><label>Price (€)</label><input type="number" step="0.01" data-field="price" placeholder="0.00" /></div>' +
+    '</div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Allergens</label><input type="text" data-field="allergens" placeholder="e.g. 1,3,7" /></div>' +
+      '<div class="field" style="display:none">' +
+        '<input type="hidden" data-field="id"       value="new-' + Date.now() + '" />' +
+        '<input type="hidden" data-field="category" value="' + escAttr(category) + '" />' +
+      '</div>' +
+    '</div>' +
+    '<div class="field"><label>Description</label><textarea data-field="desc"></textarea></div>';
   el.appendChild(card);
 }
 
 // ── Simple lists (sides / drinks) ────────────────────────────────────────────
 function renderSimpleList(containerId, items) {
   var el = document.getElementById(containerId);
-  el.innerHTML = items.map(function(item, i) {
-    var uid = containerId + '-' + i;
-    return '<div class="item-card" id="card-' + uid + '">' +
+  el.innerHTML = items.map(function(item) {
+    return '<div class="item-card">' +
       '<div class="item-card-header"><strong>' + escHtml(item.name) + '</strong>' +
-      '<button class="remove-btn" onclick="removeCard(\'' + uid + '\')">Remove</button></div>' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
       '<div class="field-row">' +
-      '<div class="field"><label>Name</label><input type="text" id="' + uid + '-name" value="' + escAttr(item.name) + '" /></div>' +
-      '<div class="field"><label>Price (€)</label><input type="number" step="0.01" id="' + uid + '-price" value="' + (item.price||'') + '" /></div>' +
+        '<div class="field"><label>Name</label><input type="text" data-field="name" value="' + escAttr(item.name) + '" /></div>' +
+        '<div class="field"><label>Price (€)</label><input type="number" step="0.01" data-field="price" value="' + (item.price || '') + '" /></div>' +
       '</div></div>';
   }).join('');
 }
 
 function addSimpleItem(type) {
-  var containerId = type + 'Items';
-  var el = document.getElementById(containerId);
-  var i = el.children.length;
-  var uid = containerId + '-' + i;
+  var el   = document.getElementById(type + 'Items');
   var card = document.createElement('div');
   card.className = 'item-card';
-  card.id = 'card-' + uid;
   card.innerHTML =
     '<div class="item-card-header"><strong>New item</strong>' +
-    '<button class="remove-btn" onclick="removeCard(\'' + uid + '\')">Remove</button></div>' +
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
     '<div class="field-row">' +
-    '<div class="field"><label>Name</label><input type="text" id="' + uid + '-name" placeholder="Item name" /></div>' +
-    '<div class="field"><label>Price (€)</label><input type="number" step="0.01" id="' + uid + '-price" placeholder="0.00" /></div>' +
+      '<div class="field"><label>Name</label><input type="text" data-field="name" placeholder="Item name" /></div>' +
+      '<div class="field"><label>Price (€)</label><input type="number" step="0.01" data-field="price" placeholder="0.00" /></div>' +
     '</div>';
   el.appendChild(card);
 }
 
-function removeCard(uid) {
-  var el = document.getElementById('card-' + uid);
-  if (el) el.remove();
-}
-
 // ── Read forms → build content object ────────────────────────────────────────
 function readForms() {
-  var days = (content.hours && content.hours.days || []).map(function(d, i) {
-    var closed = document.getElementById('h-closed-' + i) &&
-                 document.getElementById('h-closed-' + i).checked;
+  var days = ((content.hours && content.hours.days) || []).map(function(d, i) {
+    var cb = document.getElementById('h-closed-' + i);
     return {
       dayName: d.dayName,
       opens:   g('h-opens-'  + i),
       closes:  g('h-closes-' + i),
-      closed:  closed
+      closed:  cb ? cb.checked : false
     };
   });
 
+  // Reads cards using data-field attrs — immune to removal reindexing
   function readCards(containerId, hasDish) {
     var el = document.getElementById(containerId);
     if (!el) return [];
-    return Array.from(el.children).map(function(card, i) {
-      var uid = containerId + '-' + i;
-      var nameEl = document.getElementById(uid + '-name');
+    return Array.from(el.children).map(function(card, idx) {
+      var nameEl = card.querySelector('[data-field="name"]');
       if (!nameEl) return null;
-      var obj = {name: nameEl.value.trim(), price: parseFloat(document.getElementById(uid + '-price').value) || 0};
+      var obj = {
+        name:  nameEl.value.trim(),
+        price: parseFloat((card.querySelector('[data-field="price"]') || {}).value) || 0
+      };
       if (hasDish) {
-        obj.id         = g(uid + '-id') || ('dish-' + Date.now() + '-' + i);
-        obj.category   = g(uid + '-category');
-        obj.allergens  = g(uid + '-allergens');
-        obj.description = (document.getElementById(uid + '-desc') || {}).value || '';
-        obj.sortOrder  = i + 1;
+        obj.id          = (card.querySelector('[data-field="id"]')       || {}).value || ('dish-' + Date.now() + '-' + idx);
+        obj.category    = (card.querySelector('[data-field="category"]') || {}).value || '';
+        obj.allergens   = (card.querySelector('[data-field="allergens"]')|| {}).value || '';
+        obj.description = (card.querySelector('[data-field="desc"]')     || {}).value || '';
+        obj.sortOrder   = idx + 1;
       }
       return obj;
     }).filter(Boolean);
@@ -623,7 +642,7 @@ function readForms() {
       directionsUrl:   g('s-directionsUrl'),
       googleMapsUrl:   g('s-googleMapsUrl')
     },
-    hours: {days: days},
+    hours: { days: days },
     story: {
       heading:         g('story-heading'),
       paragraph1:      g('story-para1'),
@@ -637,7 +656,7 @@ function readForms() {
       sides:       readCards('sidesItems',  false),
       drinks:      readCards('drinksItems', false)
     },
-    dishes: readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
+    dishes:  readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
     gallery: (function() {
       var cards = document.getElementById('galleryCards');
       if (!cards) return content.gallery || [];
@@ -646,7 +665,7 @@ function readForms() {
           sortOrder: i + 1,
           src:     card.dataset.src || '',
           caption: (card.querySelector('[data-field="caption"]') || {}).value || '',
-          alt:     (card.querySelector('[data-field="alt"]') || {}).value || ''
+          alt:     (card.querySelector('[data-field="alt"]')     || {}).value || ''
         };
       });
     })()
@@ -660,17 +679,22 @@ function g(id) {
 
 // ── Save to GitHub ────────────────────────────────────────────────────────────
 async function saveAll() {
+  if (pendingUploads > 0) {
+    showToast('Please wait — ' + pendingUploads + ' image upload' + (pendingUploads > 1 ? 's' : '') + ' still in progress');
+    return;
+  }
+
   var btn = document.getElementById('saveBtn');
   btn.disabled = true;
   setStatus('Saving…');
 
   var newContent = readForms();
-  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(newContent, null, 2))));
+  var encoded    = btoa(unescape(encodeURIComponent(JSON.stringify(newContent, null, 2))));
 
   try {
     for (var attempt = 0; attempt < 3; attempt++) {
-      // Always fetch a fresh SHA with cache-busting to avoid stale-SHA conflicts
-      var headRes = await fetch(
+      // Fresh SHA every attempt with cache-busting query param
+      var headRes  = await fetch(
         'https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main&_=' + Date.now(),
         { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
       );
@@ -684,29 +708,30 @@ async function saveAll() {
         method: 'PUT',
         headers: {
           'Authorization': 'Bearer ' + getToken(),
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json'
+          'Accept':        'application/vnd.github+json',
+          'Content-Type':  'application/json'
         },
         body: JSON.stringify({
           message: 'Update content via admin panel',
           content: encoded,
-          sha: headData.sha,
-          branch: 'main'
+          sha:     headData.sha,
+          branch:  'main'
         })
       });
 
       if (putRes.ok) {
         content = newContent;
+        markClean();
         setStatus('Saved ✓');
-        setTimeout(function(){ setStatus(''); }, 3000);
+        setTimeout(function() { setStatus(''); }, 3000);
         showToast('⏳ Changes saved — may take 10–30 seconds to appear on the site');
         break;
       }
 
-      var putErr = await putRes.json();
+      var putErr    = await putRes.json();
       var isConflict = putRes.status === 409 ||
                        (putErr.message && putErr.message.toLowerCase().includes('does not match'));
-      if (isConflict && attempt < 2) continue; // retry with a freshly fetched SHA
+      if (isConflict && attempt < 2) continue;
       setStatus('Error: ' + (putErr.message || putRes.status), true);
       break;
     }
@@ -733,11 +758,19 @@ function setStatus(msg, isError) {
 
 // ── Change password ───────────────────────────────────────────────────────────
 async function changePassword() {
-  var p1 = document.getElementById('newPwd1').value;
-  var p2 = document.getElementById('newPwd2').value;
+  var p1  = document.getElementById('newPwd1').value;
+  var p2  = document.getElementById('newPwd2').value;
   var msg = document.getElementById('pwdMsg');
-  if (!p1 || p1.length < 6) { msg.textContent = 'Password must be at least 6 characters.'; msg.style.color = '#c0392b'; return; }
-  if (p1 !== p2) { msg.textContent = 'Passwords do not match.'; msg.style.color = '#c0392b'; return; }
+  if (!p1 || p1.length < 6) {
+    msg.textContent = 'Password must be at least 6 characters.';
+    msg.style.color = '#c0392b';
+    return;
+  }
+  if (p1 !== p2) {
+    msg.textContent = 'Passwords do not match.';
+    msg.style.color = '#c0392b';
+    return;
+  }
   var h = await sha256(p1);
   localStorage.setItem('pb_pwd_hash', h);
   msg.textContent = 'Password updated. Use it next time you sign in.';
@@ -747,12 +780,12 @@ async function changePassword() {
 }
 
 // ── Panel navigation ──────────────────────────────────────────────────────────
-function showPanel(name) {
-  document.querySelectorAll('.panel').forEach(function(p){ p.classList.remove('active'); });
-  document.querySelectorAll('.sidebar a').forEach(function(a){ a.classList.remove('active'); });
+function showPanel(name, linkEl) {
+  document.querySelectorAll('.panel').forEach(function(p) { p.classList.remove('active'); });
+  document.querySelectorAll('.sidebar a').forEach(function(a) { a.classList.remove('active'); });
   var panel = document.getElementById('panel-' + name);
   if (panel) panel.classList.add('active');
-  event.currentTarget && event.currentTarget.classList.add('active');
+  if (linkEl) linkEl.classList.add('active');
   document.getElementById('sidebar').classList.remove('open');
 }
 
@@ -770,15 +803,15 @@ function renderGallery(gallery) {
 }
 
 function makeGalleryCard(src, caption, alt) {
-  var card = document.createElement('div');
-  card.className = 'gallery-card';
+  var card    = document.createElement('div');
+  card.className  = 'gallery-card';
   card.dataset.src = src;
-  var imgSrc = src ? '../' + src : '';
+  var imgSrc  = src ? '../' + src : '';
   card.innerHTML =
-    '<img src="' + escAttr(imgSrc) + '" onerror="this.style.background=\'#eee\';this.removeAttribute(\'src\')" />' +
+    '<img src="' + escAttr(imgSrc) + '" />' +
     '<div class="gallery-card-body">' +
-      '<input type="text" placeholder="Caption" value="' + escAttr(caption) + '" data-field="caption" />' +
-      '<input type="text" placeholder="Alt text" value="' + escAttr(alt) + '" data-field="alt" />' +
+      '<input type="text" placeholder="Caption"  value="' + escAttr(caption) + '" data-field="caption" />' +
+      '<input type="text" placeholder="Alt text" value="' + escAttr(alt)     + '" data-field="alt" />' +
     '</div>' +
     '<div class="gallery-card-footer">' +
       '<label class="upload-label">Replace<input type="file" accept="image/*" /></label>' +
@@ -793,16 +826,20 @@ function makeGalleryCard(src, caption, alt) {
 
 async function replaceImage(file, card) {
   var statusEl = card.querySelector('.upload-status');
-  // Show local preview immediately — the GitHub Pages URL won't exist until after deploy
   card.querySelector('img').src = URL.createObjectURL(file);
   statusEl.textContent = 'Uploading…';
+  pendingUploads++;
   try {
     var newSrc = await uploadImageToRepo(file);
-    card.dataset.src = newSrc;
+    card.dataset.src     = newSrc;
     statusEl.textContent = 'Done ✓';
     setTimeout(function() { statusEl.textContent = ''; }, 3000);
   } catch(e) {
-    statusEl.textContent = 'Upload failed';
+    console.error('replaceImage:', e);
+    statusEl.textContent = 'Failed';
+    statusEl.title       = e && e.message ? e.message : String(e);
+  } finally {
+    pendingUploads--;
   }
 }
 
@@ -811,7 +848,7 @@ function uploadImageToRepo(file) {
     var reader = new FileReader();
     reader.onload = async function(e) {
       try {
-        var base64 = e.target.result.split(',')[1];
+        var base64   = e.target.result.split(',')[1];
         var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
         var filename = 'assets/' + Date.now() + '-' + safeName;
 
@@ -826,8 +863,8 @@ function uploadImageToRepo(file) {
           method: 'PUT',
           headers: {
             'Authorization': 'Bearer ' + getToken(),
-            'Accept': 'application/vnd.github+json',
-            'Content-Type': 'application/json'
+            'Accept':        'application/vnd.github+json',
+            'Content-Type':  'application/json'
           },
           body: JSON.stringify(body)
         });
@@ -857,11 +894,8 @@ function handleNewImages(files) {
 function setupGalleryDropZone() {
   var zone = document.getElementById('galleryAddZone');
   if (!zone) return;
-  zone.addEventListener('dragover', function(e) {
-    e.preventDefault();
-    zone.classList.add('drag-over');
-  });
-  zone.addEventListener('dragleave', function() { zone.classList.remove('drag-over'); });
+  zone.addEventListener('dragover',  function(e) { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', function()  { zone.classList.remove('drag-over'); });
   zone.addEventListener('drop', function(e) {
     e.preventDefault();
     zone.classList.remove('drag-over');
@@ -871,10 +905,10 @@ function setupGalleryDropZone() {
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 function escHtml(s) {
-  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 }
 function escAttr(s) {
-  return String(s||'').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  return String(s || '').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 </script>
 </body>
