@@ -284,5 +284,28 @@
       "caption": "Prawn baguette",
       "alt": "Prawn baguette with seasoned fries"
     }
-  ]
+  ],
+  "eventsHero": {
+    "pillText": "What's On at Paperboys",
+    "titleLine1": "The room is",
+    "titleLine2": "always alive.",
+    "subtitle": "Brunch clubs, supper nights, DJ Sundays, pop-up collabs — Paperboys is more than a café. It's a place things happen.",
+    "cta1Label": "Get in touch",
+    "cta1Href": "mailto:hello@paperboys.ie",
+    "cta2Label": "Host your event",
+    "cta2Href": "#hire"
+  },
+  "hire": {
+    "eyebrow": "Private Hire",
+    "heading": "Got something to celebrate?",
+    "paragraph": "Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. We'll sort the food, the coffee and the atmosphere — you bring the people.",
+    "bulletPoints": [
+      "Full venue buyout available",
+      "Bespoke menus on request",
+      "Up to 40 guests",
+      "Morning, afternoon or evening slots"
+    ],
+    "ctaLabel": "Get in touch",
+    "ctaHref": "mailto:hello@paperboys.ie"
+  }
 }

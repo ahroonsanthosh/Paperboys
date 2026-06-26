@@ -251,6 +251,9 @@
       <a href="#" onclick="showPanel('sandwiches', this); return false;">Sandwiches</a>
       <a href="#" onclick="showPanel('sides', this); return false;">Sides</a>
       <a href="#" onclick="showPanel('drinks', this); return false;">Drinks</a>
+      <div class="sidebar-label">Events</div>
+      <a href="#" onclick="showPanel('eventsHero', this); return false;">Events Hero</a>
+      <a href="#" onclick="showPanel('hire', this); return false;">Private Hire</a>
       <div class="sidebar-label">Gallery</div>
       <a href="#" onclick="showPanel('gallery', this); return false;">Gallery Images</a>
       <div class="sidebar-label">Other</div>
@@ -332,6 +335,42 @@
         <div class="panel-title">Drinks</div>
         <div class="item-list" id="drinksItems"></div>
         <button class="add-btn" onclick="addSimpleItem('drinks')">+ Add drink</button>
+      </div>
+
+      <!-- Events Hero -->
+      <div class="panel" id="panel-eventsHero">
+        <div class="panel-title">Events Hero</div>
+        <div class="field"><label>Pill Badge Text</label><input type="text" id="ev-pillText" /></div>
+        <div class="field-row">
+          <div class="field"><label>Title Line 1</label><input type="text" id="ev-titleLine1" /></div>
+          <div class="field"><label>Title Line 2 (italic)</label><input type="text" id="ev-titleLine2" /></div>
+        </div>
+        <div class="field"><label>Subtitle Text</label><textarea id="ev-subtitle"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label>CTA 1 Label</label><input type="text" id="ev-cta1Label" /></div>
+          <div class="field"><label>CTA 1 Link (href)</label><input type="text" id="ev-cta1Href" /></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>CTA 2 Label</label><input type="text" id="ev-cta2Label" /></div>
+          <div class="field"><label>CTA 2 Link (href)</label><input type="text" id="ev-cta2Href" /></div>
+        </div>
+      </div>
+
+      <!-- Private Hire -->
+      <div class="panel" id="panel-hire">
+        <div class="panel-title">Private Hire</div>
+        <div class="field"><label>Eyebrow Label</label><input type="text" id="hire-eyebrow" /></div>
+        <div class="field"><label>Heading</label><input type="text" id="hire-heading" /></div>
+        <div class="field"><label>Paragraph</label><textarea id="hire-para"></textarea></div>
+        <div class="field">
+          <label>Bullet Points</label>
+          <div class="item-list" id="hireBullets"></div>
+          <button class="add-btn" onclick="addHireBullet()">+ Add bullet point</button>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>CTA Label</label><input type="text" id="hire-ctaLabel" /></div>
+          <div class="field"><label>CTA Link (href)</label><input type="text" id="hire-ctaHref" /></div>
+        </div>
       </div>
 
       <!-- Gallery -->
@@ -473,6 +512,24 @@ function populateForms() {
   renderDishes('sandwichItems',  dishes.filter(function(d) { return d.category === 'sandwiches'; }));
   renderSimpleList('sidesItems',  m.sides  || []);
   renderSimpleList('drinksItems', m.drinks || []);
+
+  var ev = content.eventsHero || {};
+  val('ev-pillText',  ev.pillText);
+  val('ev-titleLine1', ev.titleLine1);
+  val('ev-titleLine2', ev.titleLine2);
+  val('ev-subtitle',  ev.subtitle);
+  val('ev-cta1Label', ev.cta1Label);
+  val('ev-cta1Href',  ev.cta1Href);
+  val('ev-cta2Label', ev.cta2Label);
+  val('ev-cta2Href',  ev.cta2Href);
+
+  var hr = content.hire || {};
+  val('hire-eyebrow',  hr.eyebrow);
+  val('hire-heading',  hr.heading);
+  val('hire-para',     hr.paragraph);
+  renderHireBullets(hr.bulletPoints || []);
+  val('hire-ctaLabel', hr.ctaLabel);
+  val('hire-ctaHref',  hr.ctaHref);
 
   renderGallery(content.gallery || []);
 }
@@ -659,7 +716,31 @@ function readForms() {
       sides:       readCards('sidesItems',  false),
       drinks:      readCards('drinksItems', false)
     },
-    dishes:  readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
+    dishes: readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
+    eventsHero: {
+      pillText:  g('ev-pillText'),
+      titleLine1: g('ev-titleLine1'),
+      titleLine2: g('ev-titleLine2'),
+      subtitle:  g('ev-subtitle'),
+      cta1Label: g('ev-cta1Label'),
+      cta1Href:  g('ev-cta1Href'),
+      cta2Label: g('ev-cta2Label'),
+      cta2Href:  g('ev-cta2Href')
+    },
+    hire: {
+      eyebrow:      g('hire-eyebrow'),
+      heading:      g('hire-heading'),
+      paragraph:    g('hire-para'),
+      bulletPoints: (function() {
+        var el = document.getElementById('hireBullets');
+        if (!el) return [];
+        return Array.from(el.querySelectorAll('[data-field="bullet"]')).map(function(inp) {
+          return inp.value.trim();
+        }).filter(Boolean);
+      })(),
+      ctaLabel: g('hire-ctaLabel'),
+      ctaHref:  g('hire-ctaHref')
+    },
     gallery: (function() {
       var cards = document.getElementById('galleryCards');
       if (!cards) return content.gallery || [];
@@ -794,6 +875,31 @@ function showPanel(name, linkEl) {
 
 function toggleNav() {
   document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ── Hire bullet points ────────────────────────────────────────────────────────
+function renderHireBullets(bullets) {
+  var el = document.getElementById('hireBullets');
+  el.innerHTML = (bullets || []).map(function(b) {
+    return '<div class="item-card" style="padding:0.6rem 1rem;">' +
+      '<div style="display:flex;align-items:center;gap:0.5rem;">' +
+      '<input type="text" data-field="bullet" value="' + escAttr(b) + '" style="flex:1;padding:0.4rem 0.6rem;border:1.5px solid #ddd;border-radius:5px;font-size:0.875rem;font-family:inherit;" />' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button>' +
+      '</div></div>';
+  }).join('');
+}
+
+function addHireBullet() {
+  var el   = document.getElementById('hireBullets');
+  var card = document.createElement('div');
+  card.className = 'item-card';
+  card.style.cssText = 'padding:0.6rem 1rem;';
+  card.innerHTML =
+    '<div style="display:flex;align-items:center;gap:0.5rem;">' +
+    '<input type="text" data-field="bullet" placeholder="Bullet point text…" style="flex:1;padding:0.4rem 0.6rem;border:1.5px solid #ddd;border-radius:5px;font-size:0.875rem;font-family:inherit;" />' +
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button>' +
+    '</div>';
+  el.appendChild(card);
 }
 
 // ── Gallery ───────────────────────────────────────────────────────────────────

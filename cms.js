@@ -16,12 +16,14 @@
   fetch('content.json?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var settings = d.settings || {};
-      var hours    = d.hours    || {};
-      var story    = d.story    || {};
-      var menu     = d.menu     || {};
-      var dishes   = d.dishes   || [];
-      var gallery  = d.gallery  || [];
+      var settings   = d.settings   || {};
+      var hours      = d.hours      || {};
+      var story      = d.story      || {};
+      var menu       = d.menu       || {};
+      var dishes     = d.dishes     || [];
+      var gallery    = d.gallery    || [];
+      var eventsHero = d.eventsHero || {};
+      var hire       = d.hire       || {};
 
       // ── Site Settings ──────────────────────────────────────────────────────
       document.querySelectorAll('.cms-brand-name').forEach(function (el) {
@@ -121,6 +123,38 @@
       }
       renderDishes('breakfastList',  bycat.breakfast);
       renderDishes('sandwichesList', bycat.sandwiches);
+
+      // ── Events Hero ────────────────────────────────────────────────────────
+      set('evheroPillText',   eventsHero.pillText);
+      set('evheroTitleLine1', eventsHero.titleLine1);
+      set('evheroTitleLine2', eventsHero.titleLine2);
+      set('evheroSub',        eventsHero.subtitle);
+      var cta1 = document.getElementById('evheroCta1');
+      if (cta1) {
+        if (eventsHero.cta1Label) cta1.textContent = eventsHero.cta1Label;
+        if (eventsHero.cta1Href)  cta1.href        = eventsHero.cta1Href;
+      }
+      var cta2 = document.getElementById('evheroCta2');
+      if (cta2) {
+        if (eventsHero.cta2Label) cta2.innerHTML = esc(eventsHero.cta2Label) + '<span class="btn__arrow">→</span>';
+        if (eventsHero.cta2Href)  cta2.href      = eventsHero.cta2Href;
+      }
+
+      // ── Private Hire ───────────────────────────────────────────────────────
+      set('hireEyebrow', hire.eyebrow);
+      set('hireHeading', hire.heading);
+      set('hirePara',    hire.paragraph);
+      var hireList = document.getElementById('hireList');
+      if (hireList && hire.bulletPoints && hire.bulletPoints.length) {
+        hireList.innerHTML = hire.bulletPoints.map(function (b) {
+          return '<li>' + esc(b) + '</li>';
+        }).join('');
+      }
+      var hireCta = document.getElementById('hireCtaLink');
+      if (hireCta) {
+        if (hire.ctaLabel) hireCta.textContent = hire.ctaLabel;
+        if (hire.ctaHref)  hireCta.href        = hire.ctaHref;
+      }
 
       // ── Gallery ────────────────────────────────────────────────────────────
       var grid = document.getElementById('galleryGrid');
