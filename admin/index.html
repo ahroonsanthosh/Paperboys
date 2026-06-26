@@ -654,40 +654,49 @@ async function saveAll() {
   setStatus('Saving…');
 
   var newContent = readForms();
-  var body = JSON.stringify(newContent, null, 2);
-  var encoded = btoa(unescape(encodeURIComponent(body)));
+  var encoded = btoa(unescape(encodeURIComponent(JSON.stringify(newContent, null, 2))));
 
   try {
-    // Get current file SHA
-    var headRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main', {
-      headers: {'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json'}
-    });
-    var headData = await headRes.json();
-    var sha = headData.sha;
+    for (var attempt = 0; attempt < 3; attempt++) {
+      // Always fetch a fresh SHA with cache-busting to avoid stale-SHA conflicts
+      var headRes = await fetch(
+        'https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main&_=' + Date.now(),
+        { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json', 'Cache-Control': 'no-cache' } }
+      );
+      var headData = await headRes.json();
+      if (!headRes.ok) {
+        setStatus('Error: ' + (headData.message || headRes.status), true);
+        break;
+      }
 
-    // Push update
-    var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
-      method: 'PUT',
-      headers: {
-        'Authorization': 'Bearer ' + getToken(),
-        'Accept': 'application/vnd.github+json',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        message: 'Update content via admin panel',
-        content: encoded,
-        sha: sha,
-        branch: 'main'
-      })
-    });
+      var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
+        method: 'PUT',
+        headers: {
+          'Authorization': 'Bearer ' + getToken(),
+          'Accept': 'application/vnd.github+json',
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          message: 'Update content via admin panel',
+          content: encoded,
+          sha: headData.sha,
+          branch: 'main'
+        })
+      });
 
-    if (putRes.ok) {
-      content = newContent;
-      setStatus('Saved ✓');
-      setTimeout(function(){ setStatus(''); }, 3000);
-    } else {
-      var err = await putRes.json();
-      setStatus('Error: ' + (err.message || putRes.status), true);
+      if (putRes.ok) {
+        content = newContent;
+        setStatus('Saved ✓');
+        setTimeout(function(){ setStatus(''); }, 3000);
+        break;
+      }
+
+      var putErr = await putRes.json();
+      var isConflict = putRes.status === 409 ||
+                       (putErr.message && putErr.message.toLowerCase().includes('does not match'));
+      if (isConflict && attempt < 2) continue; // retry with a freshly fetched SHA
+      setStatus('Error: ' + (putErr.message || putRes.status), true);
+      break;
     }
   } catch(e) {
     setStatus('Network error — check connection', true);
