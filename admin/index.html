@@ -672,7 +672,7 @@ async function saveAll() {
       // Always fetch a fresh SHA with cache-busting to avoid stale-SHA conflicts
       var headRes = await fetch(
         'https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main&_=' + Date.now(),
-        { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json', 'Cache-Control': 'no-cache' } }
+        { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
       );
       var headData = await headRes.json();
       if (!headRes.ok) {
