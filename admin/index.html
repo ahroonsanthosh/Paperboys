@@ -134,6 +134,29 @@
     }
     #pwdMsg { margin-top: 0.5rem; font-size: 0.875rem; }
 
+    /* ── Gallery ── */
+    .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
+    .gallery-card { background: #fff; border: 1.5px solid #e5e5e5; border-radius: 8px; overflow: hidden; }
+    .gallery-card img { width: 100%; height: 140px; object-fit: cover; display: block; }
+    .gallery-card-body { padding: 0.75rem; }
+    .gallery-card-body input { width: 100%; padding: 0.4rem 0.6rem; border: 1.5px solid #ddd; border-radius: 5px; font-size: 0.8rem; margin-bottom: 0.4rem; font-family: inherit; }
+    .gallery-card-body input:focus { outline: none; border-color: #0e1f3d; }
+    .gallery-card-footer { display: flex; justify-content: space-between; align-items: center; padding: 0 0.75rem 0.75rem; }
+    .upload-label {
+      display: inline-block; padding: 0.35rem 0.75rem; background: #0e1f3d; color: #fff;
+      border-radius: 5px; font-size: 0.75rem; cursor: pointer;
+    }
+    .upload-label:hover { background: #1a3560; }
+    .upload-label input[type=file] { display: none; }
+    .upload-status { font-size: 0.72rem; color: #888; }
+    .gallery-add-zone {
+      border: 2px dashed #bbb; border-radius: 8px; padding: 2rem;
+      text-align: center; cursor: pointer; color: #888; font-size: 0.875rem;
+      transition: border-color 0.15s, color 0.15s;
+    }
+    .gallery-add-zone:hover, .gallery-add-zone.drag-over { border-color: #0e1f3d; color: #0e1f3d; }
+    .gallery-add-zone input[type=file] { display: none; }
+
     /* ── Mobile nav toggle ── */
     #navToggle {
       display: none; background: none; border: none; color: #fff;
@@ -209,6 +232,8 @@
       <a href="#" onclick="showPanel('sandwiches'); return false;">Sandwiches</a>
       <a href="#" onclick="showPanel('sides'); return false;">Sides</a>
       <a href="#" onclick="showPanel('drinks'); return false;">Drinks</a>
+      <div class="sidebar-label">Gallery</div>
+      <a href="#" onclick="showPanel('gallery'); return false;">Gallery Images</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password'); return false;">Change Password</a>
     </nav>
@@ -290,6 +315,17 @@
         <button class="add-btn" onclick="addSimpleItem('drinks')">+ Add drink</button>
       </div>
 
+      <!-- Gallery -->
+      <div class="panel" id="panel-gallery">
+        <div class="panel-title">Gallery Images</div>
+        <p style="color:#666;font-size:0.875rem;margin-bottom:1.25rem;">Upload new images or edit captions. Changes take effect after Save.</p>
+        <div class="gallery-grid" id="galleryCards"></div>
+        <label class="gallery-add-zone" id="galleryAddZone">
+          <input type="file" id="galleryAddInput" accept="image/*" multiple onchange="handleNewImages(this.files)" />
+          <div>&#43; Click or drag images here to add to gallery</div>
+        </label>
+      </div>
+
       <!-- Change Password -->
       <div class="panel" id="panel-password">
         <div class="panel-title">Change Password</div>
@@ -352,6 +388,7 @@ var content = {};
 function showEditor() {
   document.getElementById('loginScreen').style.display = 'none';
   document.getElementById('editorScreen').style.display = 'block';
+  setupGalleryDropZone();
   loadContent();
 }
 
@@ -397,6 +434,8 @@ function populateForms() {
   renderDishes('sandwichItems',   dishes.filter(function(d){ return d.category === 'sandwiches'; }));
   renderSimpleList('sidesItems',  m.sides  || []);
   renderSimpleList('drinksItems', m.drinks || []);
+
+  renderGallery(content.gallery || []);
 }
 
 function val(id, v) {
@@ -588,7 +627,18 @@ function readForms() {
       drinks:      readCards('drinksItems', false)
     },
     dishes: readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
-    gallery: content.gallery || []
+    gallery: (function() {
+      var cards = document.getElementById('galleryCards');
+      if (!cards) return content.gallery || [];
+      return Array.from(cards.children).map(function(card, i) {
+        return {
+          sortOrder: i + 1,
+          src:     card.dataset.src || '',
+          caption: (card.querySelector('[data-field="caption"]') || {}).value || '',
+          alt:     (card.querySelector('[data-field="alt"]') || {}).value || ''
+        };
+      });
+    })()
   };
 }
 
@@ -679,6 +729,115 @@ function showPanel(name) {
 
 function toggleNav() {
   document.getElementById('sidebar').classList.toggle('open');
+}
+
+// ── Gallery ───────────────────────────────────────────────────────────────────
+function renderGallery(gallery) {
+  var el = document.getElementById('galleryCards');
+  el.innerHTML = '';
+  (gallery || []).forEach(function(item) {
+    el.appendChild(makeGalleryCard(item.src, item.caption || '', item.alt || ''));
+  });
+}
+
+function makeGalleryCard(src, caption, alt) {
+  var card = document.createElement('div');
+  card.className = 'gallery-card';
+  card.dataset.src = src;
+  var imgSrc = src ? '../' + src : '';
+  card.innerHTML =
+    '<img src="' + escAttr(imgSrc) + '" onerror="this.style.background=\'#eee\';this.removeAttribute(\'src\')" />' +
+    '<div class="gallery-card-body">' +
+      '<input type="text" placeholder="Caption" value="' + escAttr(caption) + '" data-field="caption" />' +
+      '<input type="text" placeholder="Alt text" value="' + escAttr(alt) + '" data-field="alt" />' +
+    '</div>' +
+    '<div class="gallery-card-footer">' +
+      '<label class="upload-label">Replace<input type="file" accept="image/*" /></label>' +
+      '<span class="upload-status"></span>' +
+      '<button class="remove-btn" onclick="this.closest(\'.gallery-card\').remove()">Remove</button>' +
+    '</div>';
+  card.querySelector('input[type=file]').addEventListener('change', function() {
+    if (this.files[0]) replaceImage(this.files[0], card);
+  });
+  return card;
+}
+
+async function replaceImage(file, card) {
+  var statusEl = card.querySelector('.upload-status');
+  statusEl.textContent = 'Uploading…';
+  try {
+    var newSrc = await uploadImageToRepo(file);
+    card.dataset.src = newSrc;
+    card.querySelector('img').src = '../' + newSrc;
+    statusEl.textContent = 'Done ✓';
+    setTimeout(function() { statusEl.textContent = ''; }, 3000);
+  } catch(e) {
+    statusEl.textContent = 'Upload failed';
+  }
+}
+
+function uploadImageToRepo(file) {
+  return new Promise(function(resolve, reject) {
+    var reader = new FileReader();
+    reader.onload = async function(e) {
+      try {
+        var base64 = e.target.result.split(',')[1];
+        var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
+        var filename = 'assets/' + Date.now() + '-' + safeName;
+
+        var checkRes = await fetch(
+          'https://api.github.com/repos/' + REPO + '/contents/' + filename + '?ref=main',
+          { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
+        );
+        var body = { message: 'Upload image via admin panel', content: base64, branch: 'main' };
+        if (checkRes.ok) { body.sha = (await checkRes.json()).sha; }
+
+        var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + filename, {
+          method: 'PUT',
+          headers: {
+            'Authorization': 'Bearer ' + getToken(),
+            'Accept': 'application/vnd.github+json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(body)
+        });
+        if (putRes.ok) {
+          resolve(filename);
+        } else {
+          var err = await putRes.json();
+          reject(new Error(err.message || 'Upload failed'));
+        }
+      } catch(err) { reject(err); }
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+function handleNewImages(files) {
+  var el = document.getElementById('galleryCards');
+  Array.from(files).forEach(function(file) {
+    var card = makeGalleryCard('', '', '');
+    card.querySelector('img').src = URL.createObjectURL(file);
+    el.appendChild(card);
+    replaceImage(file, card);
+  });
+  document.getElementById('galleryAddInput').value = '';
+}
+
+function setupGalleryDropZone() {
+  var zone = document.getElementById('galleryAddZone');
+  if (!zone) return;
+  zone.addEventListener('dragover', function(e) {
+    e.preventDefault();
+    zone.classList.add('drag-over');
+  });
+  zone.addEventListener('dragleave', function() { zone.classList.remove('drag-over'); });
+  zone.addEventListener('drop', function(e) {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    if (e.dataTransfer.files.length) handleNewImages(e.dataTransfer.files);
+  });
 }
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
