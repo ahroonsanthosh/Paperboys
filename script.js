@@ -82,6 +82,22 @@
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  // ===== Newsletter form =====
+  var nlForm = document.getElementById('newsletterForm');
+  if (nlForm) {
+    nlForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var email  = this.querySelector('input[type=email]').value;
+      var mailto = (this.dataset.mailto || 'mailto:hello@paperboys.ie?subject=Newsletter+signup');
+      window.open(mailto + '&body=Please+add+me+to+the+mailing+list%3A+' + encodeURIComponent(email));
+      var btn = this.querySelector('button[type=submit]');
+      var orig = btn.textContent;
+      btn.textContent = 'Done ✓';
+      this.querySelector('input').value = '';
+      setTimeout(function () { btn.textContent = orig; }, 3000);
+    });
+  }
+
   // ===== Scroll-zoom video hero =====
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var vhero = document.getElementById('vhero');

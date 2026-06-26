@@ -16,14 +16,16 @@
   fetch('content.json?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var settings   = d.settings   || {};
-      var hours      = d.hours      || {};
-      var story      = d.story      || {};
-      var menu       = d.menu       || {};
-      var dishes     = d.dishes     || [];
-      var gallery    = d.gallery    || [];
-      var eventsHero = d.eventsHero || {};
-      var hire       = d.hire       || {};
+      var settings       = d.settings       || {};
+      var hours          = d.hours          || {};
+      var story          = d.story          || {};
+      var menu           = d.menu           || {};
+      var dishes         = d.dishes         || [];
+      var gallery        = d.gallery        || [];
+      var eventsHero     = d.eventsHero     || {};
+      var hire           = d.hire           || {};
+      var gallerySection = d.gallerySection || {};
+      var newsletter     = d.newsletter     || {};
 
       // ── Site Settings ──────────────────────────────────────────────────────
       document.querySelectorAll('.cms-brand-name').forEach(function (el) {
@@ -144,17 +146,30 @@
       set('hireEyebrow', hire.eyebrow);
       set('hireHeading', hire.heading);
       set('hirePara',    hire.paragraph);
-      var hireList = document.getElementById('hireList');
-      if (hireList && hire.bulletPoints && hire.bulletPoints.length) {
-        hireList.innerHTML = hire.bulletPoints.map(function (b) {
-          return '<li>' + esc(b) + '</li>';
-        }).join('');
-      }
+      set('hireDetails', hire.details);
       var hireCta = document.getElementById('hireCtaLink');
       if (hireCta) {
         if (hire.ctaLabel) hireCta.textContent = hire.ctaLabel;
         if (hire.ctaHref)  hireCta.href        = hire.ctaHref;
       }
+
+      // ── Gallery Section Header ─────────────────────────────────────────────
+      set('galleryEyebrow',    gallerySection.eyebrow);
+      set('galleryHeading',    gallerySection.heading);
+      set('gallerySocialText', gallerySection.socialText);
+      var gallerySocialHandle = document.getElementById('gallerySocialHandle');
+      if (gallerySocialHandle && settings.instagramHandle) {
+        gallerySocialHandle.textContent = settings.instagramHandle;
+      }
+
+      // ── Newsletter ─────────────────────────────────────────────────────────
+      set('newsletterLine1', newsletter.line1);
+      set('newsletterLine2', newsletter.line2);
+      set('newsletterSub',   newsletter.subtext);
+      var nlCta = document.getElementById('newsletterCta');
+      if (nlCta && newsletter.ctaLabel) nlCta.textContent = newsletter.ctaLabel;
+      var nlForm = document.getElementById('newsletterForm');
+      if (nlForm && newsletter.ctaMailto) nlForm.dataset.mailto = newsletter.ctaMailto;
 
       // ── Gallery ────────────────────────────────────────────────────────────
       var grid = document.getElementById('galleryGrid');

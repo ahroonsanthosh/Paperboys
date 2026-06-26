@@ -57,14 +57,18 @@
   },
   "story": {
     "heading": "A neighbourhood brunch room with a bit of mischief.",
-    "paragraph1": "Tucked onto Tobin Street, Paperboys is small, warm and unmistakably Cork. We keep the menu tight and the coffee serious — the kind of room you slip into on a slow morning and lose an hour in.",
-    "paragraph2": "No fuss, no pretence. Just good plates, good people, and our two paperboys keeping an eye on the place.",
+    "paragraph1": "Small room. Great plates. Serious coffee. Paperboys is tucked onto Tobin Street — the kind of place you plan to stay an hour and end up in all morning.",
+    "paragraph2": "No fuss. No pretence. Just good food, good people, and our two paperboys keeping watch. When the evening calls — we know how to make it worth your while.",
     "storefrontQuote": "\"Two faces over the door, and the best reason to leave the house before noon.\"",
     "tickerWords": [
       "Sourdough",
       "Flat Whites",
       "Brunch Daily",
-      "Cork City"
+      "Cork City",
+      "Sunday Sessions",
+      "Live Events",
+      "Private Hire",
+      "Pop-ups"
     ]
   },
   "menu": {
@@ -298,14 +302,21 @@
   "hire": {
     "eyebrow": "Private Hire",
     "heading": "Got something to celebrate?",
-    "paragraph": "Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. We'll sort the food, the coffee and the atmosphere — you bring the people.",
-    "bulletPoints": [
-      "Full venue buyout available",
-      "Bespoke menus on request",
-      "Up to 40 guests",
-      "Morning, afternoon or evening slots"
-    ],
+    "paragraph": "Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. Full buyout, bespoke menus, up to 40 guests. We sort the food, the coffee and the atmosphere — you bring the people.",
+    "details": "Up to 40 guests · Full buyout · Bespoke menus · Morning, afternoon or evening",
     "ctaLabel": "Get in touch",
     "ctaHref": "mailto:hello@paperboys.ie"
+  },
+  "gallerySection": {
+    "eyebrow": "Tobin Street · Daily",
+    "heading": "The scene.",
+    "socialText": "Follow the chaos"
+  },
+  "newsletter": {
+    "line1": "Get in first.",
+    "line2": "Stay in the loop.",
+    "subtext": "Events, Sunday Sessions, pop-ups — in your inbox before it hits the gram.",
+    "ctaLabel": "Join the list",
+    "ctaMailto": "mailto:hello@paperboys.ie?subject=Newsletter+signup"
   }
 }

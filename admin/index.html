@@ -255,7 +255,9 @@
       <a href="#" onclick="showPanel('eventsHero', this); return false;">Events Hero</a>
       <a href="#" onclick="showPanel('hire', this); return false;">Private Hire</a>
       <div class="sidebar-label">Gallery</div>
-      <a href="#" onclick="showPanel('gallery', this); return false;">Gallery Images</a>
+      <a href="#" onclick="showPanel('gallery', this); return false;">Gallery</a>
+      <div class="sidebar-label">Newsletter</div>
+      <a href="#" onclick="showPanel('newsletter', this); return false;">Newsletter</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
     </nav>
@@ -362,11 +364,7 @@
         <div class="field"><label>Eyebrow Label</label><input type="text" id="hire-eyebrow" /></div>
         <div class="field"><label>Heading</label><input type="text" id="hire-heading" /></div>
         <div class="field"><label>Paragraph</label><textarea id="hire-para"></textarea></div>
-        <div class="field">
-          <label>Bullet Points</label>
-          <div class="item-list" id="hireBullets"></div>
-          <button class="add-btn" onclick="addHireBullet()">+ Add bullet point</button>
-        </div>
+        <div class="field"><label>Details Line (shown below paragraph)</label><input type="text" id="hire-details" /></div>
         <div class="field-row">
           <div class="field"><label>CTA Label</label><input type="text" id="hire-ctaLabel" /></div>
           <div class="field"><label>CTA Link (href)</label><input type="text" id="hire-ctaHref" /></div>
@@ -375,13 +373,30 @@
 
       <!-- Gallery -->
       <div class="panel" id="panel-gallery">
-        <div class="panel-title">Gallery Images</div>
-        <p style="color:#666;font-size:0.875rem;margin-bottom:1.25rem;">Upload new images or edit captions. Changes take effect after Save.</p>
+        <div class="panel-title">Gallery</div>
+        <div class="field"><label>Section Eyebrow</label><input type="text" id="gs-eyebrow" /></div>
+        <div class="field"><label>Section Heading</label><input type="text" id="gs-heading" /></div>
+        <div class="field"><label>Instagram Strip Text</label><input type="text" id="gs-socialText" /></div>
+        <p style="color:#666;font-size:0.875rem;margin:1.5rem 0 1rem;border-top:1px solid #eee;padding-top:1.25rem;">Upload new images or edit captions. Changes take effect after Save.</p>
         <div class="gallery-grid" id="galleryCards"></div>
         <label class="gallery-add-zone" id="galleryAddZone">
           <input type="file" id="galleryAddInput" accept="image/*" multiple onchange="handleNewImages(this.files)" />
           <div>&#43; Click or drag images here to add to gallery</div>
         </label>
+      </div>
+
+      <!-- Newsletter -->
+      <div class="panel" id="panel-newsletter">
+        <div class="panel-title">Newsletter Section</div>
+        <div class="field-row">
+          <div class="field"><label>Heading Line 1</label><input type="text" id="nl-line1" /></div>
+          <div class="field"><label>Heading Line 2 (italic)</label><input type="text" id="nl-line2" /></div>
+        </div>
+        <div class="field"><label>Subtext</label><textarea id="nl-subtext"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label>Button Label</label><input type="text" id="nl-ctaLabel" /></div>
+          <div class="field"><label>Mailto Link</label><input type="text" id="nl-ctaMailto" /></div>
+        </div>
       </div>
 
       <!-- Change Password -->
@@ -527,9 +542,21 @@ function populateForms() {
   val('hire-eyebrow',  hr.eyebrow);
   val('hire-heading',  hr.heading);
   val('hire-para',     hr.paragraph);
-  renderHireBullets(hr.bulletPoints || []);
+  val('hire-details',  hr.details);
   val('hire-ctaLabel', hr.ctaLabel);
   val('hire-ctaHref',  hr.ctaHref);
+
+  var gs = content.gallerySection || {};
+  val('gs-eyebrow',    gs.eyebrow);
+  val('gs-heading',    gs.heading);
+  val('gs-socialText', gs.socialText);
+
+  var nl = content.newsletter || {};
+  val('nl-line1',      nl.line1);
+  val('nl-line2',      nl.line2);
+  val('nl-subtext',    nl.subtext);
+  val('nl-ctaLabel',   nl.ctaLabel);
+  val('nl-ctaMailto',  nl.ctaMailto);
 
   renderGallery(content.gallery || []);
 }
@@ -728,18 +755,24 @@ function readForms() {
       cta2Href:  g('ev-cta2Href')
     },
     hire: {
-      eyebrow:      g('hire-eyebrow'),
-      heading:      g('hire-heading'),
-      paragraph:    g('hire-para'),
-      bulletPoints: (function() {
-        var el = document.getElementById('hireBullets');
-        if (!el) return [];
-        return Array.from(el.querySelectorAll('[data-field="bullet"]')).map(function(inp) {
-          return inp.value.trim();
-        }).filter(Boolean);
-      })(),
-      ctaLabel: g('hire-ctaLabel'),
-      ctaHref:  g('hire-ctaHref')
+      eyebrow:   g('hire-eyebrow'),
+      heading:   g('hire-heading'),
+      paragraph: g('hire-para'),
+      details:   g('hire-details'),
+      ctaLabel:  g('hire-ctaLabel'),
+      ctaHref:   g('hire-ctaHref')
+    },
+    gallerySection: {
+      eyebrow:    g('gs-eyebrow'),
+      heading:    g('gs-heading'),
+      socialText: g('gs-socialText')
+    },
+    newsletter: {
+      line1:      g('nl-line1'),
+      line2:      g('nl-line2'),
+      subtext:    g('nl-subtext'),
+      ctaLabel:   g('nl-ctaLabel'),
+      ctaMailto:  g('nl-ctaMailto')
     },
     gallery: (function() {
       var cards = document.getElementById('galleryCards');
@@ -875,31 +908,6 @@ function showPanel(name, linkEl) {
 
 function toggleNav() {
   document.getElementById('sidebar').classList.toggle('open');
-}
-
-// ── Hire bullet points ────────────────────────────────────────────────────────
-function renderHireBullets(bullets) {
-  var el = document.getElementById('hireBullets');
-  el.innerHTML = (bullets || []).map(function(b) {
-    return '<div class="item-card" style="padding:0.6rem 1rem;">' +
-      '<div style="display:flex;align-items:center;gap:0.5rem;">' +
-      '<input type="text" data-field="bullet" value="' + escAttr(b) + '" style="flex:1;padding:0.4rem 0.6rem;border:1.5px solid #ddd;border-radius:5px;font-size:0.875rem;font-family:inherit;" />' +
-      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button>' +
-      '</div></div>';
-  }).join('');
-}
-
-function addHireBullet() {
-  var el   = document.getElementById('hireBullets');
-  var card = document.createElement('div');
-  card.className = 'item-card';
-  card.style.cssText = 'padding:0.6rem 1rem;';
-  card.innerHTML =
-    '<div style="display:flex;align-items:center;gap:0.5rem;">' +
-    '<input type="text" data-field="bullet" placeholder="Bullet point text…" style="flex:1;padding:0.4rem 0.6rem;border:1.5px solid #ddd;border-radius:5px;font-size:0.875rem;font-family:inherit;" />' +
-    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button>' +
-    '</div>';
-  el.appendChild(card);
 }
 
 // ── Gallery ───────────────────────────────────────────────────────────────────
