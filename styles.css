@@ -1,14 +1,15 @@
 /* ===== Paperboys — brunch + events ===== */
 :root{
-  --ink:#10254a;
-  --ink-2:#0a1830;
+  --ink:#0e1c14;
+  --ink-2:#080f0a;
   --brand:#1d4ed8;
-  --cream:#f6f1e6;
-  --cream-2:#efe7d6;
-  --paper:#fbf8f1;
-  --terra:#d8623d;
-  --mustard:#e0a52e;
-  --muted:#5b6577;
+  --cream:#f5f0e8;
+  --cream-2:#ece5d5;
+  --paper:#faf8f3;
+  --terra:#f04823;
+  --mustard:#f5c400;
+  --lime:#c8f535;
+  --muted:#4a5c52;
   --line:rgba(16,37,74,.12);
   --r:18px;
   --max:1200px;
@@ -106,15 +107,15 @@ section{position:relative}
 .nav__links a{position:relative;color:var(--ink);opacity:.85;transition:opacity .25s}
 .nav__links a::after{content:"";position:absolute;left:0;bottom:-5px;height:2px;width:0;background:var(--terra);transition:width .3s var(--ease)}
 .nav__links a:hover{opacity:1}.nav__links a:hover::after{width:100%}
-.nav__cta{background:var(--terra);color:var(--cream);padding:.6rem 1.25rem;border-radius:100px;font-weight:700;font-size:.88rem;letter-spacing:.02em;transition:transform .3s var(--ease),background .3s,box-shadow .3s;box-shadow:0 6px 20px -6px rgba(216,98,61,.5)}
-.nav__cta:hover{background:#c2502e;transform:translateY(-2px);box-shadow:0 10px 28px -6px rgba(216,98,61,.6)}
+.nav__cta{background:var(--lime);color:var(--ink-2);padding:.6rem 1.25rem;border-radius:100px;font-weight:700;font-size:.88rem;letter-spacing:.02em;transition:transform .3s var(--ease),background .3s,box-shadow .3s;box-shadow:0 6px 20px -6px rgba(200,245,53,.45)}
+.nav__cta:hover{background:#b8e422;transform:translateY(-2px);box-shadow:0 10px 28px -6px rgba(200,245,53,.6)}
 .nav__burger{display:none;flex-direction:column;gap:5px;background:none;border:0;padding:8px;cursor:pointer}
 .nav__burger span{width:26px;height:2px;background:var(--ink);border-radius:2px;transition:.3s var(--ease)}
 
 /* ===== Hero (scroll-zoom video) ===== */
 .hero__accent{
   font-style:italic;
-  background:linear-gradient(135deg,var(--terra) 0%,var(--mustard) 100%);
+  background:linear-gradient(135deg,var(--terra) 0%,var(--mustard) 60%,var(--lime) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .vhero{position:relative;height:340vh;z-index:2}
@@ -146,7 +147,7 @@ section{position:relative}
 .story h2{font-size:clamp(2.4rem,5.5vw,4.2rem);margin-bottom:1.3rem;max-width:14ch;line-height:1.02}
 .story__text p{color:var(--muted);font-size:1.08rem;max-width:46ch;margin-bottom:1rem}
 .story__meta{display:flex;gap:2.5rem;margin-top:2.4rem;flex-wrap:wrap}
-.story__meta .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--terra);display:block;line-height:1}
+.story__meta .num{font-family:'Fraunces',serif;font-size:2.1rem;color:var(--lime);display:block;line-height:1;text-shadow:0 0 18px rgba(200,245,53,.35)}
 .story__meta small{color:var(--muted);font-weight:500;font-size:.85rem}
 .story__visual{position:relative}
 .story__card{
@@ -501,12 +502,12 @@ h2.reveal,h3.reveal{opacity:0;transform:translateY(14px);transition:opacity .8s 
 h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 .story__card.reveal{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
 .story__card.reveal.is-in{opacity:1;transform:none}
-.tile.reveal{opacity:0;clip-path:inset(0 0 100% 0);transition:opacity .5s var(--ease),clip-path .8s var(--ease)}
-.tile.reveal.is-in{opacity:1;clip-path:inset(0 0 0% 0)}
-.tile.reveal:nth-child(2).is-in{transition-delay:.1s}
-.tile.reveal:nth-child(3).is-in{transition-delay:.2s}
-.tile.reveal:nth-child(4).is-in{transition-delay:.3s}
-.tile.reveal:nth-child(5).is-in{transition-delay:.4s}
+.tile.reveal{opacity:0;transform:translateY(28px) scale(.96);transition:opacity .7s var(--ease),transform .75s var(--ease)}
+.tile.reveal.is-in{opacity:1;transform:none}
+.tile.reveal:nth-child(2){transition-delay:.1s}
+.tile.reveal:nth-child(3){transition-delay:.2s}
+.tile.reveal:nth-child(4){transition-delay:.3s}
+.tile.reveal:nth-child(5){transition-delay:.4s}
 .tile img{transform:scale(1.08);transition:transform 1.3s var(--ease)}
 .tile.is-in img{transform:scale(1)}
 .tile:hover img{transform:scale(1.05)}
@@ -526,8 +527,8 @@ h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 
 /* vhero — cursor light orb */
 .vhero__light{
-  position:absolute;width:700px;height:700px;border-radius:50%;
-  background:radial-gradient(circle,rgba(216,98,61,.72) 0%,rgba(216,98,61,.18) 40%,transparent 72%);
+  position:absolute;width:440px;height:440px;border-radius:50%;
+  background:radial-gradient(circle,rgba(240,72,35,.82) 0%,rgba(240,72,35,.22) 45%,transparent 72%);
   transform:translate(-50%,-50%);pointer-events:none;
   transition:left .45s cubic-bezier(.22,.7,.2,1),top .45s cubic-bezier(.22,.7,.2,1);
   z-index:2;left:50%;top:50%;mix-blend-mode:screen;
@@ -547,7 +548,7 @@ h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 .evhero__dot{
   position:absolute;border-radius:50%;
   width:calc(var(--sz,4)*1px);height:calc(var(--sz,4)*1px);
-  background:rgba(216,98,61,.55);pointer-events:none;
+  background:rgba(200,245,53,.6);pointer-events:none;
   animation:floatDot var(--dur,8s) var(--del,0s) ease-in-out infinite alternate;
   left:var(--lx,50%);top:var(--ty,50%);
 }
@@ -644,7 +645,7 @@ h2.reveal.is-in,h3.reveal.is-in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){
   *{animation:none!important;scroll-behavior:auto!important}
   .reveal,h2.reveal,h3.reveal,.tile.reveal,.story__card.reveal{opacity:1;transform:none;transition:none}
-  .tile.reveal{clip-path:none}
+  .tile.reveal{transform:none}
   .tile img{transform:none}
   .vhero__light{animation:none!important}
   .evhero__glow,.evhero__pill::before,.evhero__dot{animation:none!important}
