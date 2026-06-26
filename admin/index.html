@@ -431,6 +431,8 @@ if (sessionStorage.getItem('pb_auth') === '1') showEditor();
 
 // ── Load content ────────────────────────────────────────────────────────────
 function loadContent() {
+  var btn = document.getElementById('saveBtn');
+  if (btn) btn.disabled = true;
   fetch('../content.json?v=' + Date.now())
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -438,7 +440,8 @@ function loadContent() {
       populateForms();
       markClean();
     })
-    .catch(function() { setStatus('Could not load content.json', true); });
+    .catch(function() { setStatus('Could not load content.json', true); })
+    .finally(function() { if (btn) btn.disabled = false; });
 }
 
 function populateForms() {
