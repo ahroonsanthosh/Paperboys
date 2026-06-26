@@ -127,7 +127,7 @@
         if ('IntersectionObserver' in window) {
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
-              if (e.isIntersecting) { e.target.classList.add('is-visible'); io.unobserve(e.target); }
+              if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
             });
           }, {threshold: 0.1});
           grid.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
