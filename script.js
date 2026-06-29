@@ -52,6 +52,34 @@
   var li = document.querySelector('#hoursList li[data-day="' + today + '"]');
   if (li) li.classList.add('is-today');
 
+  // Load gallery tiles from content.json so admin-uploaded images appear
+  var tileClasses = ['tile--a', 'tile--b', 'tile--c', 'tile--d', 'tile--e'];
+  var tileDelays  = [0, 80, 160, 120, 140];
+  fetch('content.json?v=' + Date.now())
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var tiles = data.gallery && data.gallery.tiles;
+      if (!tiles || !tiles.length) return;
+      var grid = document.getElementById('galleryGrid');
+      if (!grid) return;
+      grid.innerHTML = tiles.map(function(tile, i) {
+        var cls   = tileClasses[i % tileClasses.length];
+        var delay = tileDelays[i % tileDelays.length];
+        var delayAttr = delay ? ' data-delay="' + delay + '"' : '';
+        return '<figure class="tile ' + cls + ' reveal"' + delayAttr + '>' +
+          '<img src="' + tile.src + '" alt="' + (tile.alt || '') + '" loading="lazy" />' +
+          '<figcaption>' + (tile.caption || '') + '</figcaption>' +
+          '</figure>';
+      }).join('');
+      // Re-run reveal observer on new elements
+      if ('IntersectionObserver' in window) {
+        grid.querySelectorAll('.reveal').forEach(function(el) { io.observe(el); });
+      } else {
+        grid.querySelectorAll('.reveal').forEach(function(el) { el.classList.add('is-in'); });
+      }
+    })
+    .catch(function() { /* keep static fallback tiles */ });
+
   // Scroll reveal
   var reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window) {
