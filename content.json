@@ -3,322 +3,244 @@
     "businessName": "Paperboys",
     "streetAddress": "Tobin Street, City Centre",
     "locality": "Cork, Ireland",
-    "heroEyebrow": "Tobin Street · Cork City · Open daily 10–4",
-    "heroTitle": "Good food.",
-    "heroTitleAccent": "Better times.",
     "instagramHandle": "@paperboys_cork",
     "instagramUrl": "https://www.instagram.com/paperboys_cork",
+    "email": "hello@paperboys.ie",
     "directionsUrl": "https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork",
-    "googleMapsUrl": "https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed"
+    "googleMapsEmbedUrl": "https://www.google.com/maps?q=Tobin%20Street%2C%20Cork%2C%20Ireland&output=embed",
+    "spotifyPlaylistId": "37i9dQZF1DX0SM0LYsmbMT"
   },
+
+  "announceBar": {
+    "text": "We're open every day 10–4 on Tobin Street.",
+    "ctaLabel": "Peep the menu →",
+    "ctaHref": "#menu"
+  },
+
+  "hero": {
+    "title": "Paperboys",
+    "subheading": "Cork's favourite brunch room — tucked on Tobin Street and open every single day.",
+    "cta1Label": "See the menu",
+    "cta1Href": "#menu",
+    "cta2Label": "Find us →",
+    "cta2Href": "#visit",
+    "badgeText": "OPEN DAILY · 10–4 · TOBIN ST · "
+  },
+
+  "ticker": {
+    "words": [
+      "Flat Whites",
+      "Tobin Street",
+      "Daily Brunch",
+      "Cork City",
+      "Good Plates",
+      "Est. 2023"
+    ]
+  },
+
+  "story": {
+    "label": "Who we are",
+    "heading": "Small room. Big plates. Very Cork.",
+    "headingAccent": "Very Cork.",
+    "paragraph1": "We squeezed ourselves onto Tobin Street and never looked back. Tight menu, serious coffee, and two paperboys keeping watch over the whole thing.",
+    "paragraph2": "No fuss. No pretence. Just the good stuff — served every day from 10 till 4.",
+    "storefrontQuote": "Two faces over the door, and the best reason to leave the house before noon.",
+    "stats": [
+      { "value": "10–4", "label": "Every day" },
+      { "value": "Cork", "label": "City centre" },
+      { "value": "No.1", "label": "Tobin Street" }
+    ]
+  },
+
   "hours": {
     "days": [
-      {
-        "dayName": "Monday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Tuesday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Wednesday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Thursday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Friday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Saturday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      },
-      {
-        "dayName": "Sunday",
-        "opens": "10:00",
-        "closes": "16:00",
-        "closed": false
-      }
+      { "dayName": "Monday",    "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Tuesday",   "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Wednesday", "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Thursday",  "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Friday",    "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Saturday",  "opens": "10:00", "closes": "16:00", "closed": false },
+      { "dayName": "Sunday",    "opens": "10:00", "closes": "16:00", "closed": false }
     ]
   },
-  "story": {
-    "heading": "A neighbourhood brunch room with a bit of mischief.",
-    "paragraph1": "Small room. Great plates. Serious coffee. Paperboys is tucked onto Tobin Street — the kind of place you plan to stay an hour and end up in all morning.",
-    "paragraph2": "No fuss. No pretence. Just good food, good people, and our two paperboys keeping watch. When the evening calls — we know how to make it worth your while.",
-    "storefrontQuote": "\"Two faces over the door, and the best reason to leave the house before noon.\"",
-    "tickerWords": [
-      "Sourdough",
-      "Flat Whites",
-      "Brunch Daily",
-      "Cork City",
-      "Sunday Sessions",
-      "Live Events",
-      "Private Hire",
-      "Pop-ups"
-    ]
-  },
+
   "menu": {
+    "label": "Bites · Brunch & Sambos · Est. 2023",
+    "heading": "The menu",
     "introText": "Served all day. Allergen numbers in brackets — full key at the foot of the list.",
     "allergenKey": "Allergens — 1 Gluten · 2 Crustaceans · 3 Eggs · 4 Fish · 5 Peanuts · 6 Soy · 7 Milk · 8 Nuts · 9 Celery · 10 Mustard · 11 Sesame · 12 Sulphites · 13 Lupin · 14 Molluscs.",
-    "sides": [
+    "dishes": [
       {
-        "name": "Avo",
-        "price": 4.5
+        "id": "halloumi-florentine",
+        "category": "breakfast",
+        "name": "Halloumi Florentine",
+        "allergens": "1,3,7",
+        "price": 14.50,
+        "description": "Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon.",
+        "sortOrder": 1
       },
       {
-        "name": "Bacon",
-        "price": 4.5
+        "id": "revised-morning-issue",
+        "category": "breakfast",
+        "name": "The Revised Morning Issue",
+        "allergens": "1,3,7",
+        "price": 14.50,
+        "description": "Signature hash browns, black pudding hash, hollandaise, poached eggs. Add crispy bacon / avo.",
+        "sortOrder": 2
       },
       {
-        "name": "Black Pudding",
-        "price": 4.5
+        "id": "benny-boru",
+        "category": "breakfast",
+        "name": "Benny Boru",
+        "allergens": "1,3,7,10",
+        "price": 15.00,
+        "description": "Brioche, honey-glazed ham, hollandaise, poached eggs. Add crispy bacon / black pudding.",
+        "sortOrder": 3
       },
       {
-        "name": "Halloumi",
-        "price": 4.5
+        "id": "avo-smash",
+        "category": "breakfast",
+        "name": "Avo… Smash!",
+        "allergens": "1,3,7,8",
+        "price": 14.50,
+        "description": "Sourdough or brioche, smashed avo, crispy chilli & peanut ryu, poached eggs. Add halloumi / crispy bacon.",
+        "sortOrder": 4
       },
       {
-        "name": "Fries",
-        "price": 4.5
+        "id": "ham-2-cheeses",
+        "category": "sandwiches",
+        "name": "The Ham 'n 2 Cheeses",
+        "allergens": "1,7,10",
+        "price": 12.00,
+        "description": "Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar & emmentaler. Add fries.",
+        "sortOrder": 1
       },
       {
-        "name": "Sourdough or Brioche",
-        "price": 2.5
+        "id": "muthah-cluckah",
+        "category": "sandwiches",
+        "name": "The Muthah Cluckah",
+        "allergens": "1,3,6,7,10",
+        "price": 13.50,
+        "description": "Crispy battered buttermilk & hot-sauce marinated chicken, pickles, lettuce, hot ranch sauce. Add fries / crispy bacon.",
+        "sortOrder": 2
+      },
+      {
+        "id": "banh-mi",
+        "category": "sandwiches",
+        "name": "The Banh Mi",
+        "allergens": "1,3,4,10",
+        "price": 12.50,
+        "description": "Vietnamese pork belly, pickled daikon & carrot, chilli, coriander, vietnamayo, baguette. Veg sub: crispy garlic chilli tofu.",
+        "sortOrder": 3
+      },
+      {
+        "id": "melt",
+        "category": "sandwiches",
+        "name": "The Melt",
+        "allergens": "1,7,10",
+        "price": 12.00,
+        "description": "Roast peppers, mushroom, caramelised onion, 2-cheese sauce, smoked cheddar, emmentaler. Add fries.",
+        "sortOrder": 4
       }
     ],
+    "sides": [
+      { "name": "Avo",                  "price": 4.50 },
+      { "name": "Bacon",                "price": 4.50 },
+      { "name": "Black Pudding",        "price": 4.50 },
+      { "name": "Halloumi",             "price": 4.50 },
+      { "name": "Fries",                "price": 4.50 },
+      { "name": "Sourdough or Brioche", "price": 2.50 }
+    ],
     "drinks": [
+      { "name": "Espresso / Doppio",  "price": 3.00 },
+      { "name": "Americano",          "price": 3.30 },
+      { "name": "Flat White",         "price": 3.50 },
+      { "name": "Cappuccino",         "price": 3.50 },
+      { "name": "Latte",              "price": 3.50 },
+      { "name": "Dirty Chai",         "price": 4.00 },
+      { "name": "Mocha",              "price": 3.60 },
+      { "name": "Masala Chai",        "price": 3.70 },
+      { "name": "Hot Choc",           "price": 3.50 },
+      { "name": "Tea",                "price": 2.00 },
+      { "name": "OJ",                 "price": 2.50 },
+      { "name": "Rose Lemonade",      "price": 4.50 },
+      { "name": "Mimosa",             "price": 9.00 },
+      { "name": "Hugo Spritz",        "price": 11.00 },
+      { "name": "Aperol Spritz",      "price": 11.00 },
+      { "name": "Beamish",            "price": 5.20 },
+      { "name": "Heineken",           "price": 6.20 },
+      { "name": "Orchard Thieves",    "price": 6.20 },
+      { "name": "Cab Sav (G)",        "price": 8.00 },
+      { "name": "Sav Blanc (G)",      "price": 8.00 }
+    ]
+  },
+
+  "gallery": {
+    "label": "The room & the plates",
+    "heading": "Warm light, good company.",
+    "tiles": [
+      { "sortOrder": 1, "src": "assets/pbb5.webp", "caption": "The counter",    "alt": "Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber" },
+      { "sortOrder": 2, "src": "assets/pbb4.webp", "caption": "On the plate",   "alt": "Two brunch plates at Paperboys" },
+      { "sortOrder": 3, "src": "assets/pbb2.webp", "caption": "Coffee, all day","alt": "A flat white with latte art" },
+      { "sortOrder": 4, "src": "assets/pbb3.webp", "caption": "Egg tostadas",   "alt": "Egg tostadas topped with micro-herbs and salsa" },
+      { "sortOrder": 5, "src": "assets/pbb1.webp", "caption": "Prawn baguette", "alt": "Prawn baguette with seasoned fries" }
+    ]
+  },
+
+  "whatson": {
+    "label": "Coming up",
+    "heading": "What's On",
+    "note": "Follow us on Instagram for the latest specials and pop-ups — we keep things fresh :)",
+    "events": [
       {
-        "name": "Espresso / Doppio",
-        "price": 3
+        "day": "Every day",
+        "title": "Daily Brunch",
+        "description": "Full menu on from 10 till 4. Breakfast dishes, sambos, coffee — the whole lot.",
+        "tag": "10:00 – 16:00"
       },
       {
-        "name": "Americano",
-        "price": 3.3
+        "day": "Weekend",
+        "title": "Saturday & Sunday Special",
+        "description": "Weekend plates drop every Saturday and Sunday — something a little extra alongside the usual.",
+        "tag": "Ask inside"
       },
       {
-        "name": "Flat White",
-        "price": 3.5
-      },
-      {
-        "name": "Cappuccino",
-        "price": 3.5
-      },
-      {
-        "name": "Latte",
-        "price": 3.5
-      },
-      {
-        "name": "Dirty Chai",
-        "price": 4
-      },
-      {
-        "name": "Mocha",
-        "price": 3.6
-      },
-      {
-        "name": "Masala Chai",
-        "price": 3.7
-      },
-      {
-        "name": "Hot Choc",
-        "price": 3.5
-      },
-      {
-        "name": "Tea",
-        "price": 2
-      },
-      {
-        "name": "OJ",
-        "price": 2.5
-      },
-      {
-        "name": "Rose Lemonade",
-        "price": 4.5
-      },
-      {
-        "name": "Mimosa",
-        "price": 9
-      },
-      {
-        "name": "Hugo Spritz",
-        "price": 11
-      },
-      {
-        "name": "Aperol Spritz",
-        "price": 11
-      },
-      {
-        "name": "Beamish",
-        "price": 5.2
-      },
-      {
-        "name": "Heineken",
-        "price": 6.2
-      },
-      {
-        "name": "Orchard Thieves",
-        "price": 6.2
-      },
-      {
-        "name": "Cab Sav (G)",
-        "price": 8
-      },
-      {
-        "name": "Sav Blanc (G)",
-        "price": 8
+        "day": "Monthly",
+        "title": "Pop-up Guests",
+        "description": "We occasionally hand the kitchen over to guest chefs and producers. Watch the Instagram for dates.",
+        "tag": "@paperboys_cork"
       }
     ]
   },
-  "dishes": [
-    {
-      "name": "Halloumi Florentine",
-      "price": 15,
-      "id": "halloumi-florentine",
-      "category": "breakfast",
-      "allergens": "1,3,7",
-      "description": "Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon.",
-      "sortOrder": 1
-    },
-    {
-      "name": "The Revised Morning Issue",
-      "price": 14.5,
-      "id": "revised-morning-issue",
-      "category": "breakfast",
-      "allergens": "1,3,7",
-      "description": "Signature hash browns, black pudding hash, hollandaise, poached eggs. Add crispy bacon / avo.",
-      "sortOrder": 2
-    },
-    {
-      "name": "Benny Boru",
-      "price": 15,
-      "id": "benny-boru",
-      "category": "breakfast",
-      "allergens": "1,3,7,10",
-      "description": "Brioche, honey-glazed ham, hollandaise, poached eggs. Add crispy bacon / black pudding.",
-      "sortOrder": 3
-    },
-    {
-      "name": "Avo… Smash!",
-      "price": 14.5,
-      "id": "avo-smash",
-      "category": "breakfast",
-      "allergens": "1,3,7,8",
-      "description": "Sourdough or brioche, smashed avo, crispy chilli & peanut ryu, poached eggs. Add halloumi / crispy bacon.",
-      "sortOrder": 4
-    },
-    {
-      "name": "The Ham 'n 2 Cheeses",
-      "price": 12,
-      "id": "ham-2-cheeses",
-      "category": "sandwiches",
-      "allergens": "1,7,10",
-      "description": "Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar & emmentaler. Add fries.",
-      "sortOrder": 1
-    },
-    {
-      "name": "The Muthah Cluckah",
-      "price": 13.5,
-      "id": "muthah-cluckah",
-      "category": "sandwiches",
-      "allergens": "1,3,6,7,10",
-      "description": "Crispy battered buttermilk & hot-sauce marinated chicken, pickles, lettuce, hot ranch sauce. Add fries / crispy bacon.",
-      "sortOrder": 2
-    },
-    {
-      "name": "The Banh Mi",
-      "price": 12.5,
-      "id": "banh-mi",
-      "category": "sandwiches",
-      "allergens": "1,3,4,10",
-      "description": "Vietnamese pork belly, pickled daikon & carrot, chilli, coriander, vietnamayo, baguette. Veg sub: crispy garlic chilli tofu.",
-      "sortOrder": 3
-    },
-    {
-      "name": "The Melt",
-      "price": 12,
-      "id": "melt",
-      "category": "sandwiches",
-      "allergens": "1,7,10",
-      "description": "Roast peppers, mushroom, caramelised onion, 2-cheese sauce, smoked cheddar, emmentaler. Add fries.",
-      "sortOrder": 4
-    }
-  ],
-  "gallery": [
-    {
-      "sortOrder": 1,
-      "src": "assets/1782450307096-the_counter.webp",
-      "caption": "The counter",
-      "alt": "Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber"
-    },
-    {
-      "sortOrder": 2,
-      "src": "assets/pbb4.webp",
-      "caption": "On the plate",
-      "alt": "Two brunch plates — buttermilk fried chicken with French toast, and grilled halloumi with flatbread"
-    },
-    {
-      "sortOrder": 3,
-      "src": "assets/pbb2.webp",
-      "caption": "Coffee, all day",
-      "alt": "A flat white with latte art"
-    },
-    {
-      "sortOrder": 4,
-      "src": "assets/pbb3.webp",
-      "caption": "Egg tostadas",
-      "alt": "Egg tostadas topped with micro-herbs and salsa"
-    },
-    {
-      "sortOrder": 5,
-      "src": "assets/pbb1.webp",
-      "caption": "Prawn baguette",
-      "alt": "Prawn baguette with seasoned fries"
-    }
-  ],
-  "eventsHero": {
-    "pillText": "What's On at Paperboys",
-    "titleLine1": "The room is",
-    "titleLine2": "always alive.",
-    "subtitle": "Brunch clubs, supper nights, DJ Sundays, pop-up collabs — Paperboys is more than a café. It's a place things happen.",
-    "cta1Label": "Get in touch",
-    "cta1Href": "mailto:hello@paperboys.ie",
-    "cta2Label": "Host your event",
-    "cta2Href": "#hire"
+
+  "soundtrack": {
+    "label": "The vibe",
+    "heading": "Paperboys HiFi",
+    "paragraph1": "We've been slowly building a playlist that pretty much runs in the background of everything we do.",
+    "paragraph2": "Somewhere between soul, jazz, and whatever mood we're in that morning — stick it on.",
+    "ctaLabel": "Save on Spotify",
+    "spotifyPlaylistId": "37i9dQZF1DX0SM0LYsmbMT"
   },
-  "hire": {
-    "eyebrow": "Private Hire",
-    "heading": "Got something to celebrate?",
-    "paragraph": "Paperboys takes private bookings for brunches, evening dinners, work dos, birthdays and everything in between. Full buyout, bespoke menus, up to 40 guests. We sort the food, the coffee and the atmosphere — you bring the people.",
-    "ctaLabel": "Get in touch",
-    "ctaHref": "#contact"
+
+  "usefulLinks": {
+    "links": [
+      { "label": "Full Menu",      "href": "#menu",                                                                           "external": false },
+      { "label": "Instagram",      "href": "https://www.instagram.com/paperboys_cork",                                        "external": true  },
+      { "label": "Get Directions", "href": "https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork",     "external": true  },
+      { "label": "Opening Hours",  "href": "#visit",                                                                          "external": false },
+      { "label": "hello@paperboys.ie", "href": "mailto:hello@paperboys.ie",                                                   "external": true  }
+    ]
   },
-  "gallerySection": {
-    "eyebrow": "Tobin Street · Daily",
-    "heading": "The scene.",
-    "socialText": "Follow the chaos"
+
+  "ctaStrip": {
+    "title": "Good plates. Serious coffee.",
+    "subtext": "We're on Tobin Street every day — come find us :)",
+    "ctaLabel": "Find the room",
+    "ctaHref": "#visit"
   },
-  "contact": {
-    "eyebrow": "Get in touch",
-    "heading": "Let's make",
-    "headingAccent": "something happen.",
-    "subtext": "Private hire, events, pop-ups or just a question — drop us a line and we'll get back to you.",
-    "ctaLabel": "Send it →",
-    "mailto": "mailto:hello@paperboys.ie"
+
+  "visit": {
+    "label": "Come say hello",
+    "heading": "Find the room."
   }
 }

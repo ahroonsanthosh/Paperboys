@@ -6,23 +6,29 @@
   var y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // Announcement bar close
+  // Announcement bar — measure height dynamically so nav never overlaps
   var announce = document.getElementById('announce');
   var announceClose = document.getElementById('announceClose');
   var nav = document.getElementById('nav');
-  var BAR_H = 38; // px — matches CSS top offset
+
+  function setBarHeight() {
+    var h = (announce && !announce.classList.contains('is-gone'))
+      ? announce.offsetHeight : 0;
+    document.documentElement.style.setProperty('--bar-h', h + 'px');
+    if (nav) nav.style.top = h + 'px';
+  }
 
   function dismissBar() {
     if (!announce) return;
     announce.classList.add('is-gone');
-    if (nav) nav.classList.add('bar-gone');
+    setBarHeight();
   }
 
-  if (announceClose) {
-    announceClose.addEventListener('click', dismissBar);
-  }
+  if (announceClose) announceClose.addEventListener('click', dismissBar);
+  setBarHeight();
+  window.addEventListener('resize', setBarHeight, { passive: true });
 
-  // Sticky nav
+  // Sticky nav shadow
   var onScroll = function () {
     if (!nav) return;
     nav.classList.toggle('is-stuck', window.scrollY > 12);
