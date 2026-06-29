@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="theme-color" content="#0e1f3d" />
+  <meta name="theme-color" content="#F5F1E8" />
   <title>Paperboys — Brunch · Cork City</title>
   <meta name="description" content="Paperboys is a brunch room in the heart of Cork City. Considered plates, properly pulled coffee, served daily 10–4 on Tobin Street." />
   <link rel="canonical" href="https://ahroonsanthosh.github.io/Paperboys/" />
@@ -18,7 +18,7 @@
   <meta name="twitter:image" content="https://ahroonsanthosh.github.io/Paperboys/assets/pbb4.webp" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400..600;1,9..144,400..600&family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@700;900&display=swap" rel="stylesheet" />
   <link rel="icon" href="assets/mascot.svg" />
   <link rel="stylesheet" href="styles.css" />
   <script type="application/ld+json">
@@ -26,12 +26,11 @@
     "@context": "https://schema.org",
     "@type": "Restaurant",
     "name": "Paperboys",
-    "description": "An old-school brunch room in the heart of Cork City.",
+    "description": "A brunch room in the heart of Cork City.",
     "servesCuisine": "Brunch",
     "priceRange": "€€",
     "image": "https://ahroonsanthosh.github.io/Paperboys/assets/pbb4.webp",
     "url": "https://ahroonsanthosh.github.io/Paperboys/",
-    "telephone": "",
     "address": {
       "@type": "PostalAddress",
       "streetAddress": "Tobin Street",
@@ -51,7 +50,12 @@
 </head>
 <body>
   <a href="#story" class="skip-link">Skip to content</a>
-  <div class="grain" aria-hidden="true"></div>
+
+  <!-- Announcement bar -->
+  <div class="announce" id="announce" role="banner">
+    <p>We're open every day 10–4 on Tobin Street. <a href="#menu">Peep the menu →</a></p>
+    <button class="announce__close" id="announceClose" aria-label="Dismiss announcement">×</button>
+  </div>
 
   <!-- Nav -->
   <header class="nav" id="nav">
@@ -60,63 +64,69 @@
       <span>Paperboys</span>
     </a>
     <nav class="nav__links">
-      <a href="#story">Story</a>
+      <a href="#story">Our Story</a>
       <a href="#menu">Menu</a>
       <a href="#gallery">The Room</a>
-      <a href="#visit">Visit</a>
+      <a href="#visit">Find Us</a>
     </nav>
-    <a class="nav__cta" href="#visit">Plan a visit</a>
+    <a class="nav__cta" href="#visit">Come in :)</a>
     <button class="nav__burger" id="burger" aria-label="Open menu"><span></span><span></span><span></span></button>
   </header>
 
   <main id="top">
-    <!-- Hero (scroll-zoom video) -->
-    <section class="vhero" id="vhero">
-      <div class="vhero__sticky">
-        <div class="vhero__copy" id="vheroCopy">
-          <img src="assets/mascot.svg" alt="" class="vhero__mark" />
-          <p class="eyebrow">Tobin Street · Cork City · Open daily 10–4</p>
-          <h1 class="vhero__title">Brunch, <span class="hero__accent">done</span> properly.</h1>
-        </div>
 
-        <div class="vhero__inset" id="vheroInset">
-          <video class="vhero__video" id="vheroVideo" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg" aria-label="Brunch being served at Paperboys">
-            <source src="assets/hero.webm" type="video/webm" />
-            <source src="assets/hero.mp4" type="video/mp4" />
-          </video>
+    <!-- Hero — type led -->
+    <section class="hero">
+      <figure class="hero__circle hero__circle--a reveal">
+        <img src="assets/pbb4.webp" alt="Brunch plates at Paperboys" loading="eager" />
+      </figure>
+      <figure class="hero__circle hero__circle--b reveal" data-delay="120">
+        <img src="assets/pbb2.webp" alt="A flat white at Paperboys" loading="eager" />
+      </figure>
+      <div class="hero__content">
+        <h1 class="hero__title">Paperboys</h1>
+        <p class="hero__sub">Cork's favourite brunch room — tucked on Tobin Street and open every single day.</p>
+        <div class="hero__actions">
+          <a href="#menu" class="btn btn--fill">See the menu</a>
+          <a href="#visit" class="btn btn--outline">Find us <span class="btn__arrow">→</span></a>
         </div>
-
-        <div class="vhero__actions" id="vheroActions">
-          <a href="#menu" class="btn btn--primary">See the menu</a>
-          <a href="#visit" class="btn btn--line">Find us<span class="btn__arrow">→</span></a>
-        </div>
+      </div>
+      <div class="hero__badge" aria-hidden="true">
+        <svg viewBox="0 0 100 100" width="110" height="110">
+          <path id="badgePath" d="M 50,50 m -37,0 a 37,37 0 1,1 74,0 a 37,37 0 1,1 -74,0" fill="none"/>
+          <text font-family="Manrope,sans-serif" font-weight="700" font-size="11.5" fill="#1A1918" letter-spacing="2">
+            <textPath href="#badgePath">OPEN DAILY · 10–4 · TOBIN ST · </textPath>
+          </text>
+        </svg>
+        <img src="assets/mascot.svg" alt="" class="hero__badge-mark" />
       </div>
     </section>
 
-    <div class="hero__ticker" aria-hidden="true">
+    <!-- Ticker -->
+    <div class="ticker" aria-hidden="true">
       <div class="ticker__track">
-        <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
-        <span>Sourdough</span><i>·</i><span>Flat Whites</span><i>·</i><span>Brunch Daily</span><i>·</i><span>Cork City</span><i>·</i>
+        <span>Flat Whites</span><i>✦</i><span>Tobin Street</span><i>✦</i><span>Daily Brunch</span><i>✦</i><span>Cork City</span><i>✦</i><span>Good Plates</span><i>✦</i><span>Est. 2023</span><i>✦</i>
+        <span>Flat Whites</span><i>✦</i><span>Tobin Street</span><i>✦</i><span>Daily Brunch</span><i>✦</i><span>Cork City</span><i>✦</i><span>Good Plates</span><i>✦</i><span>Est. 2023</span><i>✦</i>
       </div>
     </div>
 
     <!-- Story -->
     <section class="story" id="story">
-      <div class="story__text">
-        <p class="eyebrow reveal">Who we are</p>
-        <h2 class="reveal" data-delay="80">A neighbourhood brunch room with a bit of mischief.</h2>
-        <p class="reveal" data-delay="160">Tucked onto Tobin Street, Paperboys is small, warm and unmistakably Cork. We keep the menu tight and the coffee serious — the kind of room you slip into on a slow morning and lose an hour in.</p>
-        <p class="reveal" data-delay="220">No fuss, no pretence. Just good plates, good people, and our two paperboys keeping an eye on the place.</p>
-        <div class="story__meta reveal" data-delay="280">
-          <div><span class="num" data-count="10">10–4</span><small>Open every day</small></div>
-          <div><span class="num">Cork</span><small>City centre</small></div>
-          <div><span class="num">No.1</span><small>On Tobin St.</small></div>
+      <div class="story__inner">
+        <div class="story__text">
+          <p class="label reveal">Who we are</p>
+          <h2 class="reveal" data-delay="80">Small room.<br/>Big plates.<br/><em>Very Cork.</em></h2>
+          <p class="reveal" data-delay="160">We squeezed ourselves onto Tobin Street and never looked back. Tight menu, serious coffee, and two paperboys keeping watch over the whole thing.</p>
+          <p class="reveal" data-delay="220">No fuss. No pretence. Just the good stuff — served every day from 10 till 4.</p>
+          <div class="story__stats reveal" data-delay="280">
+            <div class="story__stat"><span>10–4</span><small>Every day</small></div>
+            <div class="story__stat"><span>Cork</span><small>City centre</small></div>
+            <div class="story__stat"><span>No.1</span><small>Tobin Street</small></div>
+          </div>
         </div>
-      </div>
-      <div class="story__visual">
-        <figure class="story__card reveal" data-delay="160">
-          <img src="assets/storefront.webp" alt="The Paperboys storefront on Tobin Street — the two-face mascot sign above the timber doors" loading="lazy" />
-          <figcaption class="story__quote">“Two faces over the door, and the best reason to leave the house before noon.”</figcaption>
+        <figure class="story__visual reveal" data-delay="140">
+          <img src="assets/storefront.webp" alt="The Paperboys storefront on Tobin Street" loading="lazy" />
+          <figcaption>"Two faces over the door, and the best reason to leave the house before noon."</figcaption>
         </figure>
       </div>
     </section>
@@ -124,8 +134,8 @@
     <!-- Menu -->
     <section class="menu" id="menu">
       <div class="menu__head">
-        <p class="eyebrow eyebrow--light reveal">Bites · Brunch &amp; Sambos · Est. 2023</p>
-        <h2 class="reveal" data-delay="80">The menu</h2>
+        <p class="label label--light reveal">Bites · Brunch &amp; Sambos · Est. 2023</p>
+        <h2 class="reveal" data-delay="80"><em>The menu</em></h2>
         <p class="menu__intro reveal" data-delay="140">Served all day. Allergen numbers in brackets — full key at the foot of the list.</p>
       </div>
 
@@ -217,23 +227,33 @@
     <!-- Gallery -->
     <section class="gallery" id="gallery">
       <div class="gallery__head">
-        <p class="eyebrow reveal">The room &amp; the plates</p>
-        <h2 class="reveal" data-delay="80">Warm light, good company.</h2>
+        <p class="label reveal">The room &amp; the plates</p>
+        <h2 class="reveal" data-delay="80"><em>Warm light,<br/>good company.</em></h2>
       </div>
       <div class="gallery__grid">
         <figure class="tile tile--a reveal"><img src="assets/pbb5.webp" alt="Inside Paperboys — the counter, hanging glassware and coffee board under slatted timber" loading="lazy" /><figcaption>The counter</figcaption></figure>
-        <figure class="tile tile--b reveal" data-delay="80"><img src="assets/pbb4.webp" alt="Two brunch plates — buttermilk fried chicken with French toast, and grilled halloumi with flatbread" loading="lazy" /><figcaption>On the plate</figcaption></figure>
+        <figure class="tile tile--b reveal" data-delay="80"><img src="assets/pbb4.webp" alt="Two brunch plates" loading="lazy" /><figcaption>On the plate</figcaption></figure>
         <figure class="tile tile--c reveal" data-delay="160"><img src="assets/pbb2.webp" alt="A flat white with latte art" loading="lazy" /><figcaption>Coffee, all day</figcaption></figure>
         <figure class="tile tile--d reveal" data-delay="120"><img src="assets/pbb3.webp" alt="Egg tostadas topped with micro-herbs and salsa" loading="lazy" /><figcaption>Egg tostadas</figcaption></figure>
         <figure class="tile tile--e reveal" data-delay="140"><img src="assets/pbb1.webp" alt="Prawn baguette with seasoned fries" loading="lazy" /><figcaption>Prawn baguette</figcaption></figure>
       </div>
     </section>
 
+    <!-- CTA strip -->
+    <section class="cta-strip">
+      <div class="cta-strip__inner">
+        <p class="cta-strip__title"><em>Good plates. Serious coffee.</em></p>
+        <p class="cta-strip__sub">We're on Tobin Street every day — come find us :)</p>
+        <a href="#visit" class="btn btn--fill btn--white">Find the room</a>
+      </div>
+      <img class="cta-strip__mascot" src="assets/mascot.svg" alt="" aria-hidden="true" />
+    </section>
+
     <!-- Visit -->
     <section class="visit" id="visit">
       <div class="visit__info">
-        <p class="eyebrow eyebrow--light reveal">Come say hello</p>
-        <h2 class="reveal" data-delay="80">Find the room.</h2>
+        <p class="label reveal">Come say hello</p>
+        <h2 class="reveal" data-delay="80"><em>Find the room.</em></h2>
         <address class="reveal" data-delay="140">
           Paperboys<br />Tobin Street, City Centre<br />Cork, Ireland
         </address>
@@ -250,8 +270,8 @@
           </ul>
         </div>
         <div class="visit__actions reveal" data-delay="240">
-          <a class="btn btn--primary" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get directions</a>
-          <a class="btn btn--line btn--line-light" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">@paperboys_cork</a>
+          <a class="btn btn--fill" href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get directions</a>
+          <a class="btn btn--outline" href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">@paperboys_cork</a>
         </div>
       </div>
       <div class="visit__map reveal" data-delay="160">
@@ -260,6 +280,7 @@
           loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </section>
+
   </main>
 
   <footer class="footer">
@@ -269,7 +290,10 @@
         <span>Paperboys</span>
       </div>
       <nav class="footer__nav">
-        <a href="#story">Story</a><a href="#menu">Menu</a><a href="#gallery">The Room</a><a href="#visit">Visit</a>
+        <a href="#story">Our Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#gallery">The Room</a>
+        <a href="#visit">Find Us</a>
         <a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Instagram</a>
       </nav>
     </div>
@@ -279,7 +303,6 @@
     </div>
   </footer>
 
-  <!-- mobile-only quick actions -->
   <nav class="mobilebar" aria-label="Quick actions">
     <a href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Directions</a>
     <a href="#menu">Menu</a>
