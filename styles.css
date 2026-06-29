@@ -3,8 +3,8 @@
   --bg:       #F5F1E8;        /* warm off-white */
   --white:    #FFFFFF;
   --black:    #1A1918;        /* near-black text */
-  --orange:   #E8521A;        /* primary accent */
-  --orange-dk:#C93F0A;        /* hover shade */
+  --orange:   #1B5FA8;        /* primary accent — Paperboys blue */
+  --orange-dk:#144C8E;        /* hover shade */
   --cyan:     #4DCFCA;        /* secondary accent */
   --cyan-bg:  #DFF4F3;
   --mint:     #C8DDD2;        /* tertiary */
@@ -81,9 +81,9 @@ h2 em, h2 i {
 }
 .btn--fill {
   background: var(--orange); color: var(--white);
-  box-shadow: 0 8px 20px -6px rgba(232,82,26,.45);
+  box-shadow: 0 8px 20px -6px rgba(27,95,168,.45);
 }
-.btn--fill:hover { background: var(--orange-dk); transform: translateY(-3px); box-shadow: 0 14px 28px -8px rgba(232,82,26,.5); }
+.btn--fill:hover { background: var(--orange-dk); transform: translateY(-3px); box-shadow: 0 14px 28px -8px rgba(27,95,168,.5); }
 .btn--outline {
   border: 2px solid var(--black); color: var(--black); background: transparent;
 }
@@ -339,7 +339,7 @@ h2 em, h2 i {
   max-width: var(--max); margin-inline: auto;
 }
 .dish:hover .dish__row h4 { color: var(--orange); }
-.dish:hover .dot { border-bottom-color: rgba(232,82,26,.5); }
+.dish:hover .dot { border-bottom-color: rgba(27,95,168,.5); }
 
 /* ===== Gallery ===== */
 .gallery {
