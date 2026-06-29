@@ -222,6 +222,30 @@
     "spotifyPlaylistId": "37i9dQZF1DX0SM0LYsmbMT"
   },
 
+  "planYourEvent": {
+    "tickerText": "Plan Your Event",
+    "cards": [
+      {
+        "id": "private-hire",
+        "style": "warm",
+        "heading": "Private Hire",
+        "paragraph": "Birthday brunch, work do, family celebration — we take over the whole room for you. Bespoke menu, coffee sorted, up to 40 guests. You bring the people.",
+        "sub": "More info and shots of the space at the link below.",
+        "ctaLabel": "Get in touch ↗",
+        "ctaHref": "mailto:hello@paperboys.ie?subject=Private%20Hire%20Enquiry"
+      },
+      {
+        "id": "events-popups",
+        "style": "cyan",
+        "heading": "Events & Pop-ups",
+        "paragraph": "Looking to host a supper club, pop-up collab or brand activation? We've got the space, the kitchen and the crowd to make it work.",
+        "sub": "Press the button to see more info and get the conversation started :)",
+        "ctaLabel": "Have a look ↗",
+        "ctaHref": "mailto:hello@paperboys.ie?subject=Event%20Enquiry"
+      }
+    ]
+  },
+
   "usefulLinks": {
     "links": [
       { "label": "Full Menu",      "href": "#menu",                                                                           "external": false },
