@@ -652,9 +652,9 @@ h2 em, h2 i {
 .footer__brand {
   display: flex; align-items: center; gap: .7rem;
   font-family: 'Playfair Display', serif; font-weight: 900;
-  font-size: 1.5rem; letter-spacing: -.02em;
+  font-size: 1.5rem; letter-spacing: -.02em; color: var(--white);
 }
-.footer__brand img { width: 40px; filter: brightness(0) invert(1); }
+.footer__brand img { width: 40px; }
 .footer__nav { display: flex; gap: 1.6rem; flex-wrap: wrap; font-weight: 600; font-size: .92rem; }
 .footer__nav a { opacity: .55; transition: opacity .2s, color .2s; }
 .footer__nav a:hover { opacity: 1; color: var(--orange); }
