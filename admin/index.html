@@ -205,7 +205,6 @@
       #saveBtn { padding: 0.45rem 0.9rem; font-size: 0.8rem; }
       .signout { font-size: 0.75rem; }
 
-      /* Gallery: single column on phones */
       .gallery-grid { grid-template-columns: 1fr 1fr; }
     }
 
@@ -243,6 +242,8 @@
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-label">Site</div>
       <a href="#" onclick="showPanel('settings', this); return false;">Site Info</a>
+      <a href="#" onclick="showPanel('announceBar', this); return false;">Announce Bar</a>
+      <a href="#" onclick="showPanel('hero', this); return false;">Hero</a>
       <a href="#" onclick="showPanel('hours', this); return false;">Opening Hours</a>
       <a href="#" onclick="showPanel('story', this); return false;">Story &amp; Ticker</a>
       <div class="sidebar-label">Menu</div>
@@ -251,13 +252,11 @@
       <a href="#" onclick="showPanel('sandwiches', this); return false;">Sandwiches</a>
       <a href="#" onclick="showPanel('sides', this); return false;">Sides</a>
       <a href="#" onclick="showPanel('drinks', this); return false;">Drinks</a>
-      <div class="sidebar-label">Events</div>
-      <a href="#" onclick="showPanel('eventsHero', this); return false;">Events Hero</a>
-      <a href="#" onclick="showPanel('hire', this); return false;">Private Hire</a>
-      <div class="sidebar-label">Gallery</div>
+      <div class="sidebar-label">Sections</div>
       <a href="#" onclick="showPanel('gallery', this); return false;">Gallery</a>
-      <div class="sidebar-label">Contact</div>
-      <a href="#" onclick="showPanel('contact', this); return false;">Contact Form</a>
+      <a href="#" onclick="showPanel('whatson', this); return false;">What's On</a>
+      <a href="#" onclick="showPanel('soundtrack', this); return false;">Soundtrack</a>
+      <a href="#" onclick="showPanel('planYourEvent', this); return false;">Plan Your Event</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
     </nav>
@@ -272,17 +271,40 @@
           <div class="field"><label>Street Address</label><input type="text" id="s-streetAddress" /></div>
           <div class="field"><label>Locality</label><input type="text" id="s-locality" /></div>
         </div>
-        <div class="field"><label>Hero Eyebrow Text</label><input type="text" id="s-heroEyebrow" /></div>
-        <div class="field-row">
-          <div class="field"><label>Hero Title Line 1</label><input type="text" id="s-heroTitle" /></div>
-          <div class="field"><label>Hero Title Accent (italic gradient)</label><input type="text" id="s-heroTitleAccent" /></div>
-        </div>
         <div class="field-row">
           <div class="field"><label>Instagram Handle</label><input type="text" id="s-instagramHandle" /></div>
           <div class="field"><label>Instagram URL</label><input type="text" id="s-instagramUrl" /></div>
         </div>
+        <div class="field"><label>Email</label><input type="text" id="s-email" /></div>
         <div class="field"><label>Directions URL</label><input type="text" id="s-directionsUrl" /></div>
         <div class="field"><label>Google Maps Embed URL</label><input type="text" id="s-googleMapsUrl" /></div>
+        <div class="field"><label>Spotify Playlist ID</label><input type="text" id="s-spotifyPlaylistId" /></div>
+      </div>
+
+      <!-- Announce Bar -->
+      <div class="panel" id="panel-announceBar">
+        <div class="panel-title">Announce Bar</div>
+        <div class="field"><label>Bar Text</label><input type="text" id="ab-text" /></div>
+        <div class="field-row">
+          <div class="field"><label>CTA Label</label><input type="text" id="ab-ctaLabel" /></div>
+          <div class="field"><label>CTA Link</label><input type="text" id="ab-ctaHref" /></div>
+        </div>
+      </div>
+
+      <!-- Hero -->
+      <div class="panel" id="panel-hero">
+        <div class="panel-title">Hero</div>
+        <div class="field"><label>Title</label><input type="text" id="hero-title" /></div>
+        <div class="field"><label>Subheading</label><textarea id="hero-subheading"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label>CTA 1 Label</label><input type="text" id="hero-cta1Label" /></div>
+          <div class="field"><label>CTA 1 Link</label><input type="text" id="hero-cta1Href" /></div>
+        </div>
+        <div class="field-row">
+          <div class="field"><label>CTA 2 Label</label><input type="text" id="hero-cta2Label" /></div>
+          <div class="field"><label>CTA 2 Link</label><input type="text" id="hero-cta2Href" /></div>
+        </div>
+        <div class="field"><label>Rotating Badge Text</label><input type="text" id="hero-badgeText" /></div>
       </div>
 
       <!-- Opening Hours -->
@@ -295,6 +317,7 @@
       <div class="panel" id="panel-story">
         <div class="panel-title">Story &amp; Ticker</div>
         <div class="field"><label>Heading</label><input type="text" id="story-heading" /></div>
+        <div class="field"><label>Heading Accent (italic suffix)</label><input type="text" id="story-headingAccent" /></div>
         <div class="field"><label>Paragraph 1</label><textarea id="story-para1"></textarea></div>
         <div class="field"><label>Paragraph 2</label><textarea id="story-para2"></textarea></div>
         <div class="field"><label>Storefront Quote</label><input type="text" id="story-quote" /></div>
@@ -311,6 +334,8 @@
       <!-- Menu Intro -->
       <div class="panel" id="panel-menuIntro">
         <div class="panel-title">Menu Intro</div>
+        <div class="field"><label>Section Label</label><input type="text" id="menu-label" /></div>
+        <div class="field"><label>Heading</label><input type="text" id="menu-heading" /></div>
         <div class="field"><label>Intro Text</label><textarea id="menu-intro"></textarea></div>
         <div class="field"><label>Allergen Key</label><textarea id="menu-allergen"></textarea></div>
       </div>
@@ -343,43 +368,13 @@
         <button class="add-btn" onclick="addSimpleItem('drinks')">+ Add drink</button>
       </div>
 
-      <!-- Events Hero -->
-      <div class="panel" id="panel-eventsHero">
-        <div class="panel-title">Events Hero</div>
-        <div class="field"><label>Pill Badge Text</label><input type="text" id="ev-pillText" /></div>
-        <div class="field-row">
-          <div class="field"><label>Title Line 1</label><input type="text" id="ev-titleLine1" /></div>
-          <div class="field"><label>Title Line 2 (italic)</label><input type="text" id="ev-titleLine2" /></div>
-        </div>
-        <div class="field"><label>Subtitle Text</label><textarea id="ev-subtitle"></textarea></div>
-        <div class="field-row">
-          <div class="field"><label>CTA 1 Label</label><input type="text" id="ev-cta1Label" /></div>
-          <div class="field"><label>CTA 1 Link (href)</label><input type="text" id="ev-cta1Href" /></div>
-        </div>
-        <div class="field-row">
-          <div class="field"><label>CTA 2 Label</label><input type="text" id="ev-cta2Label" /></div>
-          <div class="field"><label>CTA 2 Link (href)</label><input type="text" id="ev-cta2Href" /></div>
-        </div>
-      </div>
-
-      <!-- Private Hire -->
-      <div class="panel" id="panel-hire">
-        <div class="panel-title">Private Hire</div>
-        <div class="field"><label>Eyebrow Label</label><input type="text" id="hire-eyebrow" /></div>
-        <div class="field"><label>Heading</label><input type="text" id="hire-heading" /></div>
-        <div class="field"><label>Paragraph</label><textarea id="hire-para"></textarea></div>
-        <div class="field-row">
-          <div class="field"><label>CTA Label</label><input type="text" id="hire-ctaLabel" /></div>
-          <div class="field"><label>CTA Link (href)</label><input type="text" id="hire-ctaHref" /></div>
-        </div>
-      </div>
-
       <!-- Gallery -->
       <div class="panel" id="panel-gallery">
         <div class="panel-title">Gallery</div>
-        <div class="field"><label>Section Eyebrow</label><input type="text" id="gs-eyebrow" /></div>
-        <div class="field"><label>Section Heading</label><input type="text" id="gs-heading" /></div>
-        <div class="field"><label>Instagram Strip Text</label><input type="text" id="gs-socialText" /></div>
+        <div class="field-row">
+          <div class="field"><label>Section Label</label><input type="text" id="gal-label" /></div>
+          <div class="field"><label>Section Heading</label><input type="text" id="gal-heading" /></div>
+        </div>
         <p style="color:#666;font-size:0.875rem;margin:1.5rem 0 1rem;border-top:1px solid #eee;padding-top:1.25rem;">Upload new images or edit captions. Changes take effect after Save.</p>
         <div class="gallery-grid" id="galleryCards"></div>
         <label class="gallery-add-zone" id="galleryAddZone">
@@ -388,25 +383,47 @@
         </label>
       </div>
 
-      <!-- Contact -->
-      <div class="panel" id="panel-contact">
-        <div class="panel-title">Contact Form</div>
-        <div class="field"><label>Eyebrow</label><input type="text" id="ct-eyebrow" /></div>
+      <!-- What's On -->
+      <div class="panel" id="panel-whatson">
+        <div class="panel-title">What's On</div>
         <div class="field-row">
-          <div class="field"><label>Heading Line 1</label><input type="text" id="ct-heading" /></div>
-          <div class="field"><label>Heading Accent (italic)</label><input type="text" id="ct-headingAccent" /></div>
+          <div class="field"><label>Section Label</label><input type="text" id="wo-label" /></div>
+          <div class="field"><label>Heading</label><input type="text" id="wo-heading" /></div>
         </div>
-        <div class="field"><label>Subtext</label><textarea id="ct-subtext"></textarea></div>
+        <div class="field"><label>Note (shown below events)</label><textarea id="wo-note"></textarea></div>
+        <p style="font-size:0.8rem;font-weight:600;color:#555;margin-bottom:0.75rem;">Events</p>
+        <div class="item-list" id="whatsonEvents"></div>
+        <button class="add-btn" onclick="addWhatsonEvent()">+ Add event</button>
+      </div>
+
+      <!-- Soundtrack -->
+      <div class="panel" id="panel-soundtrack">
+        <div class="panel-title">Soundtrack</div>
         <div class="field-row">
-          <div class="field"><label>Button Label</label><input type="text" id="ct-ctaLabel" /></div>
-          <div class="field"><label>Mailto Address</label><input type="text" id="ct-mailto" /></div>
+          <div class="field"><label>Section Label</label><input type="text" id="sd-label" /></div>
+          <div class="field"><label>Heading</label><input type="text" id="sd-heading" /></div>
         </div>
+        <div class="field"><label>Paragraph 1</label><textarea id="sd-para1"></textarea></div>
+        <div class="field"><label>Paragraph 2</label><textarea id="sd-para2"></textarea></div>
+        <div class="field-row">
+          <div class="field"><label>CTA Label</label><input type="text" id="sd-ctaLabel" /></div>
+          <div class="field"><label>Spotify Playlist ID</label><input type="text" id="sd-spotifyId" /></div>
+        </div>
+      </div>
+
+      <!-- Plan Your Event -->
+      <div class="panel" id="panel-planYourEvent">
+        <div class="panel-title">Plan Your Event</div>
+        <div class="field"><label>Ticker Text</label><input type="text" id="pe-tickerText" /></div>
+        <p style="font-size:0.8rem;font-weight:600;color:#555;margin-bottom:0.75rem;">Cards</p>
+        <div class="item-list" id="planEventCards"></div>
+        <button class="add-btn" onclick="addPlanCard()">+ Add card</button>
       </div>
 
       <!-- Change Password -->
       <div class="panel" id="panel-password">
         <div class="panel-title">Change Password</div>
-        <p style="color:#666;font-size:0.875rem;margin-bottom:1.5rem;">Update the password used to access this editor. Share the new password with anyone who needs access.</p>
+        <p style="color:#666;font-size:0.875rem;margin-bottom:1.5rem;">Update the password used to access this editor.</p>
         <div class="pwd-section">
           <h3>Set new password</h3>
           <input type="password" id="newPwd1" placeholder="New password" />
@@ -470,7 +487,6 @@ window.addEventListener('beforeunload', function(e) {
 function markClean() { unsaved = false; }
 function markDirty() { unsaved = true; }
 
-// Track user edits (programmatic value-sets don't fire these events)
 document.addEventListener('input',  markDirty);
 document.addEventListener('change', markDirty);
 
@@ -491,14 +507,22 @@ if (sessionStorage.getItem('pb_auth') === '1') showEditor();
 function loadContent() {
   var btn = document.getElementById('saveBtn');
   if (btn) btn.disabled = true;
+  setStatus('Loading…');
   fetch('../content.json?v=' + Date.now())
-    .then(function(r) { return r.json(); })
+    .then(function(r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.json();
+    })
     .then(function(data) {
       content = data;
       populateForms();
       markClean();
+      setStatus('');
     })
-    .catch(function() { setStatus('Could not load content.json', true); })
+    .catch(function(e) {
+      console.error('loadContent:', e);
+      setStatus('Could not load content.json — ' + (e && e.message ? e.message : String(e)), true);
+    })
     .finally(function() { if (btn) btn.disabled = false; });
 }
 
@@ -507,64 +531,71 @@ function populateForms() {
   val('s-businessName',    s.businessName);
   val('s-streetAddress',   s.streetAddress);
   val('s-locality',        s.locality);
-  val('s-heroEyebrow',      s.heroEyebrow);
-  val('s-heroTitle',        s.heroTitle);
-  val('s-heroTitleAccent',  s.heroTitleAccent);
   val('s-instagramHandle', s.instagramHandle);
   val('s-instagramUrl',    s.instagramUrl);
+  val('s-email',           s.email);
   val('s-directionsUrl',   s.directionsUrl);
-  val('s-googleMapsUrl',   s.googleMapsUrl);
+  val('s-googleMapsUrl',   s.googleMapsEmbedUrl);
+  val('s-spotifyPlaylistId', s.spotifyPlaylistId);
+
+  var ab = content.announceBar || {};
+  val('ab-text',     ab.text);
+  val('ab-ctaLabel', ab.ctaLabel);
+  val('ab-ctaHref',  ab.ctaHref);
+
+  var h = content.hero || {};
+  val('hero-title',      h.title);
+  val('hero-subheading', h.subheading);
+  val('hero-cta1Label',  h.cta1Label);
+  val('hero-cta1Href',   h.cta1Href);
+  val('hero-cta2Label',  h.cta2Label);
+  val('hero-cta2Href',   h.cta2Href);
+  val('hero-badgeText',  h.badgeText);
 
   buildHoursRows((content.hours && content.hours.days) || []);
 
   var st = content.story || {};
-  val('story-heading', st.heading);
-  val('story-para1',   st.paragraph1);
-  val('story-para2',   st.paragraph2);
-  val('story-quote',   st.storefrontQuote);
-  renderTicker(st.tickerWords || []);
+  val('story-heading',       st.heading);
+  val('story-headingAccent', st.headingAccent);
+  val('story-para1',         st.paragraph1);
+  val('story-para2',         st.paragraph2);
+  val('story-quote',         st.storefrontQuote);
+  renderTicker((content.ticker && content.ticker.words) || []);
 
   var m = content.menu || {};
+  val('menu-label',    m.label);
+  val('menu-heading',  m.heading);
   val('menu-intro',    m.introText);
   val('menu-allergen', m.allergenKey);
 
-  var dishes = content.dishes || [];
+  var dishes = m.dishes || [];
   renderDishes('breakfastItems', dishes.filter(function(d) { return d.category === 'breakfast'; }));
   renderDishes('sandwichItems',  dishes.filter(function(d) { return d.category === 'sandwiches'; }));
   renderSimpleList('sidesItems',  m.sides  || []);
   renderSimpleList('drinksItems', m.drinks || []);
 
-  var ev = content.eventsHero || {};
-  val('ev-pillText',  ev.pillText);
-  val('ev-titleLine1', ev.titleLine1);
-  val('ev-titleLine2', ev.titleLine2);
-  val('ev-subtitle',  ev.subtitle);
-  val('ev-cta1Label', ev.cta1Label);
-  val('ev-cta1Href',  ev.cta1Href);
-  val('ev-cta2Label', ev.cta2Label);
-  val('ev-cta2Href',  ev.cta2Href);
+  var gal = content.gallery || {};
+  val('gal-label',   gal.label);
+  val('gal-heading', gal.heading);
+  renderGallery(gal.tiles || []);
 
-  var hr = content.hire || {};
-  val('hire-eyebrow',  hr.eyebrow);
-  val('hire-heading',  hr.heading);
-  val('hire-para',     hr.paragraph);
-  val('hire-ctaLabel', hr.ctaLabel);
-  val('hire-ctaHref',  hr.ctaHref);
+  var wo = content.whatson || {};
+  val('wo-label',   wo.label);
+  val('wo-heading', wo.heading);
+  val('wo-note',    wo.note);
+  renderWhatsonEvents(wo.events || []);
 
-  var gs = content.gallerySection || {};
-  val('gs-eyebrow',    gs.eyebrow);
-  val('gs-heading',    gs.heading);
-  val('gs-socialText', gs.socialText);
+  var sd = content.soundtrack || {};
+  val('sd-label',     sd.label);
+  val('sd-heading',   sd.heading);
+  val('sd-para1',     sd.paragraph1);
+  val('sd-para2',     sd.paragraph2);
+  val('sd-ctaLabel',  sd.ctaLabel);
+  val('sd-spotifyId', sd.spotifyPlaylistId);
 
-  var ct = content.contact || {};
-  val('ct-eyebrow',       ct.eyebrow);
-  val('ct-heading',       ct.heading);
-  val('ct-headingAccent', ct.headingAccent);
-  val('ct-subtext',       ct.subtext);
-  val('ct-ctaLabel',      ct.ctaLabel);
-  val('ct-mailto',        ct.mailto);
-
-  renderGallery(content.gallery || []);
+  var pe = content.planYourEvent || {};
+  val('pe-tickerText', pe.tickerText);
+  renderPlanCards(pe.cards || []);
 }
 
 function val(id, v) {
@@ -616,7 +647,6 @@ function removeTicker(i) {
 }
 
 // ── Dishes ───────────────────────────────────────────────────────────────────
-// Cards use data-field attrs so readCards() works correctly even after removals
 function renderDishes(containerId, dishes) {
   var el = document.getElementById(containerId);
   el.innerHTML = dishes.map(function(d) {
@@ -690,6 +720,82 @@ function addSimpleItem(type) {
   el.appendChild(card);
 }
 
+// ── What's On events ─────────────────────────────────────────────────────────
+function renderWhatsonEvents(events) {
+  var el = document.getElementById('whatsonEvents');
+  el.innerHTML = events.map(function(ev) {
+    return '<div class="item-card">' +
+      '<div class="item-card-header"><strong>' + escHtml(ev.title) + '</strong>' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Day / Frequency</label><input type="text" data-field="day" value="' + escAttr(ev.day) + '" /></div>' +
+        '<div class="field"><label>Tag</label><input type="text" data-field="tag" value="' + escAttr(ev.tag) + '" /></div>' +
+      '</div>' +
+      '<div class="field"><label>Title</label><input type="text" data-field="title" value="' + escAttr(ev.title) + '" /></div>' +
+      '<div class="field"><label>Description</label><textarea data-field="description">' + escHtml(ev.description || '') + '</textarea></div>' +
+      '</div>';
+  }).join('');
+}
+
+function addWhatsonEvent() {
+  var el = document.getElementById('whatsonEvents');
+  var card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML =
+    '<div class="item-card-header"><strong>New event</strong>' +
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Day / Frequency</label><input type="text" data-field="day" placeholder="Every day" /></div>' +
+      '<div class="field"><label>Tag</label><input type="text" data-field="tag" placeholder="10:00 – 16:00" /></div>' +
+    '</div>' +
+    '<div class="field"><label>Title</label><input type="text" data-field="title" placeholder="Event title" /></div>' +
+    '<div class="field"><label>Description</label><textarea data-field="description"></textarea></div>';
+  el.appendChild(card);
+}
+
+// ── Plan Your Event cards ─────────────────────────────────────────────────────
+function renderPlanCards(cards) {
+  var el = document.getElementById('planEventCards');
+  el.innerHTML = cards.map(function(card) {
+    return '<div class="item-card">' +
+      '<div class="item-card-header"><strong>' + escHtml(card.heading) + '</strong>' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Heading</label><input type="text" data-field="heading" value="' + escAttr(card.heading) + '" /></div>' +
+        '<div class="field"><label>Style (warm / cyan)</label><input type="text" data-field="style" value="' + escAttr(card.style || '') + '" /></div>' +
+      '</div>' +
+      '<div class="field"><label>Paragraph</label><textarea data-field="paragraph">' + escHtml(card.paragraph || '') + '</textarea></div>' +
+      '<div class="field"><label>Sub Text</label><input type="text" data-field="sub" value="' + escAttr(card.sub || '') + '" /></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>CTA Label</label><input type="text" data-field="ctaLabel" value="' + escAttr(card.ctaLabel || '') + '" /></div>' +
+        '<div class="field"><label>CTA Link</label><input type="text" data-field="ctaHref" value="' + escAttr(card.ctaHref || '') + '" /></div>' +
+      '</div>' +
+      '<input type="hidden" data-field="id" value="' + escAttr(card.id || '') + '" />' +
+      '</div>';
+  }).join('');
+}
+
+function addPlanCard() {
+  var el = document.getElementById('planEventCards');
+  var card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML =
+    '<div class="item-card-header"><strong>New card</strong>' +
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Heading</label><input type="text" data-field="heading" placeholder="Private Hire" /></div>' +
+      '<div class="field"><label>Style (warm / cyan)</label><input type="text" data-field="style" placeholder="warm" /></div>' +
+    '</div>' +
+    '<div class="field"><label>Paragraph</label><textarea data-field="paragraph"></textarea></div>' +
+    '<div class="field"><label>Sub Text</label><input type="text" data-field="sub" /></div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>CTA Label</label><input type="text" data-field="ctaLabel" /></div>' +
+      '<div class="field"><label>CTA Link</label><input type="text" data-field="ctaHref" /></div>' +
+    '</div>' +
+    '<input type="hidden" data-field="id" value="card-' + Date.now() + '" />';
+  el.appendChild(card);
+}
+
 // ── Read forms → build content object ────────────────────────────────────────
 function readForms() {
   var days = ((content.hours && content.hours.days) || []).map(function(d, i) {
@@ -702,7 +808,6 @@ function readForms() {
     };
   });
 
-  // Reads cards using data-field attrs — immune to removal reindexing
   function readCards(containerId, hasDish) {
     var el = document.getElementById(containerId);
     if (!el) return [];
@@ -724,76 +829,122 @@ function readForms() {
     }).filter(Boolean);
   }
 
+  function readWhatsonEvents() {
+    var el = document.getElementById('whatsonEvents');
+    if (!el) return [];
+    return Array.from(el.children).map(function(card) {
+      return {
+        day:         (card.querySelector('[data-field="day"]')         || {}).value || '',
+        title:       (card.querySelector('[data-field="title"]')       || {}).value || '',
+        description: (card.querySelector('[data-field="description"]') || {}).value || '',
+        tag:         (card.querySelector('[data-field="tag"]')         || {}).value || ''
+      };
+    });
+  }
+
+  function readPlanCards() {
+    var el = document.getElementById('planEventCards');
+    if (!el) return [];
+    return Array.from(el.children).map(function(card) {
+      return {
+        id:        (card.querySelector('[data-field="id"]')        || {}).value || ('card-' + Date.now()),
+        style:     (card.querySelector('[data-field="style"]')     || {}).value || 'warm',
+        heading:   (card.querySelector('[data-field="heading"]')   || {}).value || '',
+        paragraph: (card.querySelector('[data-field="paragraph"]') || {}).value || '',
+        sub:       (card.querySelector('[data-field="sub"]')       || {}).value || '',
+        ctaLabel:  (card.querySelector('[data-field="ctaLabel"]')  || {}).value || '',
+        ctaHref:   (card.querySelector('[data-field="ctaHref"]')   || {}).value || ''
+      };
+    });
+  }
+
+  var galleryTiles = (function() {
+    var cards = document.getElementById('galleryCards');
+    if (!cards) return (content.gallery && content.gallery.tiles) || [];
+    return Array.from(cards.children).map(function(card, i) {
+      return {
+        sortOrder: i + 1,
+        src:     card.dataset.src || '',
+        caption: (card.querySelector('[data-field="caption"]') || {}).value || '',
+        alt:     (card.querySelector('[data-field="alt"]')     || {}).value || ''
+      };
+    });
+  })();
+
   return {
     settings: {
-      businessName:    g('s-businessName'),
-      streetAddress:   g('s-streetAddress'),
-      locality:        g('s-locality'),
-      heroEyebrow:     g('s-heroEyebrow'),
-      heroTitle:       g('s-heroTitle'),
-      heroTitleAccent: g('s-heroTitleAccent'),
-      instagramHandle: g('s-instagramHandle'),
-      instagramUrl:    g('s-instagramUrl'),
-      directionsUrl:   g('s-directionsUrl'),
-      googleMapsUrl:   g('s-googleMapsUrl')
+      businessName:       g('s-businessName'),
+      streetAddress:      g('s-streetAddress'),
+      locality:           g('s-locality'),
+      instagramHandle:    g('s-instagramHandle'),
+      instagramUrl:       g('s-instagramUrl'),
+      email:              g('s-email'),
+      directionsUrl:      g('s-directionsUrl'),
+      googleMapsEmbedUrl: g('s-googleMapsUrl'),
+      spotifyPlaylistId:  g('s-spotifyPlaylistId')
+    },
+    announceBar: {
+      text:     g('ab-text'),
+      ctaLabel: g('ab-ctaLabel'),
+      ctaHref:  g('ab-ctaHref')
+    },
+    hero: {
+      title:      g('hero-title'),
+      subheading: g('hero-subheading'),
+      cta1Label:  g('hero-cta1Label'),
+      cta1Href:   g('hero-cta1Href'),
+      cta2Label:  g('hero-cta2Label'),
+      cta2Href:   g('hero-cta2Href'),
+      badgeText:  g('hero-badgeText')
+    },
+    ticker: {
+      words: tickerWords.slice()
     },
     hours: { days: days },
     story: {
+      label:           (content.story || {}).label,
       heading:         g('story-heading'),
+      headingAccent:   g('story-headingAccent'),
       paragraph1:      g('story-para1'),
       paragraph2:      g('story-para2'),
       storefrontQuote: g('story-quote'),
-      tickerWords:     tickerWords.slice()
+      stats:           (content.story || {}).stats || []
     },
     menu: {
-      introText:   g('menu-intro'),
+      label:      g('menu-label'),
+      heading:    g('menu-heading'),
+      introText:  g('menu-intro'),
       allergenKey: g('menu-allergen'),
-      sides:       readCards('sidesItems',  false),
-      drinks:      readCards('drinksItems', false)
+      dishes:     readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
+      sides:      readCards('sidesItems',  false),
+      drinks:     readCards('drinksItems', false)
     },
-    dishes: readCards('breakfastItems', true).concat(readCards('sandwichItems', true)),
-    eventsHero: {
-      pillText:  g('ev-pillText'),
-      titleLine1: g('ev-titleLine1'),
-      titleLine2: g('ev-titleLine2'),
-      subtitle:  g('ev-subtitle'),
-      cta1Label: g('ev-cta1Label'),
-      cta1Href:  g('ev-cta1Href'),
-      cta2Label: g('ev-cta2Label'),
-      cta2Href:  g('ev-cta2Href')
+    gallery: {
+      label:   g('gal-label'),
+      heading: g('gal-heading'),
+      tiles:   galleryTiles
     },
-    hire: {
-      eyebrow:   g('hire-eyebrow'),
-      heading:   g('hire-heading'),
-      paragraph: g('hire-para'),
-      ctaLabel:  g('hire-ctaLabel'),
-      ctaHref:   g('hire-ctaHref')
+    whatson: {
+      label:   g('wo-label'),
+      heading: g('wo-heading'),
+      note:    g('wo-note'),
+      events:  readWhatsonEvents()
     },
-    gallerySection: {
-      eyebrow:    g('gs-eyebrow'),
-      heading:    g('gs-heading'),
-      socialText: g('gs-socialText')
+    soundtrack: {
+      label:            g('sd-label'),
+      heading:          g('sd-heading'),
+      paragraph1:       g('sd-para1'),
+      paragraph2:       g('sd-para2'),
+      ctaLabel:         g('sd-ctaLabel'),
+      spotifyPlaylistId: g('sd-spotifyId')
     },
-    contact: {
-      eyebrow:       g('ct-eyebrow'),
-      heading:       g('ct-heading'),
-      headingAccent: g('ct-headingAccent'),
-      subtext:       g('ct-subtext'),
-      ctaLabel:      g('ct-ctaLabel'),
-      mailto:        g('ct-mailto')
+    planYourEvent: {
+      tickerText: g('pe-tickerText'),
+      cards:      readPlanCards()
     },
-    gallery: (function() {
-      var cards = document.getElementById('galleryCards');
-      if (!cards) return content.gallery || [];
-      return Array.from(cards.children).map(function(card, i) {
-        return {
-          sortOrder: i + 1,
-          src:     card.dataset.src || '',
-          caption: (card.querySelector('[data-field="caption"]') || {}).value || '',
-          alt:     (card.querySelector('[data-field="alt"]')     || {}).value || ''
-        };
-      });
-    })()
+    usefulLinks: content.usefulLinks || {},
+    ctaStrip:    content.ctaStrip    || {},
+    visit:       content.visit       || {}
   };
 }
 
@@ -818,7 +969,6 @@ async function saveAll() {
 
   try {
     for (var attempt = 0; attempt < 3; attempt++) {
-      // Fresh SHA every attempt with cache-busting query param
       var headRes  = await fetch(
         'https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main&_=' + Date.now(),
         { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
@@ -849,7 +999,7 @@ async function saveAll() {
         markClean();
         setStatus('Saved ✓');
         setTimeout(function() { setStatus(''); }, 3000);
-        showToast('⏳ Changes saved — may take 10–30 seconds to appear on the site');
+        showToast('Changes saved — may take 10–30 seconds to appear on the site');
         break;
       }
 
@@ -919,10 +1069,10 @@ function toggleNav() {
 }
 
 // ── Gallery ───────────────────────────────────────────────────────────────────
-function renderGallery(gallery) {
+function renderGallery(tiles) {
   var el = document.getElementById('galleryCards');
   el.innerHTML = '';
-  (gallery || []).forEach(function(item) {
+  (tiles || []).forEach(function(item) {
     el.appendChild(makeGalleryCard(item.src, item.caption || '', item.alt || ''));
   });
 }
