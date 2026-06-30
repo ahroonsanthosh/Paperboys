@@ -1,6 +1,14 @@
 {
   "version": 2,
-  "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null
+  "framework": null,
+  "headers": [
+    {
+      "source": "/content.json",
+      "headers": [
+        { "key": "Content-Type", "value": "application/json" },
+        { "key": "Cache-Control", "value": "no-store" }
+      ]
+    }
+  ]
 }
