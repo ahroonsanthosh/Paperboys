@@ -1,0 +1,7 @@
+name = "paperboys-admin-proxy"
+main = "index.js"
+compatibility_date = "2024-01-01"
+
+# Deploy secrets via CLI (never commit them):
+#   wrangler secret put GITHUB_TOKEN
+#   wrangler secret put ADMIN_SECRET

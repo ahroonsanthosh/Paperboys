@@ -45,23 +45,6 @@
     #saveBtn:disabled { opacity: 0.6; cursor: default; }
     #saveStatus { font-size: 0.8rem; color: #a0b4c8; min-width: 6rem; text-align: right; }
 
-    /* ── Token warning banner (developer-only) ── */
-    #tokenWarning {
-      display: none; background: #7c3100; color: #fff;
-      padding: 0.6rem 1.5rem; font-size: 0.82rem; text-align: center;
-    }
-    #tokenWarning a { color: #c8a96e; cursor: pointer; text-decoration: underline; }
-
-    /* ── Setup panel extras ── */
-    .setup-note {
-      background: #f5f4f0; border-left: 3px solid #c8a96e;
-      padding: 0.9rem 1rem; border-radius: 0 6px 6px 0;
-      font-size: 0.85rem; color: #555; margin-bottom: 1.5rem; line-height: 1.55;
-    }
-    .setup-note strong { color: #0e1f3d; }
-    .setup-token-row { display: flex; gap: 0.5rem; }
-    .setup-token-row input { flex: 1; }
-    .token-saved { display: none; color: #27ae60; font-size: 0.875rem; margin-top: 0.5rem; }
     .signout { font-size: 0.8rem; color: #a0b4c8; cursor: pointer; background: none; border: none; }
     .signout:hover { color: #fff; }
 
@@ -246,9 +229,6 @@
 
 <!-- ── Editor Screen ── -->
 <div id="editorScreen">
-  <div id="tokenWarning">
-    Saving is not configured. <a onclick="showPanel('setup', null); return false;">Click here to complete setup</a> — takes 2 minutes, done once.
-  </div>
   <div class="topbar">
     <button id="navToggle" onclick="toggleNav()" aria-label="Menu">&#9776;</button>
     <h1>Paperboys Content Editor</h1>
@@ -280,7 +260,6 @@
       <a href="#" onclick="showPanel('planYourEvent', this); return false;">Plan Your Event</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
-      <a href="#" onclick="showPanel('setup', this); return false;" id="setupLink">Developer Setup</a>
     </nav>
 
     <div class="content">
@@ -442,30 +421,6 @@
         <button class="add-btn" onclick="addPlanCard()">+ Add card</button>
       </div>
 
-      <!-- Developer Setup -->
-      <div class="panel" id="panel-setup">
-        <div class="panel-title">Developer Setup</div>
-        <div class="setup-note">
-          <strong>This panel is for the developer only.</strong> You do this once per device — the client never needs to see it.<br><br>
-          1. Go to <strong>github.com → Settings → Developer settings → Personal access tokens → Tokens (classic)</strong><br>
-          2. Generate a new token with the <strong>repo</strong> scope<br>
-          3. Paste it below and click Save
-        </div>
-        <div class="field">
-          <label>GitHub Personal Access Token</label>
-          <div class="setup-token-row">
-            <input type="password" id="tokenInput" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off" />
-            <button class="pwd-btn" onclick="saveToken()">Save</button>
-          </div>
-          <p class="token-saved" id="tokenSaved">✓ Token saved. Saving is now enabled.</p>
-        </div>
-        <div class="field" style="margin-top:1rem;">
-          <label>Current status</label>
-          <p id="tokenStatus" style="font-size:0.875rem;color:#555;margin-top:0.3rem;"></p>
-        </div>
-        <button class="remove-btn" style="margin-top:1rem;" onclick="clearToken()">Remove saved token</button>
-      </div>
-
       <!-- Change Password -->
       <div class="panel" id="panel-password">
         <div class="panel-title">Change Password</div>
@@ -485,35 +440,8 @@
 
 <script>
 // ── Config ─────────────────────────────────────────────────────────────────
-var REPO = 'ahroonsanthosh/Paperboys';
-var FILE = 'content.json';
-
-function getToken() { return localStorage.getItem('pb_gh_token') || ''; }
-
-function saveToken() {
-  var t = document.getElementById('tokenInput').value.trim();
-  if (!t) return;
-  localStorage.setItem('pb_gh_token', t);
-  document.getElementById('tokenInput').value = '';
-  document.getElementById('tokenSaved').style.display = 'block';
-  updateTokenUI();
-}
-
-function clearToken() {
-  if (!confirm('Remove the saved token?')) return;
-  localStorage.removeItem('pb_gh_token');
-  updateTokenUI();
-}
-
-function updateTokenUI() {
-  var hasToken = !!getToken();
-  var warning  = document.getElementById('tokenWarning');
-  var status   = document.getElementById('tokenStatus');
-  var saved    = document.getElementById('tokenSaved');
-  if (warning) warning.style.display = hasToken ? 'none' : 'block';
-  if (status)  status.textContent    = hasToken ? '✓ Token is saved. Saving is enabled.' : '✗ No token saved. Saving is disabled.';
-  if (saved && hasToken) saved.style.display = 'none';
-}
+// Set WORKER_URL to your deployed Cloudflare Worker URL (see worker/index.js)
+var WORKER_URL = '__WORKER_URL__';
 
 var DEFAULT_HASH = 'a349cbd924cc903029202298c0c18829c5c8552ae54077ea6cb9f9346eea122c';
 function getPwdHash() { return localStorage.getItem('pb_pwd_hash') || DEFAULT_HASH; }
@@ -526,13 +454,15 @@ async function sha256(str) {
 
 async function doLogin() {
   var inp = document.getElementById('pwdInput');
-  var h   = await sha256(inp.value);
+  var pw  = inp.value;
+  var h   = await sha256(pw);
   if (h !== getPwdHash()) {
     document.getElementById('loginError').textContent = 'Incorrect password.';
     return;
   }
-  inp.value = '';
   sessionStorage.setItem('pb_auth', '1');
+  sessionStorage.setItem('pb_secret', pw);  // used by Worker to auth saves
+  inp.value = '';
   showEditor();
 }
 
@@ -541,6 +471,7 @@ document.getElementById('pwdInput').addEventListener('keydown', function(e){ if 
 function signOut() {
   if (unsaved && !confirm('You have unsaved changes. Leave anyway?')) return;
   sessionStorage.removeItem('pb_auth');
+  sessionStorage.removeItem('pb_secret');
   location.reload();
 }
 
@@ -567,7 +498,6 @@ var pendingUploads = 0;
 function showEditor() {
   document.getElementById('loginScreen').style.display  = 'none';
   document.getElementById('editorScreen').style.display = 'block';
-  updateTokenUI();
   setupGalleryDropZone();
   loadContent();
 }
@@ -1024,13 +954,8 @@ function g(id) {
   return el ? el.value : '';
 }
 
-// ── Save to GitHub ────────────────────────────────────────────────────────────
+// ── Save via Cloudflare Worker ────────────────────────────────────────────────
 async function saveAll() {
-  if (!getToken()) {
-    showPanel('setup', document.getElementById('setupLink'));
-    showToast('Set up your GitHub token first — see Developer Setup in the sidebar');
-    return;
-  }
   if (pendingUploads > 0) {
     showToast('Please wait — ' + pendingUploads + ' image upload' + (pendingUploads > 1 ? 's' : '') + ' still in progress');
     return;
@@ -1040,51 +965,26 @@ async function saveAll() {
   btn.disabled = true;
   setStatus('Saving…');
 
-  var newContent = readForms();
-  var encoded    = btoa(unescape(encodeURIComponent(JSON.stringify(newContent, null, 2))));
-
   try {
-    for (var attempt = 0; attempt < 3; attempt++) {
-      var headRes  = await fetch(
-        'https://api.github.com/repos/' + REPO + '/contents/' + FILE + '?ref=main&_=' + Date.now(),
-        { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
-      );
-      var headData = await headRes.json();
-      if (!headRes.ok) {
-        setStatus('Error: ' + (headData.message || headRes.status), true);
-        break;
-      }
+    var newContent = readForms();
+    var res = await fetch(WORKER_URL, {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        secret:  sessionStorage.getItem('pb_secret') || '',
+        content: JSON.stringify(newContent, null, 2)
+      })
+    });
 
-      var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + FILE, {
-        method: 'PUT',
-        headers: {
-          'Authorization': 'Bearer ' + getToken(),
-          'Accept':        'application/vnd.github+json',
-          'Content-Type':  'application/json'
-        },
-        body: JSON.stringify({
-          message: 'Update content via admin panel',
-          content: encoded,
-          sha:     headData.sha,
-          branch:  'main'
-        })
-      });
-
-      if (putRes.ok) {
-        content = newContent;
-        markClean();
-        setStatus('Saved ✓');
-        setTimeout(function() { setStatus(''); }, 3000);
-        showToast('Changes saved — may take 10–30 seconds to appear on the site');
-        break;
-      }
-
-      var putErr    = await putRes.json();
-      var isConflict = putRes.status === 409 ||
-                       (putErr.message && putErr.message.toLowerCase().includes('does not match'));
-      if (isConflict && attempt < 2) continue;
-      setStatus('Error: ' + (putErr.message || putRes.status), true);
-      break;
+    var data = await res.json();
+    if (res.ok && data.ok) {
+      content = newContent;
+      markClean();
+      setStatus('Saved ✓');
+      setTimeout(function() { setStatus(''); }, 3000);
+      showToast('Changes saved — may take 10–30 seconds to appear on the site');
+    } else {
+      setStatus('Error: ' + (data.error || data.message || res.status), true);
     }
   } catch(e) {
     console.error('saveAll:', e);
@@ -1204,27 +1104,21 @@ function uploadImageToRepo(file) {
         var safeName = file.name.replace(/[^a-zA-Z0-9._-]/g, '_');
         var filename = 'assets/' + Date.now() + '-' + safeName;
 
-        var checkRes = await fetch(
-          'https://api.github.com/repos/' + REPO + '/contents/' + filename + '?ref=main',
-          { headers: { 'Authorization': 'Bearer ' + getToken(), 'Accept': 'application/vnd.github+json' } }
-        );
-        var body = { message: 'Upload image via admin panel', content: base64, branch: 'main' };
-        if (checkRes.ok) { body.sha = (await checkRes.json()).sha; }
-
-        var putRes = await fetch('https://api.github.com/repos/' + REPO + '/contents/' + filename, {
-          method: 'PUT',
-          headers: {
-            'Authorization': 'Bearer ' + getToken(),
-            'Accept':        'application/vnd.github+json',
-            'Content-Type':  'application/json'
-          },
-          body: JSON.stringify(body)
+        var res = await fetch(WORKER_URL, {
+          method:  'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            action:   'upload-image',
+            secret:   sessionStorage.getItem('pb_secret') || '',
+            filename: filename,
+            base64:   base64
+          })
         });
-        if (putRes.ok) {
+        var data = await res.json();
+        if (res.ok && data.ok) {
           resolve(filename);
         } else {
-          var err = await putRes.json();
-          reject(new Error(err.message || 'Upload failed'));
+          reject(new Error(data.error || data.message || 'Upload failed'));
         }
       } catch(err) { reject(err); }
     };
