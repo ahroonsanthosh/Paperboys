@@ -17,10 +17,39 @@
     .then(function (r) { return r.json(); })
     .then(function (d) {
       var settings     = d.settings     || {};
+      var hero         = d.hero         || {};
+      var story        = d.story        || {};
       var hours        = d.hours        || {};
       var menu         = d.menu         || {};
       var gallery      = d.gallery      || {};
       var whatson      = d.whatson      || {};
+
+      // ── Hero ─────────────────────────────────────────────────────────────────
+      setText('heroTitle', hero.title);
+      setText('heroSub',   hero.subheading);
+      var cta1 = document.getElementById('heroCta1');
+      if (cta1) {
+        if (hero.cta1Label) cta1.textContent = hero.cta1Label;
+        if (hero.cta1Href)  cta1.href = hero.cta1Href;
+      }
+      var cta2 = document.getElementById('heroCta2');
+      if (cta2) {
+        if (hero.cta2Label) cta2.innerHTML = esc(hero.cta2Label) + ' <span class="btn__arrow">→</span>';
+        if (hero.cta2Href)  cta2.href = hero.cta2Href;
+      }
+
+      // ── Story ─────────────────────────────────────────────────────────────────
+      if (story.heading) {
+        var sh = document.getElementById('storyHeading');
+        if (sh) {
+          var accent = story.headingAccent || '';
+          var plain  = story.heading.replace(accent, '').trim();
+          sh.innerHTML = esc(plain) + (accent ? '<br/><em>' + esc(accent) + '</em>' : '');
+        }
+      }
+      setText('storyPara1',      story.paragraph1);
+      setText('storyPara2',      story.paragraph2);
+      setText('storefrontQuote', story.storefrontQuote);
 
       // ── Opening Hours ────────────────────────────────────────────────────────
       if (hours.days && hours.days.length) {
