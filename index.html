@@ -249,7 +249,7 @@
           <span>Plan Your Event</span><i>✦</i><span>Plan Your Event</span><i>✦</i><span>Plan Your Event</span><i>✦</i>
         </div>
       </div>
-      <div class="planevent__cards">
+      <div id="planEventCards" class="planevent__cards">
         <article class="ecard ecard--warm reveal">
           <div class="ecard__inner">
             <h2><em>Private<br/>Hire</em></h2>
@@ -321,13 +321,13 @@
       <div class="soundtrack__inner">
         <div class="soundtrack__text reveal">
           <p class="label label--dark">The vibe</p>
-          <h2><em>Paperboys<br/>HiFi</em></h2>
-          <p>We've been slowly building a playlist that pretty much runs in the background of everything we do.</p>
-          <p>Somewhere between soul, jazz, and whatever mood we're in that morning — stick it on.</p>
-          <a href="https://open.spotify.com/user/paperboys_cork" target="_blank" rel="noopener" class="btn btn--fill btn--dark reveal" data-delay="120">Save on Spotify</a>
+          <h2 id="soundtrackHeading"><em>Paperboys<br/>HiFi</em></h2>
+          <p id="soundtrackPara1">We've been slowly building a playlist that pretty much runs in the background of everything we do.</p>
+          <p id="soundtrackPara2">Somewhere between soul, jazz, and whatever mood we're in that morning — stick it on.</p>
+          <a id="soundtrackCta" href="https://open.spotify.com/user/paperboys_cork" target="_blank" rel="noopener" class="btn btn--fill btn--dark reveal" data-delay="120">Save on Spotify</a>
         </div>
         <div class="soundtrack__embed reveal" data-delay="100">
-          <iframe style="border-radius:16px"
+          <iframe id="spotifyEmbed" style="border-radius:16px"
             src="https://open.spotify.com/embed/playlist/37i9dQZF1DX0SM0LYsmbMT?utm_source=generator&theme=0"
             width="100%" height="380" frameborder="0"
             allowfullscreen=""

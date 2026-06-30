@@ -16,13 +16,15 @@
   fetch('content.json?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var settings     = d.settings     || {};
-      var hero         = d.hero         || {};
-      var story        = d.story        || {};
-      var hours        = d.hours        || {};
-      var menu         = d.menu         || {};
-      var gallery      = d.gallery      || {};
-      var whatson      = d.whatson      || {};
+      var settings     = d.settings       || {};
+      var hero         = d.hero           || {};
+      var story        = d.story          || {};
+      var hours        = d.hours          || {};
+      var menu         = d.menu           || {};
+      var gallery      = d.gallery        || {};
+      var whatson      = d.whatson        || {};
+      var soundtrack   = d.soundtrack     || {};
+      var planYourEvent = d.planYourEvent || {};
 
       // ── Hero ─────────────────────────────────────────────────────────────────
       setText('heroTitle', hero.title);
@@ -163,6 +165,47 @@
           whatsonCards.querySelectorAll('.reveal').forEach(function (el) { io2.observe(el); });
         } else {
           whatsonCards.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
+        }
+      }
+      // ── Soundtrack / Spotify ──────────────────────────────────────────────────
+      setText('soundtrackPara1', soundtrack.paragraph1);
+      setText('soundtrackPara2', soundtrack.paragraph2);
+      if (soundtrack.heading) {
+        var sh2 = document.getElementById('soundtrackHeading');
+        if (sh2) sh2.innerHTML = '<em>' + esc(soundtrack.heading) + '</em>';
+      }
+      var sdCta = document.getElementById('soundtrackCta');
+      if (sdCta && soundtrack.ctaLabel) sdCta.textContent = soundtrack.ctaLabel;
+      var spotifyId = soundtrack.spotifyPlaylistId || (d.settings && d.settings.spotifyPlaylistId);
+      if (spotifyId) {
+        var embed = document.getElementById('spotifyEmbed');
+        if (embed) embed.src = 'https://open.spotify.com/embed/playlist/' + spotifyId + '?utm_source=generator&theme=0';
+      }
+
+      // ── Plan Your Event cards ─────────────────────────────────────────────────
+      var cards = planYourEvent.cards || [];
+      var cardsEl = document.getElementById('planEventCards');
+      if (cardsEl && cards.length) {
+        cardsEl.innerHTML = cards.map(function (card, i) {
+          var styleClass = 'ecard--' + (card.style || 'warm');
+          var delay = i > 0 ? ' data-delay="120"' : '';
+          return '<article class="ecard ' + styleClass + ' reveal"' + delay + '>' +
+            '<div class="ecard__inner">' +
+            '<h2><em>' + esc(card.heading) + '</em></h2>' +
+            '<p>' + esc(card.paragraph) + '</p>' +
+            '<p class="ecard__sub">' + esc(card.sub) + '</p>' +
+            '<a href="' + esc(card.ctaHref) + '" class="btn btn--fill btn--dark">' + esc(card.ctaLabel) + '</a>' +
+            '</div></article>';
+        }).join('');
+        if ('IntersectionObserver' in window) {
+          var io3 = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('is-in'); io3.unobserve(e.target); }
+            });
+          }, { threshold: 0.12 });
+          cardsEl.querySelectorAll('.reveal').forEach(function (el) { io3.observe(el); });
+        } else {
+          cardsEl.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
         }
       }
     })
