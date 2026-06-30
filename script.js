@@ -155,4 +155,48 @@
     onScrollFill();
   }
 
+  // Bouncy hover text on every heading. Splits each heading's text nodes
+  // into per-letter spans (preserving <em>/<br> structure) so CSS can
+  // stagger a bounce animation across the letters on :hover.
+  function wrapLetters(root) {
+    var counter = 0;
+    function walk(node) {
+      Array.prototype.slice.call(node.childNodes).forEach(function (child) {
+        if (child.nodeType === 3) { // text node
+          var frag = document.createDocumentFragment();
+          child.textContent.split('').forEach(function (ch) {
+            if (ch === ' ') {
+              frag.appendChild(document.createTextNode(' '));
+            } else {
+              var span = document.createElement('span');
+              span.className = 'letter';
+              span.style.setProperty('--i', counter++);
+              span.textContent = ch;
+              frag.appendChild(span);
+            }
+          });
+          node.replaceChild(frag, child);
+        } else if (child.nodeType === 1 && child.tagName !== 'BR') {
+          walk(child);
+        }
+      });
+    }
+    walk(root);
+    root.classList.add('letters-ready');
+  }
+
+  function applyBouncyHeadings() {
+    document.querySelectorAll('h1, h2, h3').forEach(function (h) {
+      // Re-check for actual .letter children rather than trusting the
+      // 'letters-ready' flag alone: cms.js sets heading textContent
+      // directly (asynchronously, after our first pass), which wipes out
+      // any spans we already added without removing the flag.
+      if (!h.querySelector('.letter')) wrapLetters(h);
+    });
+  }
+  applyBouncyHeadings();
+  // Re-scan repeatedly since cms.js / the menu+gallery fetches above can
+  // replace heading markup asynchronously, sometimes more than once.
+  [250, 600, 1000, 1800, 3000, 5000].forEach(function (ms) { setTimeout(applyBouncyHeadings, ms); });
+
 })();

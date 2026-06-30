@@ -96,6 +96,20 @@ h1, h2, h3 {
   line-height: 1.05;
   letter-spacing: -.02em;
 }
+h1 .letter, h2 .letter, h3 .letter {
+  display: inline-block;
+  will-change: transform;
+}
+h1:hover .letter, h2:hover .letter, h3:hover .letter {
+  animation: letterBounce .55s calc(var(--i, 0) * 22ms) both;
+}
+@keyframes letterBounce {
+  0%   { transform: translateY(0) rotate(0); }
+  30%  { transform: translateY(-.28em) rotate(-4deg); }
+  55%  { transform: translateY(.06em) rotate(2deg); }
+  80%  { transform: translateY(-.04em) rotate(0); }
+  100% { transform: translateY(0) rotate(0); }
+}
 h2 em, h2 i {
   font-family: 'Asectica', Georgia, serif;
   font-weight: 400;
