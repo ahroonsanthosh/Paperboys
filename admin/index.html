@@ -440,8 +440,7 @@
 
 <script>
 // ── Config ─────────────────────────────────────────────────────────────────
-// Set WORKER_URL to your deployed Cloudflare Worker URL (see worker/index.js)
-var WORKER_URL = '__WORKER_URL__';
+var WORKER_URL = '/api/save';
 
 var DEFAULT_HASH = 'a349cbd924cc903029202298c0c18829c5c8552ae54077ea6cb9f9346eea122c';
 function getPwdHash() { return localStorage.getItem('pb_pwd_hash') || DEFAULT_HASH; }
