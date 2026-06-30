@@ -1,9 +1,9 @@
 # Paperboys — CMS Guide
 
-## Studio URL
-**https://paperboys.sanity.studio**
+## Admin URL
+**`/admin`** on the live site (e.g. `https://paperboys.vercel.app/admin`).
 
-Log in with the Sanity account used to create the project (ahroonsanthosh8@gmail.com).
+Log in with the admin password (the `ADMIN_SECRET` value set in the Vercel dashboard).
 
 ---
 
@@ -25,79 +25,64 @@ the pull-quote below it, and the scrolling ticker words at the top of the page.
 
 #### Menu Settings
 The menu intro line, the full allergen key, the **Sides & Add-ons** list, and the **Drinks** list.
-Use the **+** button to add items and the trash icon to remove them.
 
 #### Menu Dishes
-Each dish is a separate document in the left sidebar under **Menu Dishes**.
-You can change name, price, allergen codes, description, and category (Breakfast or Sandwiches).
+Name, price, allergen codes, description, and category (Breakfast or Sandwiches) for each dish.
 **Sort Order** controls display order within each category (lower = first).
 
 #### Gallery Photos
-Five photos in the room & plates section. Click a photo document, upload a new image,
-update caption and alt text. **Sort Order** controls grid position.
+Photos in the room & plates section — caption, alt text, and **Sort Order** (grid position).
 
 ### How publishing works
-Click **Publish** on any document. Changes appear on the live website within seconds — no deploy needed.
-Click **Discard changes** to undo unpublished edits without affecting the live site.
+Click **Save** in the admin panel. This writes the updated content straight to `content.json`
+in the GitHub repo via the GitHub API, which triggers a Vercel redeploy — changes go live in
+roughly 30–60 seconds.
 
 ### Image uploads
-Click any image field → **Upload** → choose a file from your computer.
-Supported formats: JPG, PNG, WebP. Recommended width: 1200px or wider.
+The admin panel uploads images straight to the repo (via the GitHub API) and updates the
+relevant content field to point at the new file.
 
 ---
 
 ## Technical Reference
 
-### Environment Variables
+### Architecture
+Plain client-side rendering, no external CMS service:
 
-**Studio** (`studio/.env` — copy from `studio/.env.example`):
-```
-SANITY_STUDIO_PROJECT_ID=kbi1x7f8
-SANITY_STUDIO_DATASET=production
-SANITY_STUDIO_HOST=paperboys
-```
+- `content.json` — single source of truth for all site text, menu items, hours, etc.
+- `index.html` — static shell with empty/placeholder elements (`id="heroTitle"`, `id="menuIntro"`, etc.)
+  and hardcoded fallback text
+- `cms.js` — runs in the browser, fetches `/api/content`, and injects the values into the
+  named elements
+- `api/content.js` — Vercel serverless function that returns the bundled `content.json`
+- `admin/index.html` — password-gated editor UI; fetches `/api/content` to populate the form,
+  POSTs edits to `/api/save`
+- `api/save.js` — Vercel serverless function; verifies the admin password, then writes the
+  updated `content.json` (and any uploaded images) directly to the `main` branch via the
+  GitHub Contents API
 
-**Frontend** (`cms.js` lines 2–3):
-```js
-var PROJECT_ID = 'kbi1x7f8';
-var DATASET    = 'production';
+### Data flow
 ```
+Reading:  browser → cms.js → /api/content → content.json (bundled in the function) → DOM
 
-### GROQ Query (cms.js)
-All content is fetched in a single query:
-```groq
-{
-  "settings": *[_type == "siteSettings"][0],
-  "hours":    *[_type == "openingHours"][0],
-  "story":    *[_type == "storySection"][0],
-  "menu":     *[_type == "menuSettings"][0],
-  "dishes":   *[_type == "menuDish"] | order(category asc, sortOrder asc),
-  "gallery":  *[_type == "galleryPhoto"] | order(sortOrder asc)
-}
+Writing:  admin → /api/save (password + new content)
+              → GitHub Contents API → content.json updated on `main`
+              → GitHub push triggers Vercel redeploy
+              → /api/content now serves the new data
 ```
 
-### Schema types
-| Type | Kind | Purpose |
-|---|---|---|
-| `siteSettings` | Singleton | Business name, address, social links |
-| `openingHours` | Singleton | Mon–Sun hours with closed toggle |
-| `storySection` | Singleton | About text, storefront image, ticker words |
-| `menuSettings` | Singleton | Intro text, allergen key, sides, drinks |
-| `menuDish` | Collection | Individual menu dishes with category + price |
-| `galleryPhoto` | Collection | Gallery images with caption + alt text |
+### Environment Variables (Vercel dashboard)
+| Variable | Purpose |
+|---|---|
+| `ADMIN_SECRET` | Password required to use `/admin` and call `/api/save` |
+| `GITHUB_TOKEN` | GitHub PAT with `repo` scope, used by `api/save.js` to commit to `content.json` |
 
 ### Deployment
-- **Studio**: `cd studio && npx sanity@latest deploy`
-- **Website**: push to `main` branch → GitHub Pages auto-deploys
-
-### CORS
-The Sanity CDN read API (`*.apicdn.sanity.io`) is public — no CORS configuration needed for the frontend.
+Push to `main` → Vercel auto-deploys (`vercel.json`: `outputDirectory: "."`, no build framework).
 
 ---
 
 ## Reusing This Template for a New Client
-
-**Time required: under 15 minutes**
 
 ### Step 1 — Clone the repo
 ```bash
@@ -105,55 +90,18 @@ git clone https://github.com/ahroonsanthosh/Paperboys.git new-client-name
 cd new-client-name
 ```
 
-### Step 2 — Create a new Sanity project
-```bash
-cd studio
-npm install
-npx sanity login
-npx sanity projects create --name "New Client Name"
-# Note the project ID printed (e.g. abc123xyz)
-```
+### Step 2 — Replace content
+Edit `content.json` with the new client's business name, address, hours, menu, etc.
+`index.html`'s hardcoded text is just a static fallback — the CMS overrides it at runtime,
+but update it too so the page looks right before the first fetch resolves.
 
-### Step 3 — Configure the new project ID
-Edit two places:
+### Step 3 — Set up Vercel
+Create a new Vercel project pointing at the new repo, and set `ADMIN_SECRET` and
+`GITHUB_TOKEN` (a PAT scoped to the new repo) in the project's environment variables.
 
-**`cms.js`** (line 3):
-```js
-var PROJECT_ID = 'abc123xyz';  // ← new project ID
-```
-
-**`studio/.env`** (create from `.env.example`):
-```
-SANITY_STUDIO_PROJECT_ID=abc123xyz
-SANITY_STUDIO_DATASET=production
-SANITY_STUDIO_HOST=new-client-hostname
-```
-
-### Step 4 — Update studio title
-In `studio/sanity.config.js` change:
-```js
-title: 'Paperboys Studio'  →  title: 'New Client Studio'
-```
-
-### Step 5 — Seed initial content
-```bash
-# In studio/ directory
-SANITY_TOKEN=<editor-token-from-manage> node seed.mjs
-```
-Or paste the browser console seed script at the new studio URL (see session notes).
-
-### Step 6 — Deploy studio
-```bash
-npx sanity@latest deploy
-# When prompted for hostname: enter new-client-hostname
-```
-
-### Step 7 — Push website to GitHub
-Update `index.html` with the client's actual content (name, address, etc. — the CMS will
-override these at runtime, but they serve as static fallback).
-
+### Step 4 — Push
 ```bash
 git add -A && git commit -m "init: new client" && git push origin main
 ```
 
-That's it. The new client can now edit all content at `new-client-hostname.sanity.studio`.
+The new client can now edit content at `/admin` on their deployed site.
