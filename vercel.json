@@ -2,9 +2,5 @@
   "version": 2,
   "buildCommand": null,
   "outputDirectory": ".",
-  "framework": null,
-  "routes": [
-    { "src": "/api/(.*)", "dest": "/api/$1" },
-    { "src": "/(.*)", "dest": "/$1" }
-  ]
+  "framework": null
 }
