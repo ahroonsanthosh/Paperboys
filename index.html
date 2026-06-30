@@ -106,7 +106,7 @@
 
     <!-- Ticker -->
     <div class="ticker" aria-hidden="true">
-      <div class="ticker__track">
+      <div id="tickerTrack" class="ticker__track">
         <span>Flat Whites</span><i>✦</i><span>Tobin Street</span><i>✦</i><span>Daily Brunch</span><i>✦</i><span>Cork City</span><i>✦</i><span>Good Plates</span><i>✦</i><span>Est. 2023</span><i>✦</i>
         <span>Flat Whites</span><i>✦</i><span>Tobin Street</span><i>✦</i><span>Daily Brunch</span><i>✦</i><span>Cork City</span><i>✦</i><span>Good Plates</span><i>✦</i><span>Est. 2023</span><i>✦</i>
       </div>
@@ -352,7 +352,7 @@
           <img src="assets/pbb5.webp" alt="Inside Paperboys — the room" loading="lazy" />
         </figure>
         <div class="links-section__list reveal" data-delay="100">
-          <ul>
+          <ul id="usefulLinksList">
             <li><a href="#menu">Full Menu ↗</a></li>
             <li><a href="https://www.instagram.com/paperboys_cork" target="_blank" rel="noopener">Instagram ↗</a></li>
             <li><a href="https://www.google.com/maps/search/?api=1&query=Paperboys+Tobin+Street+Cork" target="_blank" rel="noopener">Get Directions ↗</a></li>
@@ -366,9 +366,9 @@
     <!-- CTA strip -->
     <section class="cta-strip">
       <div class="cta-strip__inner">
-        <p class="cta-strip__title"><em>Good plates. Serious coffee.</em></p>
-        <p class="cta-strip__sub">We're on Tobin Street every day — come find us :)</p>
-        <a href="#visit" class="btn btn--fill btn--white">Find the room</a>
+        <p id="ctaStripTitle" class="cta-strip__title"><em>Good plates. Serious coffee.</em></p>
+        <p id="ctaStripSub" class="cta-strip__sub">We're on Tobin Street every day — come find us :)</p>
+        <a id="ctaStripBtn" href="#visit" class="btn btn--fill btn--white">Find the room</a>
       </div>
       <img class="cta-strip__mascot" src="assets/mascot.svg" alt="" aria-hidden="true" />
     </section>
@@ -376,8 +376,8 @@
     <!-- Visit -->
     <section class="visit" id="visit">
       <div class="visit__info">
-        <p class="label reveal">Come say hello</p>
-        <h2 class="reveal" data-delay="80"><em>Find the room.</em></h2>
+        <p id="visitLabel" class="label reveal">Come say hello</p>
+        <h2 id="visitHeading" class="reveal" data-delay="80"><em>Find the room.</em></h2>
         <address class="reveal" data-delay="140">
           Paperboys<br />Tobin Street, City Centre<br />Cork, Ireland
         </address>

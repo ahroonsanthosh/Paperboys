@@ -16,15 +16,19 @@
   fetch('content.json?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var settings     = d.settings       || {};
-      var hero         = d.hero           || {};
-      var story        = d.story          || {};
-      var hours        = d.hours          || {};
-      var menu         = d.menu           || {};
-      var gallery      = d.gallery        || {};
-      var whatson      = d.whatson        || {};
-      var soundtrack   = d.soundtrack     || {};
-      var planYourEvent = d.planYourEvent || {};
+      var settings      = d.settings       || {};
+      var hero          = d.hero           || {};
+      var story         = d.story          || {};
+      var ticker        = d.ticker         || {};
+      var hours         = d.hours          || {};
+      var menu          = d.menu           || {};
+      var gallery       = d.gallery        || {};
+      var whatson       = d.whatson        || {};
+      var soundtrack    = d.soundtrack     || {};
+      var planYourEvent = d.planYourEvent  || {};
+      var usefulLinks   = d.usefulLinks    || {};
+      var ctaStrip      = d.ctaStrip       || {};
+      var visit         = d.visit          || {};
 
       // ── Hero ─────────────────────────────────────────────────────────────────
       setText('heroTitle', hero.title);
@@ -38,6 +42,18 @@
       if (cta2) {
         if (hero.cta2Label) cta2.innerHTML = esc(hero.cta2Label) + ' <span class="btn__arrow">→</span>';
         if (hero.cta2Href)  cta2.href = hero.cta2Href;
+      }
+
+      // ── Ticker ───────────────────────────────────────────────────────────────
+      var words = ticker.words || [];
+      if (words.length) {
+        var track = document.getElementById('tickerTrack');
+        if (track) {
+          var doubled = words.concat(words);
+          track.innerHTML = doubled.map(function(w) {
+            return '<span>' + esc(w) + '</span><i>✦</i>';
+          }).join('');
+        }
       }
 
       // ── Story ─────────────────────────────────────────────────────────────────
@@ -207,6 +223,34 @@
         } else {
           cardsEl.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
         }
+      }
+      // ── Useful Links ──────────────────────────────────────────────────────────
+      var links = usefulLinks.links || [];
+      var linksList = document.getElementById('usefulLinksList');
+      if (linksList && links.length) {
+        linksList.innerHTML = links.map(function(link) {
+          var attrs = link.external ? ' target="_blank" rel="noopener"' : '';
+          return '<li><a href="' + esc(link.href) + '"' + attrs + '>' + esc(link.label) + ' ↗</a></li>';
+        }).join('');
+      }
+
+      // ── CTA Strip ─────────────────────────────────────────────────────────────
+      if (ctaStrip.title) {
+        var ctaTitle = document.getElementById('ctaStripTitle');
+        if (ctaTitle) ctaTitle.innerHTML = '<em>' + esc(ctaStrip.title) + '</em>';
+      }
+      setText('ctaStripSub', ctaStrip.subtext);
+      var ctaBtn = document.getElementById('ctaStripBtn');
+      if (ctaBtn) {
+        if (ctaStrip.ctaLabel) ctaBtn.textContent = ctaStrip.ctaLabel;
+        if (ctaStrip.ctaHref)  ctaBtn.href = ctaStrip.ctaHref;
+      }
+
+      // ── Visit ─────────────────────────────────────────────────────────────────
+      setText('visitLabel', visit.label);
+      if (visit.heading) {
+        var vh = document.getElementById('visitHeading');
+        if (vh) vh.innerHTML = '<em>' + esc(visit.heading) + '</em>';
       }
     })
     .catch(function () {});

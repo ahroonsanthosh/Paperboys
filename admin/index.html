@@ -258,6 +258,9 @@
       <a href="#" onclick="showPanel('whatson', this); return false;">What's On</a>
       <a href="#" onclick="showPanel('soundtrack', this); return false;">Soundtrack</a>
       <a href="#" onclick="showPanel('planYourEvent', this); return false;">Plan Your Event</a>
+      <a href="#" onclick="showPanel('usefulLinks', this); return false;">Useful Links</a>
+      <a href="#" onclick="showPanel('ctaStrip', this); return false;">CTA Strip</a>
+      <a href="#" onclick="showPanel('visit', this); return false;">Visit</a>
       <div class="sidebar-label">Other</div>
       <a href="#" onclick="showPanel('password', this); return false;">Change Password</a>
     </nav>
@@ -419,6 +422,33 @@
         <p style="font-size:0.8rem;font-weight:600;color:#555;margin-bottom:0.75rem;">Cards</p>
         <div class="item-list" id="planEventCards"></div>
         <button class="add-btn" onclick="addPlanCard()">+ Add card</button>
+      </div>
+
+      <!-- Useful Links -->
+      <div class="panel" id="panel-usefulLinks">
+        <div class="panel-title">Useful Links</div>
+        <p style="color:#666;font-size:0.875rem;margin-bottom:1rem;">These appear in the links strip on the site.</p>
+        <div class="item-list" id="usefulLinksItems"></div>
+        <button class="add-btn" onclick="addUsefulLink()">+ Add link</button>
+      </div>
+
+      <!-- CTA Strip -->
+      <div class="panel" id="panel-ctaStrip">
+        <div class="panel-title">CTA Strip</div>
+        <div class="field"><label>Title</label><input type="text" id="cta-title" /></div>
+        <div class="field"><label>Subtext</label><input type="text" id="cta-subtext" /></div>
+        <div class="field-row">
+          <div class="field"><label>Button Label</label><input type="text" id="cta-ctaLabel" /></div>
+          <div class="field"><label>Button Link</label><input type="text" id="cta-ctaHref" /></div>
+        </div>
+      </div>
+
+      <!-- Visit -->
+      <div class="panel" id="panel-visit">
+        <div class="panel-title">Visit</div>
+        <p style="color:#666;font-size:0.875rem;margin-bottom:1rem;">Address comes from Site Info. Edit the directions link there too.</p>
+        <div class="field"><label>Section Label</label><input type="text" id="visit-label" /></div>
+        <div class="field"><label>Heading</label><input type="text" id="visit-heading" /></div>
       </div>
 
       <!-- Change Password -->
@@ -596,6 +626,19 @@ function populateForms() {
   var pe = content.planYourEvent || {};
   val('pe-tickerText', pe.tickerText);
   renderPlanCards(pe.cards || []);
+
+  var ul = content.usefulLinks || {};
+  renderUsefulLinks(ul.links || []);
+
+  var cs = content.ctaStrip || {};
+  val('cta-title',    cs.title);
+  val('cta-subtext',  cs.subtext);
+  val('cta-ctaLabel', cs.ctaLabel);
+  val('cta-ctaHref',  cs.ctaHref);
+
+  var vi = content.visit || {};
+  val('visit-label',   vi.label);
+  val('visit-heading', vi.heading);
 }
 
 function val(id, v) {
@@ -796,6 +839,49 @@ function addPlanCard() {
   el.appendChild(card);
 }
 
+// ── Useful Links ──────────────────────────────────────────────────────────────
+function renderUsefulLinks(links) {
+  var el = document.getElementById('usefulLinksItems');
+  el.innerHTML = links.map(function(link) {
+    return '<div class="item-card">' +
+      '<div class="item-card-header"><strong>' + escHtml(link.label) + '</strong>' +
+      '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+      '<div class="field-row">' +
+        '<div class="field"><label>Label</label><input type="text" data-field="label" value="' + escAttr(link.label) + '" /></div>' +
+        '<div class="field"><label>URL</label><input type="text" data-field="href" value="' + escAttr(link.href) + '" /></div>' +
+      '</div>' +
+      '<div class="toggle-wrap" style="margin-top:0.5rem;"><input type="checkbox" data-field="external"' + (link.external ? ' checked' : '') + ' /><label>Opens in new tab</label></div>' +
+      '</div>';
+  }).join('');
+}
+
+function addUsefulLink() {
+  var el = document.getElementById('usefulLinksItems');
+  var card = document.createElement('div');
+  card.className = 'item-card';
+  card.innerHTML =
+    '<div class="item-card-header"><strong>New link</strong>' +
+    '<button class="remove-btn" onclick="this.closest(\'.item-card\').remove()">Remove</button></div>' +
+    '<div class="field-row">' +
+      '<div class="field"><label>Label</label><input type="text" data-field="label" placeholder="Full Menu" /></div>' +
+      '<div class="field"><label>URL</label><input type="text" data-field="href" placeholder="#menu" /></div>' +
+    '</div>' +
+    '<div class="toggle-wrap" style="margin-top:0.5rem;"><input type="checkbox" data-field="external" /><label>Opens in new tab</label></div>';
+  el.appendChild(card);
+}
+
+function readUsefulLinks() {
+  var el = document.getElementById('usefulLinksItems');
+  if (!el) return (content.usefulLinks && content.usefulLinks.links) || [];
+  return Array.from(el.children).map(function(card) {
+    return {
+      label:    (card.querySelector('[data-field="label"]')    || {}).value || '',
+      href:     (card.querySelector('[data-field="href"]')     || {}).value || '',
+      external: !!(card.querySelector('[data-field="external"]') || {}).checked
+    };
+  });
+}
+
 // ── Read forms → build content object ────────────────────────────────────────
 function readForms() {
   var days = ((content.hours && content.hours.days) || []).map(function(d, i) {
@@ -942,9 +1028,17 @@ function readForms() {
       tickerText: g('pe-tickerText'),
       cards:      readPlanCards()
     },
-    usefulLinks: content.usefulLinks || {},
-    ctaStrip:    content.ctaStrip    || {},
-    visit:       content.visit       || {}
+    usefulLinks: { links: readUsefulLinks() },
+    ctaStrip: {
+      title:    g('cta-title'),
+      subtext:  g('cta-subtext'),
+      ctaLabel: g('cta-ctaLabel'),
+      ctaHref:  g('cta-ctaHref')
+    },
+    visit: {
+      label:   g('visit-label'),
+      heading: g('visit-heading')
+    }
   };
 }
 
