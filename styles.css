@@ -8,7 +8,7 @@ h1, h2, h3, .nav__brand, .footer__brand,
   font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
 }
 :root {
-  --bg:       #F5F1E8;        /* warm off-white */
+  --bg:       #FDE3D1;        /* Paperboys peach (light tint) — replaces former cream */
   --white:    #FFFFFF;
   --black:    #1A1918;        /* near-black text */
   --green:    #0F4B4C;       /* primary accent — Paperboys green */
@@ -69,13 +69,13 @@ section { position: relative; }
 
 /* ===== Headings ===== */
 h1, h2, h3 {
-  font-family: 'Bungee Inline', Georgia, serif;
+  font-family: 'Anton', Georgia, serif;
   font-weight: 400;
   line-height: 1.05;
   letter-spacing: -.02em;
 }
 h2 em, h2 i {
-  font-family: 'Bungee Inline', Georgia, serif;
+  font-family: 'Anton', Georgia, serif;
   font-weight: 400;
   font-style: normal;
 }
@@ -137,7 +137,7 @@ h2 em, h2 i {
 .nav.is-stuck { box-shadow: 0 4px 24px -8px rgba(26,25,24,.1); }
 .nav__brand {
   display: flex; align-items: center; gap: .6rem;
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: 1.25rem; letter-spacing: -.02em; color: var(--black);
 }
 .nav__logo { width: 48px; height: auto; }
@@ -208,12 +208,13 @@ h2 em, h2 i {
 }
 .hero__content { position: relative; z-index: 2; max-width: 820px; }
 .hero__title {
-  font-family: 'Bungee Inline', Georgia, serif;
+  font-family: 'Anton', Georgia, serif;
   font-weight: 400;
-  font-size: clamp(4.5rem, 14vw, 13rem);
-  line-height: .88; letter-spacing: -.04em;
+  font-size: clamp(2.2rem, 7vw, 6.5rem);
+  line-height: 1; letter-spacing: 0;
   color: var(--black);
   margin-bottom: clamp(2rem, 5vh, 3.2rem);
+  white-space: nowrap;
 }
 .hero__sub {
   font-size: clamp(1rem, 2.2vw, 1.3rem); color: var(--muted);
@@ -271,7 +272,7 @@ h2 em, h2 i {
 }
 .story__stats { display: flex; gap: 2.5rem; margin-top: 2.4rem; flex-wrap: wrap; }
 .story__stat span {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: 2.2rem; color: var(--green); display: block; line-height: 1;
 }
 .story__stat small { color: var(--muted); font-weight: 600; font-size: .83rem; }
@@ -309,13 +310,13 @@ h2 em, h2 i {
   color: var(--white);
 }
 .menu__head h2 em {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-style: normal; font-size: inherit; display: block;
 }
 .menu__intro { color: rgba(255,255,255,.55); max-width: 50ch; margin-top: .8rem; font-size: 1rem; }
 .menu__group { max-width: var(--max); margin: 0 auto 2.6rem; }
 .menu__cat {
-  font-family: 'Bungee Inline', serif; font-style: normal;
+  font-family: 'Anton', serif; font-style: normal;
   font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 500;
   color: var(--green); margin-bottom: .6rem;
   padding-bottom: .6rem; border-bottom: 1px solid rgba(255,255,255,.12);
@@ -339,7 +340,7 @@ h2 em, h2 i {
 }
 .dot { flex: 1; border-bottom: 1.5px dotted rgba(255,255,255,.2); transform: translateY(-4px); }
 .dish__price {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: 1.1rem; color: var(--green); white-space: nowrap;
 }
 .dish p { color: rgba(255,255,255,.5); font-size: .94rem; max-width: 52ch; }
@@ -438,7 +439,7 @@ h2 em, h2 i {
   border-radius: var(--r); margin-bottom: .9rem;
 }
 .wcard h3 {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: 1.35rem; margin-bottom: .5rem; color: var(--black);
 }
 .wcard p { color: var(--muted); font-size: .97rem; line-height: 1.55; margin-bottom: 1rem; }
@@ -469,7 +470,7 @@ h2 em, h2 i {
 .planevent__track {
   display: flex; align-items: center; gap: 2.2rem;
   width: max-content; white-space: nowrap;
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: clamp(1.5rem, 3.5vw, 2.6rem);
   color: var(--black); font-style: italic;
   animation: slide 20s linear infinite;
@@ -501,7 +502,7 @@ h2 em, h2 i {
   color: var(--black); margin-bottom: 1.2rem; line-height: .9;
 }
 .ecard h2 em {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-style: normal; font-size: inherit; display: block;
 }
 .ecard p {
@@ -555,7 +556,7 @@ h2 em, h2 i {
 .links-ticker__track {
   display: flex; align-items: center; gap: 2rem;
   width: max-content; white-space: nowrap;
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: clamp(1.4rem, 3vw, 2.2rem); color: var(--black);
   animation: slide 18s linear infinite;
   font-style: italic;
@@ -582,7 +583,7 @@ h2 em, h2 i {
 }
 .links-section__list a {
   display: block; padding: 1.1rem .2rem;
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   color: var(--black);
   transition: color .2s, padding-left .2s var(--ease);
@@ -599,7 +600,7 @@ h2 em, h2 i {
 }
 .cta-strip__inner { display: flex; flex-direction: column; gap: 1.2rem; max-width: 560px; }
 .cta-strip__title {
-  font-family: 'Bungee Inline', serif; font-style: normal;
+  font-family: 'Anton', serif; font-style: normal;
   font-size: clamp(2rem, 5vw, 3.8rem); font-weight: 500;
   line-height: 1.05; color: var(--white);
 }
@@ -624,7 +625,7 @@ h2 em, h2 i {
   color: var(--black); margin-bottom: 1.3rem;
 }
 .visit h2 em {
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-style: normal; font-size: inherit;
 }
 .visit address {
@@ -673,7 +674,7 @@ h2 em, h2 i {
 }
 .footer__brand {
   display: flex; align-items: center; gap: .7rem;
-  font-family: 'Bungee Inline', serif; font-weight: 400;
+  font-family: 'Anton', serif; font-weight: 400;
   font-size: 1.5rem; letter-spacing: -.02em; color: var(--white);
 }
 .footer__brand img { width: 40px; }
@@ -808,7 +809,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
   .hero__circle--a, .hero__circle--b { display: none; }
   .hero__mascot-bg { width: min(80vw, 340px); top: 34%; }
   .hero__content { position: relative; z-index: 2; }
-  .hero__title { font-size: clamp(3.6rem, 16vw, 5.5rem); margin-bottom: 1rem; }
+  .hero__title { font-size: clamp(2rem, 8vw, 3.6rem); margin-bottom: 1rem; }
   .hero__sub { font-size: .98rem; max-width: none; margin-bottom: 1.8rem; }
   .hero__actions { gap: .75rem; flex-direction: column; }
   .hero__actions .btn { padding: .9rem 1.5rem; font-size: .95rem; width: 100%; justify-content: center; }
@@ -855,7 +856,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
 
 /* ===== Responsive — small mobile (≤ 390px) ===== */
 @media (max-width: 390px) {
-  .hero__title { font-size: clamp(3rem, 18vw, 4.5rem); }
+  .hero__title { font-size: clamp(1.8rem, 11vw, 2.8rem); }
   .btn { padding: .8rem 1.2rem; font-size: .88rem; }
   .wcard { padding: 1.1rem 1rem; }
   .links-section__list a { font-size: 1rem; }
