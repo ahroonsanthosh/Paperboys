@@ -155,15 +155,4 @@
     onScrollFill();
   }
 
-  // Seasonal mascot accessory
-  var accessory = document.getElementById('mascotAccessory');
-  if (accessory) {
-    var month = new Date().getMonth(); // 0 = Jan
-    if (month === 11) {
-      accessory.classList.add('accessory--santa');
-    } else if (month >= 5 && month <= 7) {
-      accessory.classList.add('accessory--shades');
-    }
-  }
-
 })();
