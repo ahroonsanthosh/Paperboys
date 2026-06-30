@@ -14,7 +14,7 @@ function ghHeaders(token) {
   };
 }
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -24,7 +24,10 @@ export default async function handler(req, res) {
 
   const { secret, content, action, filename, base64 } = req.body || {};
 
-  if (!process.env.ADMIN_SECRET || secret !== process.env.ADMIN_SECRET) {
+  if (!process.env.ADMIN_SECRET) {
+    return res.status(500).json({ error: 'ADMIN_SECRET env var not set in Vercel dashboard' });
+  }
+  if (secret !== process.env.ADMIN_SECRET) {
     return res.status(401).json({ error: 'Unauthorized' });
   }
 
