@@ -13,7 +13,7 @@
     return isNaN(v) ? '' : '€' + (v % 1 === 0 ? v : v.toFixed(2));
   }
 
-  fetch('content.json?v=' + Date.now())
+  fetch('/api/content?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
       var settings      = d.settings       || {};
