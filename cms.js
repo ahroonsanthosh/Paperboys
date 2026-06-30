@@ -4,191 +4,136 @@
       .replace(/&/g, '&amp;').replace(/</g, '&lt;')
       .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
   }
-  function set(id, text) {
+  function setText(id, text) {
     var el = document.getElementById(id);
     if (el && text != null) el.textContent = text;
   }
   function price(n) {
     var v = Number(n);
-    return '€' + (v % 1 === 0 ? v : v.toFixed(2));
+    return isNaN(v) ? '' : '€' + (v % 1 === 0 ? v : v.toFixed(2));
   }
 
   fetch('content.json?v=' + Date.now())
     .then(function (r) { return r.json(); })
     .then(function (d) {
-      var settings       = d.settings       || {};
-      var hours          = d.hours          || {};
-      var story          = d.story          || {};
-      var menu           = d.menu           || {};
-      var dishes         = d.dishes         || [];
-      var gallery        = d.gallery        || [];
-      var eventsHero     = d.eventsHero     || {};
-      var hire           = d.hire           || {};
-      var gallerySection = d.gallerySection || {};
-      var contact        = d.contact        || {};
+      var settings     = d.settings     || {};
+      var hours        = d.hours        || {};
+      var menu         = d.menu         || {};
+      var gallery      = d.gallery      || {};
+      var whatson      = d.whatson      || {};
 
-      // ── Site Settings ──────────────────────────────────────────────────────
-      document.querySelectorAll('.cms-brand-name').forEach(function (el) {
-        if (settings.businessName) el.textContent = settings.businessName;
-      });
-      set('heroEyebrow',       settings.heroEyebrow);
-      set('heroTitle',         settings.heroTitle);
-      set('heroTitleAccent',   settings.heroTitleAccent);
-
-      var addr = document.getElementById('visitAddress');
-      if (addr && settings.businessName) {
-        addr.innerHTML = esc(settings.businessName) + '<br>' +
-          esc(settings.streetAddress) + '<br>' + esc(settings.locality);
-      }
-      document.querySelectorAll('.cms-instagram-link').forEach(function (el) {
-        if (settings.instagramUrl) el.href = settings.instagramUrl;
-      });
-      var igBtn = document.getElementById('visitInstagramBtn');
-      if (igBtn && settings.instagramHandle) igBtn.textContent = settings.instagramHandle;
-
-      document.querySelectorAll('.cms-directions-link').forEach(function (el) {
-        if (settings.directionsUrl) el.href = settings.directionsUrl;
-      });
-      var mapEl = document.getElementById('mapIframe');
-      if (mapEl && settings.googleMapsUrl) mapEl.src = settings.googleMapsUrl;
-
-      var copy = document.getElementById('footerCopyright');
-      if (copy && settings.businessName) {
-        copy.innerHTML = '&copy; ' + new Date().getFullYear() + ' ' +
-          esc(settings.businessName) + ' &middot; ' + esc(settings.streetAddress);
-      }
-
-      // ── Opening Hours ──────────────────────────────────────────────────────
+      // ── Opening Hours ────────────────────────────────────────────────────────
       if (hours.days && hours.days.length) {
         var list = document.getElementById('hoursList');
         if (list) {
-          var dayIdx = {monday:1,tuesday:2,wednesday:3,thursday:4,friday:5,saturday:6,sunday:0};
+          var dayIdx = { monday:1, tuesday:2, wednesday:3, thursday:4, friday:5, saturday:6, sunday:0 };
           var todayNum = new Date().getDay();
-          list.innerHTML = hours.days.map(function (d) {
-            var idx = dayIdx[(d.dayName || '').toLowerCase()];
-            var cls = [];
-            if (d.closed) cls.push('closed');
-            if (idx === todayNum) cls.push('is-today');
+          list.innerHTML = hours.days.map(function (day) {
+            var idx  = dayIdx[(day.dayName || '').toLowerCase()];
+            var cls  = [];
+            if (day.closed)        cls.push('closed');
+            if (idx === todayNum)  cls.push('is-today');
             var attrs = (idx !== undefined ? ' data-day="' + idx + '"' : '') +
-                        (cls.length ? ' class="' + cls.join(' ') + '"' : '');
-            var t = d.closed ? 'Closed' : esc(d.opens) + ' – ' + esc(d.closes);
-            return '<li' + attrs + '><span>' + esc(d.dayName) + '</span><span>' + t + '</span></li>';
+                        (cls.length       ? ' class="' + cls.join(' ') + '"' : '');
+            var time  = day.closed ? 'Closed' : esc(day.opens) + ' – ' + esc(day.closes);
+            return '<li' + attrs + '><span>' + esc(day.dayName) + '</span><span>' + time + '</span></li>';
           }).join('');
         }
       }
 
-      // ── Story ──────────────────────────────────────────────────────────────
-      set('storyHeading',    story.heading);
-      set('storyPara1',      story.paragraph1);
-      set('storyPara2',      story.paragraph2);
-      set('storefrontQuote', story.storefrontQuote);
-      var track = document.getElementById('tickerTrack');
-      if (track && story.tickerWords && story.tickerWords.length) {
-        var words = story.tickerWords.concat(story.tickerWords);
-        track.innerHTML = words.map(function (w) {
-          return '<span>' + esc(w) + '</span><i>·</i>';
-        }).join('');
-      }
+      // ── Menu ─────────────────────────────────────────────────────────────────
+      setText('menuIntro',   menu.introText);
+      setText('allergenNote', menu.allergenKey);
 
-      // ── Menu Settings ──────────────────────────────────────────────────────
-      set('menuIntro',    menu.introText);
-      set('allergenNote', menu.allergenKey);
-      var sidesList = document.getElementById('sidesList');
-      if (sidesList && menu.sides) {
-        sidesList.innerHTML = menu.sides.map(function (s) {
-          return '<li><span>' + esc(s.name) + '</span><b>' + price(s.price) + '</b></li>';
-        }).join('');
-      }
-      var drinksList = document.getElementById('drinksList');
-      if (drinksList && menu.drinks) {
-        drinksList.innerHTML = menu.drinks.map(function (s) {
-          return '<li><span>' + esc(s.name) + '</span><b>' + price(s.price) + '</b></li>';
-        }).join('');
-      }
-
-      // ── Dishes ─────────────────────────────────────────────────────────────
-      var bycat = {};
-      dishes.forEach(function (d) {
-        var c = d.category || 'other';
+      var dishes = menu.dishes || [];
+      var bycat  = {};
+      dishes.forEach(function (dish) {
+        var c = dish.category || 'other';
         if (!bycat[c]) bycat[c] = [];
-        bycat[c].push(d);
+        bycat[c].push(dish);
       });
+
       function renderDishes(id, items) {
         var el = document.getElementById(id);
         if (!el || !items || !items.length) return;
-        el.innerHTML = items.map(function (d) {
-          var al = d.allergens ? ' <em>(' + esc(d.allergens) + ')</em>' : '';
-          return '<article class="dish"><div class="dish__row">' +
-            '<h4>' + esc(d.name) + al + '</h4>' +
-            '<span class="dot"></span>' +
-            '<span class="dish__price">' + price(d.price) + '</span>' +
-            '</div><p>' + esc(d.description) + '</p></article>';
-        }).join('');
+        el.innerHTML = items.sort(function(a,b){ return (a.sortOrder||0)-(b.sortOrder||0); })
+          .map(function (dish) {
+            var al = dish.allergens ? ' <em>(' + esc(dish.allergens) + ')</em>' : '';
+            return '<article class="dish"><div class="dish__row">' +
+              '<h4>' + esc(dish.name) + al + '</h4>' +
+              '<span class="dot"></span>' +
+              '<span class="dish__price">' + price(dish.price) + '</span>' +
+              '</div><p>' + esc(dish.description) + '</p></article>';
+          }).join('');
       }
       renderDishes('breakfastList',  bycat.breakfast);
       renderDishes('sandwichesList', bycat.sandwiches);
 
-      // ── Events Hero ────────────────────────────────────────────────────────
-      set('evheroPillText',   eventsHero.pillText);
-      set('evheroTitleLine1', eventsHero.titleLine1);
-      set('evheroTitleLine2', eventsHero.titleLine2);
-      set('evheroSub',        eventsHero.subtitle);
-      var cta1 = document.getElementById('evheroCta1');
-      if (cta1) {
-        if (eventsHero.cta1Label) cta1.textContent = eventsHero.cta1Label;
-        if (eventsHero.cta1Href)  cta1.href        = eventsHero.cta1Href;
-      }
-      var cta2 = document.getElementById('evheroCta2');
-      if (cta2) {
-        if (eventsHero.cta2Label) cta2.innerHTML = esc(eventsHero.cta2Label) + '<span class="btn__arrow">→</span>';
-        if (eventsHero.cta2Href)  cta2.href      = eventsHero.cta2Href;
-      }
-
-      // ── Private Hire ───────────────────────────────────────────────────────
-      set('hireEyebrow', hire.eyebrow);
-      set('hireHeading', hire.heading);
-      set('hirePara',    hire.paragraph);
-      var hireCta = document.getElementById('hireCtaLink');
-      if (hireCta) {
-        if (hire.ctaLabel) hireCta.textContent = hire.ctaLabel;
-        if (hire.ctaHref)  hireCta.href        = hire.ctaHref;
-      }
-
-      // ── Gallery Section Header ─────────────────────────────────────────────
-      set('galleryEyebrow',    gallerySection.eyebrow);
-      set('galleryHeading',    gallerySection.heading);
-      set('gallerySocialText', gallerySection.socialText);
-      var gallerySocialHandle = document.getElementById('gallerySocialHandle');
-      if (gallerySocialHandle && settings.instagramHandle) {
-        gallerySocialHandle.textContent = settings.instagramHandle;
-      }
-
-      // ── Contact ────────────────────────────────────────────────────────────
-      set('contactEyebrow',       contact.eyebrow);
-      set('contactHeading',       contact.heading);
-      set('contactHeadingAccent', contact.headingAccent);
-      set('contactSub',           contact.subtext);
-      var ctSubmit = document.getElementById('contactSubmit');
-      if (ctSubmit && contact.ctaLabel) ctSubmit.textContent = contact.ctaLabel;
-      var ctForm = document.getElementById('contactForm');
-      if (ctForm && contact.mailto) ctForm.dataset.mailto = contact.mailto;
-
-      // ── Gallery ────────────────────────────────────────────────────────────
-      var grid = document.getElementById('galleryGrid');
-      if (grid && gallery.length) {
-        var cls = ['tile--a','tile--b','tile--c','tile--d','tile--e'];
-        grid.innerHTML = gallery.map(function (p, i) {
-          return '<figure class="tile ' + (cls[i] || 'tile--f') + ' reveal">' +
-            '<img src="' + esc(p.src) + '" alt="' + esc(p.alt) + '" loading="lazy" />' +
-            '<figcaption>' + esc(p.caption) + '</figcaption></figure>';
+      var sides = menu.sides || [];
+      var sidesList = document.getElementById('sidesList');
+      if (sidesList && sides.length) {
+        sidesList.innerHTML = sides.map(function (s) {
+          return '<li><span>' + esc(s.name) + '</span><b>' + price(s.price) + '</b></li>';
         }).join('');
+      }
+
+      var drinks = menu.drinks || [];
+      var drinksList = document.getElementById('drinksList');
+      if (drinksList && drinks.length) {
+        drinksList.innerHTML = drinks.map(function (s) {
+          return '<li><span>' + esc(s.name) + '</span><b>' + price(s.price) + '</b></li>';
+        }).join('');
+      }
+
+      // ── Gallery ───────────────────────────────────────────────────────────────
+      var tiles = gallery.tiles || [];
+      var grid  = document.getElementById('galleryGrid');
+      if (grid && tiles.length) {
+        var cls    = ['tile--a', 'tile--b', 'tile--c', 'tile--d', 'tile--e'];
+        var delays = [0, 80, 160, 120, 140];
+        grid.innerHTML = tiles.sort(function(a,b){ return (a.sortOrder||0)-(b.sortOrder||0); })
+          .map(function (tile, i) {
+            var delay = delays[i % delays.length];
+            var delayAttr = delay ? ' data-delay="' + delay + '"' : '';
+            return '<figure class="tile ' + (cls[i % cls.length] || '') + ' reveal"' + delayAttr + '>' +
+              '<img src="' + esc(tile.src) + '" alt="' + esc(tile.alt || '') + '" loading="lazy" />' +
+              '<figcaption>' + esc(tile.caption || '') + '</figcaption></figure>';
+          }).join('');
         if ('IntersectionObserver' in window) {
           var io = new IntersectionObserver(function (entries) {
             entries.forEach(function (e) {
               if (e.isIntersecting) { e.target.classList.add('is-in'); io.unobserve(e.target); }
             });
-          }, {threshold: 0.1});
+          }, { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
           grid.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+        } else {
+          grid.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
+        }
+      }
+
+      // ── What's On ─────────────────────────────────────────────────────────────
+      setText('whatsonNote', whatson.note);
+      var events = whatson.events || [];
+      var whatsonCards = document.getElementById('whatsonCards');
+      if (whatsonCards && events.length) {
+        whatsonCards.innerHTML = events.map(function (ev, i) {
+          var delay = i > 0 ? ' data-delay="' + (i * 100) + '"' : '';
+          return '<article class="wcard reveal"' + delay + '>' +
+            '<span class="wcard__day">' + esc(ev.day) + '</span>' +
+            '<h3>' + esc(ev.title) + '</h3>' +
+            '<p>' + esc(ev.description) + '</p>' +
+            '<span class="wcard__tag">' + esc(ev.tag) + '</span>' +
+            '</article>';
+        }).join('');
+        if ('IntersectionObserver' in window) {
+          var io2 = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) { e.target.classList.add('is-in'); io2.unobserve(e.target); }
+            });
+          }, { threshold: 0.12 });
+          whatsonCards.querySelectorAll('.reveal').forEach(function (el) { io2.observe(el); });
+        } else {
+          whatsonCards.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('is-in'); });
         }
       }
     })
