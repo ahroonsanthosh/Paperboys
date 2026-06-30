@@ -189,7 +189,7 @@ h2 em, h2 i {
 .hero__titlewrap { position: relative; display: inline-block; }
 .hero__mascot-bg {
   position: absolute; top: 68%; left: 51.5%; z-index: 1;
-  width: clamp(380px, min(72vw, 78vh), 1180px);
+  width: clamp(420px, min(86vw, 86vh), 1400px);
   transform: translate(-50%, -50%) scale(.92);
   opacity: 0;
   pointer-events: none;
@@ -197,7 +197,7 @@ h2 em, h2 i {
 }
 .hero__mascot-bg img { width: 100%; height: auto; }
 @keyframes heroMascotIn {
-  to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  to { opacity: .3; transform: translate(-50%, -50%) scale(1); }
 }
 .hero__content { position: relative; z-index: 2; max-width: 820px; }
 .hero__title {
@@ -789,7 +789,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
     min-height: auto;
     justify-content: center;
   }
-  .hero__mascot-bg { width: min(92vw, 55vh, 460px); top: 72%; left: 50.5%; }
+  .hero__mascot-bg { width: min(98vw, 62vh, 560px); top: 72%; left: 50.5%; }
   .hero__content { position: relative; z-index: 2; }
   .hero__title { font-size: clamp(2rem, 8vw, 3.6rem); margin-bottom: 1.4rem; }
   .hero__sub {
@@ -855,5 +855,5 @@ h2.reveal.is-in { opacity: 1; transform: none; }
   }
   .tile img { transform: none; }
   .hero__badge { animation: none; }
-  .hero__mascot-bg { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  .hero__mascot-bg { opacity: .3; transform: translate(-50%, -50%) scale(1); }
 }
