@@ -10,5 +10,8 @@
         { "key": "Cache-Control", "value": "no-store" }
       ]
     }
+  ],
+  "rewrites": [
+    { "source": "/api/save", "destination": "/api/save" }
   ]
 }
