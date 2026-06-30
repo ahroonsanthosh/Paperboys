@@ -98,4 +98,72 @@
     reveals.forEach(function (el) { el.classList.add('is-in'); });
   }
 
+  // Button squish/bounce on click
+  document.addEventListener('click', function (e) {
+    var btn = e.target.closest('.btn');
+    if (!btn) return;
+    btn.classList.remove('btn--bounce');
+    // force reflow so the animation can re-trigger on rapid clicks
+    void btn.offsetWidth;
+    btn.classList.add('btn--bounce');
+    btn.addEventListener('animationend', function handler() {
+      btn.classList.remove('btn--bounce');
+      btn.removeEventListener('animationend', handler);
+    });
+  });
+
+  // Menu prices "stamp" into place as they scroll into view.
+  // Re-scans on a timer for the first few seconds since cms.js / the gallery
+  // fetch above can replace the dish list markup asynchronously.
+  var priceObserver = ('IntersectionObserver' in window)
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-stamped');
+            priceObserver.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.4 })
+    : null;
+
+  function observePrices() {
+    document.querySelectorAll('.dish__price:not(.is-stamped)').forEach(function (el) {
+      if (priceObserver) priceObserver.observe(el);
+      else el.classList.add('is-stamped');
+    });
+  }
+  observePrices();
+  if (priceObserver) {
+    [250, 800, 1800, 3000].forEach(function (ms) { setTimeout(observePrices, ms); });
+  }
+
+  // Scroll progress — coffee cup fill
+  var cupfill = document.getElementById('cupfill');
+  var cupfillLiquid = document.getElementById('cupfillLiquid');
+  if (cupfill && cupfillLiquid) {
+    var CUP_TOP = 16, CUP_BOTTOM = 39;
+    var onScrollFill = function () {
+      var doc = document.documentElement;
+      var max = doc.scrollHeight - doc.clientHeight;
+      var pct = max > 0 ? Math.min(1, Math.max(0, window.scrollY / max)) : 0;
+      var h = pct * (CUP_BOTTOM - CUP_TOP);
+      cupfillLiquid.setAttribute('height', h.toFixed(1));
+      cupfillLiquid.setAttribute('y', (CUP_BOTTOM - h).toFixed(1));
+      cupfill.classList.toggle('is-visible', window.scrollY > 80);
+    };
+    window.addEventListener('scroll', onScrollFill, { passive: true });
+    onScrollFill();
+  }
+
+  // Seasonal mascot accessory
+  var accessory = document.getElementById('mascotAccessory');
+  if (accessory) {
+    var month = new Date().getMonth(); // 0 = Jan
+    if (month === 11) {
+      accessory.classList.add('accessory--santa');
+    } else if (month >= 5 && month <= 7) {
+      accessory.classList.add('accessory--shades');
+    }
+  }
+
 })();
