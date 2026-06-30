@@ -538,7 +538,7 @@ function loadContent() {
   var btn = document.getElementById('saveBtn');
   if (btn) btn.disabled = true;
   setStatus('Loading…');
-  fetch('../content.json?v=' + Date.now())
+  fetch('/api/content?v=' + Date.now())
     .then(function(r) {
       if (!r.ok) throw new Error('HTTP ' + r.status);
       return r.json();
