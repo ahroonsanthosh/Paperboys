@@ -231,27 +231,48 @@ h2 em, h2 i {
 }
 .hero__mascot-bg img { width: 100%; height: auto; }
 .mascot-accessory { position: absolute; display: none; pointer-events: none; }
+
+/* Santa hat — anchored above the right-hand (more open) face's cap. */
 .mascot-accessory.accessory--santa {
-  display: block; top: 1%; right: 20%; width: 16%; height: 16%;
+  display: block; left: 73%; top: 5%; width: 16%; height: 16%; transform: rotate(8deg);
 }
 .mascot-accessory.accessory--santa::before {
   content: ''; position: absolute; inset: 0;
   background: #C8443A;
   clip-path: polygon(0% 100%, 100% 100%, 85% 10%, 20% 0%);
   border-radius: 0 60% 0 0;
+  box-shadow: 0 1px 2px rgba(0,0,0,.25);
 }
 .mascot-accessory.accessory--santa::after {
   content: ''; position: absolute; top: -8%; right: 8%;
   width: 32%; height: 32%; background: var(--white); border-radius: 50%;
 }
+
+/* Sunglasses — bar pivoted to the exact angle/distance between the two
+   mascot eye paths (extracted from assets/mascot.svg via getBoundingClientRect
+   on each <path>, converted into viewBox-space percentages). The bar's left
+   edge sits exactly on the left eye; rotating it by the true eye-to-eye
+   angle means the right edge lands exactly on the right eye, so the lenses
+   (::before / ::after) need no separate vertical offset of their own. */
 .mascot-accessory.accessory--shades {
-  display: block; top: 47%; right: 30%; width: 16%; height: 5%;
-  background: var(--black); border-radius: 4px;
+  display: block;
+  left: 26.08%; top: 60.35%;
+  width: 33.66%; height: 1.6%;
+  background: var(--black);
+  border-radius: 2px;
+  transform-origin: left center;
+  transform: rotate(3.63deg) translateY(-50%);
+  box-shadow: 0 1px 2px rgba(0,0,0,.2);
 }
-.mascot-accessory.accessory--shades::before {
-  content: ''; position: absolute; top: 50%; left: -16%;
-  width: 16%; height: 2px; background: var(--black);
+.mascot-accessory.accessory--shades::before,
+.mascot-accessory.accessory--shades::after {
+  content: ''; position: absolute; top: 50%;
+  width: 17%; height: 480%;
+  background: var(--black); border-radius: 35%;
+  transform: translate(-50%, -50%);
 }
+.mascot-accessory.accessory--shades::before { left: 0%; }
+.mascot-accessory.accessory--shades::after { left: 100%; }
 @keyframes heroMascotIn {
   to { opacity: .3; transform: translate(-50%, -50%) scale(1); }
 }
