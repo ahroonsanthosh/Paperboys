@@ -188,8 +188,8 @@ h2 em, h2 i {
 }
 .hero__titlewrap { position: relative; display: inline-block; }
 .hero__mascot-bg {
-  position: absolute; top: 47%; left: 51.5%; z-index: 1;
-  width: clamp(320px, min(58vw, 62vh), 980px);
+  position: absolute; top: 68%; left: 51.5%; z-index: 1;
+  width: clamp(380px, min(72vw, 78vh), 1180px);
   transform: translate(-50%, -50%) scale(.92);
   opacity: 0;
   pointer-events: none;
@@ -784,12 +784,12 @@ h2.reveal.is-in { opacity: 1; transform: none; }
 
   /* Hero — compact typographic layout */
   .hero {
-    padding-top: calc(var(--bar-h, 52px) + 6.5rem);
+    padding-top: calc(var(--bar-h, 52px) + 11rem);
     padding-bottom: 2.5rem;
     min-height: auto;
     justify-content: center;
   }
-  .hero__mascot-bg { width: min(90vw, 60vh, 460px); top: 47%; left: 50.5%; }
+  .hero__mascot-bg { width: min(92vw, 55vh, 460px); top: 72%; left: 50.5%; }
   .hero__content { position: relative; z-index: 2; }
   .hero__title { font-size: clamp(2rem, 8vw, 3.6rem); margin-bottom: 1.4rem; }
   .hero__sub {
