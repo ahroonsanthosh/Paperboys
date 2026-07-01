@@ -348,7 +348,7 @@ h2 em, h2 i {
 
 /* ===== Menu ===== */
 .menu {
-  background: var(--ink-2); color: var(--white);
+  background: var(--green); color: var(--white);
   padding: clamp(4rem, 9vw, 7rem) clamp(1.1rem, 4vw, 2.6rem);
   z-index: 2;
 }
@@ -377,7 +377,7 @@ h2 em, h2 i {
 .menu__cat {
   font-family: 'Asectica', serif; font-style: normal;
   font-size: clamp(1.5rem, 3vw, 2.2rem); font-weight: 500;
-  color: var(--green); margin-bottom: .6rem;
+  color: var(--peach); margin-bottom: .6rem;
   padding-bottom: .6rem; border-bottom: 1px solid rgba(255,255,255,.12);
 }
 .menu__list { display: grid; grid-template-columns: 1fr 1fr; gap: 0 4rem; }
@@ -400,7 +400,7 @@ h2 em, h2 i {
 .dot { flex: 1; border-bottom: 1.5px dotted rgba(255,255,255,.2); transform: translateY(-4px); }
 .dish__price {
   font-family: 'Asectica', serif; font-weight: 400;
-  font-size: 1.1rem; color: var(--green); white-space: nowrap;
+  font-size: 1.1rem; color: var(--peach); white-space: nowrap;
   display: inline-block;
   opacity: 0; transform: scale(2.2) rotate(-10deg);
   transition: opacity .35s ease-out, transform .35s cubic-bezier(.2,.9,.3,1.2);
@@ -416,7 +416,7 @@ h2 em, h2 i {
   padding: .55rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
   color: rgba(255,255,255,.75); font-size: 1rem; font-weight: 500;
 }
-.menu__mini li b { color: var(--green); font-weight: 700; }
+.menu__mini li b { color: var(--peach); font-weight: 700; }
 .menu__mini--cols { column-count: 2; column-gap: 3rem; }
 .menu__mini--cols li { break-inside: avoid; }
 .menu__note {
@@ -424,8 +424,8 @@ h2 em, h2 i {
   font-size: .84rem; margin-top: 2.4rem; font-style: italic;
   max-width: var(--max); margin-inline: auto;
 }
-.dish:hover .dish__row h4 { color: var(--green); }
-.dish:hover .dot { border-bottom-color: rgba(15,75,76,.5); }
+.dish:hover .dish__row h4 { color: var(--peach); }
+.dish:hover .dot { border-bottom-color: rgba(251,186,144,.5); }
 
 /* ===== Gallery ===== */
 .gallery {
@@ -725,7 +725,7 @@ h2 em, h2 i {
 
 /* ===== Footer ===== */
 .footer {
-  background: var(--ink-2); color: var(--white);
+  background: var(--green); color: var(--white);
   padding: clamp(3rem, 6vw, 4.5rem) clamp(1.1rem, 4vw, 2.6rem) 2.5rem;
   z-index: 2;
 }
@@ -743,7 +743,7 @@ h2 em, h2 i {
 .footer__brand img { width: 40px; }
 .footer__nav { display: flex; gap: 1.6rem; flex-wrap: wrap; font-weight: 600; font-size: .92rem; }
 .footer__nav a { opacity: .55; transition: opacity .2s, color .2s; }
-.footer__nav a:hover { opacity: 1; color: var(--green); }
+.footer__nav a:hover { opacity: 1; color: var(--peach); }
 .footer__base {
   max-width: var(--max); margin: 1.6rem auto 0;
   display: flex; justify-content: space-between; gap: 1rem;
