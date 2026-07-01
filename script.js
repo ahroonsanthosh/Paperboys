@@ -16,6 +16,12 @@
       ? announce.offsetHeight : 0;
     document.documentElement.style.setProperty('--bar-h', h + 'px');
     if (nav) nav.style.top = h + 'px';
+    // Total fixed-header height (announcement bar + nav), used as
+    // scroll-padding-top so anchor-link navigation (nav links, skip
+    // link, #hash URLs) doesn't scroll section headings under the
+    // fixed nav.
+    var navH = nav ? nav.offsetHeight : 0;
+    document.documentElement.style.setProperty('--header-h', (h + navH + 16) + 'px');
   }
 
   function dismissBar() {
