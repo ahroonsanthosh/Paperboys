@@ -862,7 +862,6 @@ h2.reveal.is-in { opacity: 1; transform: none; }
 
   /* Gallery */
   .gallery__grid { grid-template-columns: 1fr; grid-auto-rows: 200px; gap: .6rem; }
-  .tile--a { grid-auto-rows: auto; height: 240px; }
   .tile--a, .tile--b, .tile--e { grid-column: 1 / -1; }
   .tile { border-radius: 16px; }
 
