@@ -580,13 +580,13 @@ h2 em, h2 i {
 
 /* ===== Soundtrack ===== */
 .soundtrack {
-  background: var(--peach); position: relative; overflow: hidden;
+  background: var(--green); position: relative; overflow: hidden;
   padding: clamp(4rem, 9vw, 7rem) clamp(1.1rem, 4vw, 2.6rem);
   z-index: 2;
 }
 .soundtrack__bg {
-  position: absolute; inset: 0; pointer-events: none; opacity: .18;
-  color: #000;
+  position: absolute; inset: 0; pointer-events: none; opacity: .15;
+  color: #fff;
 }
 .smiley-pattern { width: 100%; height: 100%; }
 .soundtrack__inner {
@@ -597,14 +597,14 @@ h2 em, h2 i {
 }
 .soundtrack__text h2 {
   font-size: clamp(2.4rem, 6vw, 4.5rem);
-  color: var(--black); margin-bottom: 1.2rem;
+  color: var(--white); margin-bottom: 1.2rem;
 }
 .soundtrack__text p {
-  color: rgba(26,25,24,.75); font-size: 1.05rem;
+  color: rgba(255,255,255,.75); font-size: 1.05rem;
   line-height: 1.65; max-width: 42ch; margin-bottom: .8rem;
 }
 .soundtrack__text p:last-of-type { margin-bottom: 1.6rem; }
-.label--dark { color: rgba(26,25,24,.6); }
+.label--dark { color: rgba(255,255,255,.6); }
 .btn--dark { background: var(--black); color: var(--white); }
 .btn--dark:hover { background: var(--ink-2); transform: translateY(-3px); }
 .soundtrack__embed { border-radius: var(--rc); overflow: hidden; box-shadow: var(--shadow); }
