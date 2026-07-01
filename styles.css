@@ -709,7 +709,7 @@ h2 em, h2 i {
   transition: padding-left .2s var(--ease), color .2s;
 }
 .hours li:hover { padding-left: .4rem; color: var(--black); }
-.hours li.is-today { color: var(--black); font-weight: 700; }
+.hours li.is-today { color: var(--black); font-weight: 400; }
 .hours li.is-today span:last-child::after {
   content: ' · Today'; color: var(--green); font-size: .78rem;
 }
