@@ -15,13 +15,13 @@ h1, h2, h3, .nav__brand, .footer__brand,
   font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
 }
 :root {
-  --bg:       #FDE3D1;        /* Paperboys peach (light tint) — replaces former cream */
+  --bg:       #FBBA90;        /* Paperboys peach — replaces former cream */
   --white:    #FFFFFF;
   --black:    #1A1918;        /* near-black text */
   --green:    #0F4B4C;       /* primary accent — Paperboys green */
   --green-dk: #0C3A3B;       /* hover shade */
   --peach:    #FBBA90;        /* secondary accent — Paperboys peach */
-  --peach-bg: #FDE3D1;        /* light peach tint for section backgrounds */
+  --peach-bg: #FBBA90;        /* section backgrounds — same peach as --bg */
   --cyan:     #4DCFCA;        /* legacy secondary accent (unused) */
   --cyan-bg:  #DFF4F3;
   --mint:     #C8DDD2;        /* tertiary */
