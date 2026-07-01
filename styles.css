@@ -265,6 +265,10 @@ h2 em, h2 i {
   max-width: 44ch; margin: 0 auto clamp(2rem, 4vh, 2.8rem);
   font-weight: 500; line-height: 1.55;
   text-wrap: balance;
+  text-shadow:
+    0 1px 0 var(--bg), 0 -1px 0 var(--bg), 1px 0 0 var(--bg), -1px 0 0 var(--bg),
+    0 2px 6px var(--bg), 0 -2px 6px var(--bg), 2px 0 6px var(--bg), -2px 0 6px var(--bg),
+    0 0 14px var(--bg);
 }
 .hero__actions {
   display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
@@ -842,10 +846,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
   .hero__mascot-bg { width: min(98vw, 62vh, 560px); top: 76%; left: 50.5%; }
   .hero__content { position: relative; z-index: 2; }
   .hero__title { font-size: clamp(2rem, 8vw, 3.6rem); margin-bottom: 1.4rem; }
-  .hero__sub {
-    font-size: .98rem; max-width: none; margin-bottom: 1.8rem;
-    background: var(--white); display: inline-block; padding: .3rem .8rem; border-radius: 10px;
-  }
+  .hero__sub { font-size: .98rem; max-width: none; margin-bottom: 1.8rem; }
   .hero__actions { gap: .75rem; flex-direction: column; }
   .hero__actions .btn { padding: .9rem 1.5rem; font-size: .95rem; width: 100%; justify-content: center; }
   .hero__badge { display: none; }
