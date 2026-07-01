@@ -110,7 +110,7 @@
     "dishes": [
       {
         "name": "Halloumi Florentine",
-        "price": 14.5,
+        "price": 15,
         "id": "halloumi-florentine",
         "category": "breakfast",
         "allergens": "1,3,7",
