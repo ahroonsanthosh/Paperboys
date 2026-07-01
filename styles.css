@@ -9,7 +9,7 @@
 h1, h2, h3, .nav__brand, .footer__brand,
 .story__stat span, .dish__price, .wcard h3,
 .planevent__track, .links-ticker__track, .links-section__list a,
-.menu__cat, .cta-strip__title {
+.menu__cat, .cta-strip__title, .dish__row h4, .menu__mini li b {
   font-variant-ligatures: none;
   -webkit-font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
   font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
@@ -274,7 +274,7 @@ h2 em, h2 i {
   display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center;
 }
 .hero__badge {
-  position: absolute; bottom: clamp(2rem, 5vh, 3.5rem); right: clamp(1.5rem, 4vw, 3rem);
+  position: absolute; bottom: clamp(3.5rem, 8vh, 5.5rem); right: clamp(1.5rem, 4vw, 3rem);
   display: flex; align-items: center; justify-content: center;
   animation: spin 18s linear infinite;
 }
@@ -390,8 +390,8 @@ h2 em, h2 i {
   display: flex; align-items: baseline; gap: .7rem; margin-bottom: .35rem;
 }
 .dish__row h4 {
-  font-family: 'Manrope', sans-serif; font-weight: 700;
-  font-size: 1.05rem; color: var(--white);
+  font-family: 'Asectica', sans-serif; font-weight: 400;
+  font-size: 1.2rem; color: var(--white);
 }
 .dish__row em {
   font-style: normal; font-size: .72rem;
@@ -416,7 +416,7 @@ h2 em, h2 i {
   padding: .55rem 0; border-bottom: 1px solid rgba(255,255,255,.08);
   color: rgba(255,255,255,.75); font-size: 1rem; font-weight: 500;
 }
-.menu__mini li b { color: var(--peach); font-weight: 700; }
+.menu__mini li b { color: var(--peach); font-family: 'Asectica', sans-serif; font-weight: 400; font-size: 1.05em; }
 .menu__mini--cols { column-count: 2; column-gap: 3rem; }
 .menu__mini--cols li { break-inside: avoid; }
 .menu__note {
@@ -672,7 +672,7 @@ h2 em, h2 i {
   width: clamp(100px, 18vw, 200px); height: auto;
   filter: brightness(0) invert(1); opacity: .15;
   position: absolute; right: clamp(2rem, 6vw, 5rem);
-  bottom: 0; pointer-events: none;
+  bottom: 18%; pointer-events: none;
 }
 
 /* ===== Visit ===== */
@@ -786,7 +786,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
 
   /* Hero */
   .hero { min-height: auto; padding-top: 7rem; padding-bottom: 3.5rem; }
-  .hero__badge { bottom: 1.5rem; right: 1rem; }
+  .hero__badge { bottom: 3rem; right: 1rem; }
 
   /* Story */
   .story__inner { grid-template-columns: 1fr; padding-top: 3rem; padding-bottom: 3rem; }
