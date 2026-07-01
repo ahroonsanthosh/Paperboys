@@ -743,26 +743,9 @@ h2 em, h2 i {
   flex-wrap: wrap; color: rgba(255,255,255,.35); font-size: .83rem;
 }
 
-/* ===== Mobile bar ===== */
-.mobilebar { display: none; }
 @media (max-width: 700px) {
-  .mobilebar {
-    display: grid; grid-template-columns: 1fr 1fr 1fr;
-    gap: 1px; position: fixed; left: 0; right: 0; bottom: 0;
-    z-index: 80; background: var(--line);
-    border-top: 1px solid var(--line);
-    padding-bottom: env(safe-area-inset-bottom);
-  }
-  .mobilebar a {
-    background: var(--white); text-align: center;
-    padding: .95rem .5rem; font-weight: 700; font-size: .9rem;
-    color: var(--black);
-  }
-  .mobilebar a:active { background: var(--bg); }
-  .mobilebar--accent { background: var(--green) !important; color: var(--white) !important; }
-  .footer { padding-bottom: 5.5rem; }
   .nav__cta { display: none; }
-  .cupfill { bottom: calc(64px + env(safe-area-inset-bottom) + .8rem); width: 44px; height: 44px; }
+  .cupfill { bottom: calc(env(safe-area-inset-bottom) + .8rem); width: 44px; height: 44px; }
 }
 
 /* ===== Reveal animations ===== */
