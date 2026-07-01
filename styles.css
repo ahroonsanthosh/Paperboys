@@ -9,7 +9,8 @@
 h1, h2, h3, .nav__brand, .footer__brand,
 .story__stat span, .dish__price, .wcard h3,
 .planevent__track, .links-ticker__track, .links-section__list a,
-.menu__cat, .cta-strip__title, .dish__row h4, .menu__mini li b {
+.menu__cat, .cta-strip__title, .dish__row h4, .menu__mini li b,
+.visit address, .hours li {
   font-variant-ligatures: none;
   -webkit-font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
   font-feature-settings: "liga" 0, "dlig" 0, "calt" 0;
@@ -692,7 +693,7 @@ h2 em, h2 i {
   font-style: normal; font-size: inherit;
 }
 .visit address {
-  font-style: normal; font-size: 1.15rem; line-height: 1.7;
+  font-family: 'Asectica', serif; font-style: normal; font-size: 1.15rem; line-height: 1.7;
   color: var(--muted); margin-bottom: 2rem;
 }
 .hours h3 {
@@ -704,7 +705,7 @@ h2 em, h2 i {
 .hours li {
   display: flex; justify-content: space-between;
   padding: .55rem 0; border-bottom: 1px solid var(--line);
-  font-size: 1rem; color: var(--muted);
+  font-family: 'Asectica', serif; font-size: 1.05rem; color: var(--muted);
   transition: padding-left .2s var(--ease), color .2s;
 }
 .hours li:hover { padding-left: .4rem; color: var(--black); }
