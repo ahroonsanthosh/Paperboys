@@ -741,7 +741,7 @@ h2 em, h2 i {
   font-family: 'Asectica', serif; font-weight: 400;
   font-size: 1.5rem; letter-spacing: -.02em; color: var(--white);
 }
-.footer__brand img { width: 40px; }
+.footer__brand img { width: 40px; filter: brightness(0) invert(1); }
 .footer__nav { display: flex; gap: 1.6rem; flex-wrap: wrap; font-weight: 600; font-size: .92rem; }
 .footer__nav a { opacity: .55; transition: opacity .2s, color .2s; }
 .footer__nav a:hover { opacity: 1; color: var(--peach); }
