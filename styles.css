@@ -724,6 +724,22 @@ h2 em, h2 i {
   filter: saturate(.6) brightness(1.05);
 }
 
+/* ===== Sister restaurant strip ===== */
+.sister-strip {
+  background: var(--white); text-align: center;
+  padding: .9rem 1.5rem; z-index: 2;
+  border-bottom: 1px solid var(--line);
+}
+.sister-strip p {
+  font-family: 'Manrope', sans-serif; font-size: .88rem; font-weight: 600;
+  color: var(--muted);
+}
+.sister-strip a {
+  color: var(--green); font-weight: 700; text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.sister-strip a:hover { color: var(--green-dk); }
+
 /* ===== Footer ===== */
 .footer {
   background: var(--green); color: var(--white);
