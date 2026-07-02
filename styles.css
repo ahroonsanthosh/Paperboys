@@ -262,7 +262,7 @@ h2 em, h2 i {
   white-space: nowrap;
 }
 .hero__sub {
-  font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: #4A4541;
   max-width: 44ch; margin: 0 auto clamp(2rem, 4vh, 2.8rem);
   font-weight: 500; line-height: 1.55;
   text-wrap: balance;
