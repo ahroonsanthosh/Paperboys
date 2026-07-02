@@ -262,7 +262,7 @@ h2 em, h2 i {
   white-space: nowrap;
 }
 .hero__sub {
-  font-size: clamp(1rem, 2.2vw, 1.3rem); color: var(--muted);
+  font-size: clamp(1.1rem, 2.5vw, 1.5rem); color: var(--muted);
   max-width: 44ch; margin: 0 auto clamp(2rem, 4vh, 2.8rem);
   font-weight: 500; line-height: 1.55;
   text-wrap: balance;
@@ -865,7 +865,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
   .hero__mascot-bg { width: min(98vw, 62vh, 560px); top: 76%; left: 50.5%; }
   .hero__content { position: relative; z-index: 2; }
   .hero__title { font-size: clamp(2.8rem, 27vw, 7.4rem); margin-bottom: 1.4rem; }
-  .hero__sub { font-size: .98rem; max-width: none; margin-bottom: 1.8rem; }
+  .hero__sub { font-size: 1.08rem; max-width: none; margin-bottom: 1.8rem; }
   .hero__actions { gap: .75rem; flex-direction: column; }
   .hero__actions .btn { padding: .9rem 1.5rem; font-size: .95rem; width: 100%; justify-content: center; }
   .hero__badge { display: none; }
