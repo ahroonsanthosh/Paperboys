@@ -291,7 +291,8 @@ h2 em, h2 i {
 .ticker__track {
   display: flex; align-items: center; gap: 1.6rem;
   width: max-content; white-space: nowrap; padding: .9rem 0;
-  font-family: 'Fraunces', serif; font-style: italic;
+  font-family: 'Asectica', sans-serif; font-weight: 400;
+  font-variant-ligatures: none;
   font-size: clamp(1.1rem, 2.5vw, 1.6rem);
   color: var(--white);
   animation: slide 22s linear infinite;
