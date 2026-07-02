@@ -396,8 +396,8 @@ h2 em, h2 i {
   font-size: 1.2rem; color: var(--white);
 }
 .dish__row em {
-  font-style: normal; font-size: .72rem;
-  color: rgba(255,255,255,.35); letter-spacing: .04em;
+  font-style: normal; font-size: .74rem;
+  color: rgba(255,255,255,.6); letter-spacing: .04em;
 }
 .dot { flex: 1; border-bottom: 1.5px dotted rgba(255,255,255,.2); transform: translateY(-4px); }
 .dish__price {
