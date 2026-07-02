@@ -113,103 +113,156 @@
         "price": 15,
         "id": "halloumi-florentine",
         "category": "breakfast",
-        "allergens": "1,3,7",
-        "description": "Brioche, halloumi, sautéed spinach, balsamic tomato compot, poached eggs. Add avo / crispy bacon.",
+        "allergens": "1,3,7,10",
+        "description": "Brioche, halloumi, sautéed spinach, tomato relish, poached eggs.",
         "sortOrder": 1
       },
       {
-        "name": "The Revised Morning Issue",
-        "price": 14.5,
-        "id": "revised-morning-issue",
-        "category": "breakfast",
-        "allergens": "1,3,7",
-        "description": "Signature hash browns, black pudding hash, hollandaise, poached eggs. Add crispy bacon / avo.",
-        "sortOrder": 2
-      },
-      {
-        "name": "Benny Boru",
-        "price": 15,
-        "id": "benny-boru",
-        "category": "breakfast",
-        "allergens": "1,3,7,10",
-        "description": "Brioche, honey-glazed ham, hollandaise, poached eggs. Add crispy bacon / black pudding.",
-        "sortOrder": 3
-      },
-      {
-        "name": "Avo… Smash!",
-        "price": 14.5,
+        "name": "Avo Smash",
+        "price": 13,
         "id": "avo-smash",
         "category": "breakfast",
-        "allergens": "1,3,7,8",
-        "description": "Sourdough or brioche, smashed avo, crispy chilli & peanut ryu, poached eggs. Add halloumi / crispy bacon.",
-        "sortOrder": 4
-      },
-      {
-        "name": "The Ham 'n 2 Cheeses",
-        "price": 12,
-        "id": "ham-2-cheeses",
-        "category": "sandwiches",
-        "allergens": "1,7,10",
-        "description": "Honey-mustard glazed ham, 2-cheese sauce, smoked cheddar & emmentaler. Add fries.",
-        "sortOrder": 1
-      },
-      {
-        "name": "The Muthah Cluckah",
-        "price": 13.5,
-        "id": "muthah-cluckah",
-        "category": "sandwiches",
-        "allergens": "1,3,6,7,10",
-        "description": "Crispy battered buttermilk & hot-sauce marinated chicken, pickles, lettuce, hot ranch sauce. Add fries / crispy bacon.",
+        "allergens": "1,3,7",
+        "description": "Smashed avocado, confit cherry tomatoes, goats cheese and jalapeño on toasted brioche. Add 2 poached eggs €3.",
         "sortOrder": 2
       },
       {
-        "name": "The Banh Mi",
-        "price": 12.5,
-        "id": "banh-mi",
-        "category": "sandwiches",
-        "allergens": "1,3,4,10",
-        "description": "Vietnamese pork belly, pickled daikon & carrot, chilli, coriander, vietnamayo, baguette. Veg sub: crispy garlic chilli tofu.",
+        "name": "Black Pudding Hash",
+        "price": 15.5,
+        "id": "black-pudding-hash",
+        "category": "breakfast",
+        "allergens": "1,3,7,9,10",
+        "description": "Squashed baby potatoes, black pudding, caramelised onions, jalapeño salsa and poached eggs.",
         "sortOrder": 3
       },
       {
-        "name": "The Melt",
-        "price": 12,
-        "id": "melt",
-        "category": "sandwiches",
-        "allergens": "1,7,10",
-        "description": "Roast peppers, mushroom, caramelised onion, 2-cheese sauce, smoked cheddar, emmentaler. Add fries.",
+        "name": "Rosti Benedict",
+        "price": 15.5,
+        "id": "rosti-benedict",
+        "category": "breakfast",
+        "allergens": "1,3,7",
+        "description": "Potato rosti, slow cooked ham, poached eggs & brown butter hollandaise.",
         "sortOrder": 4
+      },
+      {
+        "name": "Courgette Fritters",
+        "price": 15,
+        "id": "courgette-fritters",
+        "category": "breakfast",
+        "allergens": "3,7",
+        "description": "Courgette & chickpea fritters, spiced yogurt, pickles, herb salad & poached eggs.",
+        "sortOrder": 5
+      },
+      {
+        "name": "Maple Bacon French Toast",
+        "price": 14,
+        "id": "maple-bacon-french-toast",
+        "category": "breakfast",
+        "allergens": "1",
+        "description": "Double stack of brioche French toast, served with streaky bacon & maple syrup.",
+        "sortOrder": 6
+      },
+      {
+        "name": "Strawberry and Cream French Toast",
+        "price": 13.5,
+        "id": "strawberry-cream-french-toast",
+        "category": "breakfast",
+        "allergens": "1,3,7",
+        "description": "Cinnamon sugar coated vanilla French toast, Irish strawberries, strawberry Chantilly cream.",
+        "sortOrder": 7
+      },
+      {
+        "name": "Bacon and Egg Roll",
+        "price": 13,
+        "id": "bacon-egg-roll",
+        "category": "sandwiches",
+        "allergens": "1,3,7,10,12",
+        "description": "Toasted brioche bun, streaky bacon, fried eggs, caramelised onion, cheese and spicy mayo.",
+        "sortOrder": 1
+      },
+      {
+        "name": "Ham and Cheese Toastie",
+        "price": 12.5,
+        "id": "ham-cheese-toastie",
+        "category": "sandwiches",
+        "allergens": "1,7",
+        "description": "ABC burnt crust bread, slow cooked ham, smoked Irish cheddar, homemade tomato relish.",
+        "sortOrder": 2
+      },
+      {
+        "name": "Bahn Mi",
+        "price": 13,
+        "id": "bahn-mi",
+        "category": "sandwiches",
+        "allergens": "1,2,10",
+        "description": "Vietnamese style pork belly, pickled carrot and daikon, fresh chilli, coriander, vietmayo, baguette. Veggie option: crispy chilli garlic tofu.",
+        "sortOrder": 3
+      },
+      {
+        "name": "Mediterranean Baguette",
+        "price": 11.5,
+        "id": "mediterranean-baguette",
+        "category": "sandwiches",
+        "allergens": "1,7,8",
+        "description": "Pesto, roasted peppers, tomato, smoked scamorza and rocket on rustic sourdough baguette. Add roast chicken €3.5.",
+        "sortOrder": 4
+      },
+      {
+        "name": "Korean Fried Chicken Burger",
+        "price": 14,
+        "id": "korean-fried-chicken-burger",
+        "category": "sandwiches",
+        "allergens": "1,3,7,11",
+        "description": "Gochujang glazed fried chicken thigh, homemade spring onion kimchi slaw, on a toasted brioche bun. Add fries €4.",
+        "sortOrder": 5
+      },
+      {
+        "name": "B.R.A.T",
+        "price": 12.5,
+        "id": "brat",
+        "category": "sandwiches",
+        "allergens": "1,10,12",
+        "description": "Bacon, rocket, avocado, tomato & mayo on toasted ABC loaf. Add fried eggs €3.",
+        "sortOrder": 6
       }
     ],
     "sides": [
       {
-        "name": "Avo",
-        "price": 4.5
+        "name": "2 Poached / Fried Eggs",
+        "price": 3
+      },
+      {
+        "name": "Smashed Avo",
+        "price": 4
       },
       {
         "name": "Bacon",
-        "price": 4.5
+        "price": 3.5
       },
       {
         "name": "Black Pudding",
-        "price": 4.5
+        "price": 3
+      },
+      {
+        "name": "Extra Sauces / Mayo",
+        "price": 1
       },
       {
         "name": "Halloumi",
-        "price": 4.5
+        "price": 4
       },
       {
         "name": "Fries",
         "price": 4.5
       },
       {
-        "name": "Sourdough or Brioche",
+        "name": "ABC Burnt Crust Loaf or Brioche",
         "price": 2.5
       }
     ],
     "drinks": [
       {
-        "name": "Espresso / Doppio",
+        "name": "Espresso",
         "price": 3
       },
       {
@@ -237,23 +290,39 @@
         "price": 3.6
       },
       {
-        "name": "Masala Chai",
+        "name": "Tea",
+        "price": 2
+      },
+      {
+        "name": "Chai",
         "price": 3.7
       },
       {
-        "name": "Hot Choc",
-        "price": 3.5
+        "name": "Matcha",
+        "price": 4
       },
       {
-        "name": "Tea",
-        "price": 2
+        "name": "Hot Choco",
+        "price": 3.5
       },
       {
         "name": "OJ",
         "price": 2.5
       },
       {
-        "name": "Rose Lemonade",
+        "name": "Coke / Zero",
+        "price": 2.5
+      },
+      {
+        "name": "Sprite / Zero",
+        "price": 2.5
+      },
+      {
+        "name": "Fanta",
+        "price": 2.5
+      },
+      {
+        "name": "Ginger Beer",
         "price": 4.5
       },
       {
@@ -262,15 +331,19 @@
       },
       {
         "name": "Hugo Spritz",
-        "price": 11
+        "price": 12.5
       },
       {
         "name": "Aperol Spritz",
-        "price": 11
+        "price": 12.5
+      },
+      {
+        "name": "Limoncello Spritz",
+        "price": 12.5
       },
       {
         "name": "Beamish",
-        "price": 5.2
+        "price": 5.7
       },
       {
         "name": "Heineken",
@@ -281,11 +354,11 @@
         "price": 6.2
       },
       {
-        "name": "Cab Sav (G)",
+        "name": "Cab Sav",
         "price": 8
       },
       {
-        "name": "Sav Blanc (G)",
+        "name": "Sav Blanc",
         "price": 8
       }
     ]
