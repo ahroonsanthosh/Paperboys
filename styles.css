@@ -534,9 +534,10 @@ h2 em, h2 i {
 .planevent__track {
   display: flex; align-items: center; gap: 2.2rem;
   width: max-content; white-space: nowrap;
-  font-family: 'Asectica', serif; font-weight: 400;
+  font-family: 'Asectica', sans-serif; font-weight: 400;
+  font-variant-ligatures: none;
   font-size: clamp(1.5rem, 3.5vw, 2.6rem);
-  color: var(--black); font-style: italic;
+  color: var(--black);
   animation: slide 20s linear infinite;
 }
 .planevent__track i { color: var(--green); font-style: normal; font-size: 1rem; }
@@ -862,7 +863,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
   }
   .hero__mascot-bg { width: min(98vw, 62vh, 560px); top: 76%; left: 50.5%; }
   .hero__content { position: relative; z-index: 2; }
-  .hero__title { font-size: clamp(2.6rem, 14vw, 4.6rem); margin-bottom: 1.4rem; }
+  .hero__title { font-size: clamp(2.6rem, 18vw, 5.8rem); margin-bottom: 1.4rem; }
   .hero__sub { font-size: .98rem; max-width: none; margin-bottom: 1.8rem; }
   .hero__actions { gap: .75rem; flex-direction: column; }
   .hero__actions .btn { padding: .9rem 1.5rem; font-size: .95rem; width: 100%; justify-content: center; }
@@ -908,7 +909,7 @@ h2.reveal.is-in { opacity: 1; transform: none; }
 
 /* ===== Responsive — small mobile (≤ 390px) ===== */
 @media (max-width: 390px) {
-  .hero__title { font-size: clamp(2.2rem, 15vw, 3.6rem); }
+  .hero__title { font-size: clamp(2.4rem, 20vw, 5rem); }
   .btn { padding: .8rem 1.2rem; font-size: .88rem; }
   .wcard { padding: 1.1rem 1rem; }
   .links-section__list a { font-size: 1rem; }
